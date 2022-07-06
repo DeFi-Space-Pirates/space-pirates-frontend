@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useAlert } from '../contexts/AlertContext'
+import { useAlert } from '../../contexts/AlertContext'
 
 const Home: NextPage = () => {
   const { toggleAlert } = useAlert()
@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div className="h-screen">
       <Head>
-        <title>Space Pirates</title>
+        <title>Space Pirates Staking</title>
       </Head>
       <button
         className="btn"
