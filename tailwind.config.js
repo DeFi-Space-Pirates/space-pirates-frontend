@@ -14,9 +14,9 @@ module.exports = {
         custom: {
           primary: '#44BBA4',
           secondary: '#A9FFCB',
-          accent: '#EFD6D2',
-          neutral: '#191D24',
-          'base-100': '#2A303C',
+          accent: '#DE369D',
+          neutral: '#171619',
+          'base-100': '#EFD6D2',
           info: '#3ABFF8',
           success: '#36D399',
           warning: '#FBBD23',
@@ -24,7 +24,6 @@ module.exports = {
         },
       },
     ],
-    darkMode: 'custom',
   },
   plugins: [require('daisyui')],
 }
