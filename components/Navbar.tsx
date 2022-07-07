@@ -1,8 +1,9 @@
 import Image from 'next/image'
+import { useTronWeb } from '../contexts/TronWebContext'
 
-type Props = {}
+const Navbar = () => {
+  const { tronWeb, connectTronLink, address } = useTronWeb()
 
-const Navbar = (props: Props) => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -92,37 +93,36 @@ const Navbar = (props: Props) => {
         </ul>
       </div>
       <div className="navbar-end">
-        <h4>0x123</h4>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <Image
-                alt="profile"
-                src="https://placeimg.com/80/80/people"
-                layout="fixed"
-                height={48}
-                width={48}
-              />
+        {tronWeb ? (
+          <>
+            <h4>{address}</h4>
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <Image
+                    alt="profile"
+                    src="/Tronlink.svg"
+                    layout="fixed"
+                    height={48}
+                    width={48}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>Settings</a>
+                </li>
+              </ul>
             </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
+          </>
+        ) : (
+          <button className="btn btn-info" onClick={() => connectTronLink()}>
+            Connect wallet
+          </button>
+        )}
       </div>
     </div>
   )
