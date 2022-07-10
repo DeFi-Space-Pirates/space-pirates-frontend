@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const NavbarLinks = () => {
   return (
     <>
@@ -14,7 +16,7 @@ const NavbarLinks = () => {
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul className="p-2 bg-base-100">
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
             <a>Swap</a>
           </li>
@@ -39,7 +41,7 @@ const NavbarLinks = () => {
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul className="p-2 bg-base-100">
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
             <a>Pools</a>
           </li>
@@ -61,12 +63,18 @@ const NavbarLinks = () => {
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul className="p-2 bg-base-100">
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <a>Tokens</a>
+            <Link href="/faucet">Tokens</Link>
           </li>
           <li>
-            <a>Tron</a>
+            <a
+              target="_blank"
+              href="https://www.trongrid.io/faucet"
+              rel="noopener noreferrer"
+            >
+              Shasta faucet
+            </a>
           </li>
         </ul>
       </li>
@@ -83,7 +91,7 @@ const NavbarLinks = () => {
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul className="p-2 bg-base-100">
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
             <a>Claim</a>
           </li>
@@ -105,7 +113,7 @@ const NavbarLinks = () => {
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul className="p-2 bg-base-100">
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
             <a>Dashboard</a>
           </li>

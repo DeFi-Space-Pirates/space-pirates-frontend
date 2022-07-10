@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import formatAddress from '../../lib/formatAddress'
 import NavbarLinks from './NavbarLinks'
@@ -6,7 +7,7 @@ const Navbar = () => {
   const { tronWeb, connectTronLink, address } = useTronWeb()
 
   return (
-    <div className="navbar bg-base-100 shadow-md">
+    <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,7 +33,9 @@ const Navbar = () => {
             <NavbarLinks />
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Space Pirates</a>
+        <div className="btn btn-ghost normal-case text-xl">
+          <Link href="/">Space Pirates</Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
