@@ -1,4 +1,8 @@
-import Navbar from './Navbar'
+import { useEffect } from 'react'
+
+import { useTronWeb } from '../contexts/TronWebContext'
+
+import Navbar from './Navbar/Navbar'
 import Footer from './Footer'
 import Alert from './Alert'
 
@@ -7,11 +11,17 @@ type LayoutProps = {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { connectTronLink } = useTronWeb()
+
+  useEffect(() => {
+    connectTronLink()
+  }, [connectTronLink])
+
   return (
-    <div className="min-h-full">
+    <div className="min-h-screen flex flex-col justify-between">
       <Alert />
       <Navbar />
-      <main>{children}</main>
+      <main className="mb-auto p-5">{children}</main>
       <Footer />
     </div>
   )
