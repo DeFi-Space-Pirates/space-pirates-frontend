@@ -1,11 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import FaucetCard from '../../components/Faucet/FaucetCard'
-import { useAlert } from '../../contexts/AlertContext'
 
 const Home: NextPage = () => {
-  const { toggleAlert } = useAlert()
-
   const tokens = [
     { id: 1, name: 'DOUBLOONS', maxAmount: 10000 },
     { id: 2, name: 'ASTEROIDS', maxAmount: 10000 },
@@ -14,10 +11,8 @@ const Home: NextPage = () => {
   ]
 
   const onMintToken = async (id: number, amount: number) => {
-    try {
-    } catch (err) {
-      toggleAlert('Error during', 'danger')
-    }
+    //TODO
+    await new Promise((resolve) => setTimeout(resolve, 3000))
   }
 
   return (

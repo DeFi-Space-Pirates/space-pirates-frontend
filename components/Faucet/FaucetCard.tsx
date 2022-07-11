@@ -1,15 +1,30 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import { useAlert } from '../../contexts/AlertContext'
 
 type FaucetCardProps = {
   id: number
   name: string
   maxAmount: number
-  onMintToken: (id: number, amount: number) => void
+  onMintToken: (id: number, amount: number) => Promise<void>
 }
 
 const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
   const [amount, setAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  const { toggleAlert } = useAlert()
+
+  const onSubmit = async () => {
+    setLoading(true)
+    try {
+      await onMintToken(id, amount)
+    } catch (err) {
+      toggleAlert('Error during the mint. Try again', 'danger')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="card card-normal m-3 p-3 drop-shadow-lg bg-base-200">
@@ -45,8 +60,10 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
           </span>
         </div>
         <button
-          className="btn btn-block glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-3"
-          onClick={() => onMintToken(id, amount)}
+          className={`btn btn-block glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-3 ${
+            loading && 'loading'
+          }`}
+          onClick={() => onSubmit()}
         >
           MINT
         </button>
