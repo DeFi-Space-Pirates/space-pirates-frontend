@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { useAlert } from '../contexts/AlertContext'
+import { useAlert } from '../../contexts/AlertContext'
 
 const Alert = () => {
   const { showAlert, alertMessage, alertVariant } = useAlert()
