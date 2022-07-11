@@ -12,11 +12,11 @@ module.exports = {
     themes: [
       {
         custom: {
-          primary: '#44BBA4',
-          secondary: '#A9FFCB',
-          accent: '#DE369D',
-          neutral: '#171619',
-          'base-100': '#EFD6D2',
+          primary: '#570DF8',
+          secondary: '#F000B8',
+          accent: '#37CDBE',
+          neutral: '#3D4451',
+          'base-100': '#FFFFFF',
           info: '#3ABFF8',
           success: '#36D399',
           warning: '#FBBD23',

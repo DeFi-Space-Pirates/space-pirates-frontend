@@ -18,10 +18,10 @@ const Layout = ({ children }: LayoutProps) => {
   }, [connectTronLink])
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col justify-between">
       <Alert />
       <Navbar />
-      <main>{children}</main>
+      <main className="mb-auto p-5">{children}</main>
       <Footer />
     </div>
   )
