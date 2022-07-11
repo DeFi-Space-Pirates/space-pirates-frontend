@@ -18,13 +18,13 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <a>Swap</a>
+            <Link href="swap">Swap</Link>
           </li>
           <li>
-            <a>Convert</a>
+            <Link href="convert">Convert</Link>
           </li>
           <li>
-            <a>Split</a>
+            <Link href="split">Split</Link>
           </li>
         </ul>
       </li>
@@ -65,7 +65,7 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <Link href="/faucet">Tokens</Link>
+            <Link href="faucet">Tokens</Link>
           </li>
           <li>
             <a
