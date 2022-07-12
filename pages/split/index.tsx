@@ -5,7 +5,7 @@ import { NextPageWithLayout } from '../_app'
 
 const Split: NextPageWithLayout = () => {
   return (
-    <div className="h-screen">
+    <div className="min-h-full">
       <Head>
         <title>Space Pirates Split</title>
       </Head>

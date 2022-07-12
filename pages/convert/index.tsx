@@ -5,7 +5,7 @@ import { NextPageWithLayout } from '../_app'
 
 const Convert: NextPageWithLayout = () => {
   return (
-    <div className="h-screen">
+    <div className="min-h-full">
       <Head>
         <title>Space Pirates Convert</title>
       </Head>
