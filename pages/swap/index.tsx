@@ -11,6 +11,7 @@ import TokensModal from '../../components/Swap/TokensModal'
 import DoubleArrows from '../../components/icons/DoubleArrows'
 import TokenInput from '../../components/Swap/TokenInput'
 import { useAlert } from '../../contexts/AlertContext'
+import CardContainer from '../../components/layout/CardContainer'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -73,43 +74,39 @@ const Swap: NextPageWithLayout = () => {
         handleShowModal={handleShowModal}
         handleTokenChange={handleTokenChange}
       />
-      <div className="card m-3 p-2 drop-shadow-lg bg-base-200 sm:min-w-[420px]">
-        <div className="text-center my-4">
-          <p className="text-2xl font-bold mb-2">Swap</p>
-          <p>Swap instantly Space Pirates tokens</p>
-        </div>
-        <div className="divider m-0 p-0"></div>
-        <div className="card-body">
-          <TokenInput
-            handleShowModal={() => handleShowModal(true)}
-            amount={amountA}
-            handleAmountChange={handleAmountAChange}
-            token={tokenA}
-          />
-          <div className="flex justify-center">
-            <button
-              className="btn btn-circle btn-outline border-0 my-4"
-              onClick={() => invertTokens()}
-            >
-              <DoubleArrows />
-            </button>
-          </div>
-          <TokenInput
-            handleShowModal={() => handleShowModal(false)}
-            amount={amountB}
-            handleAmountChange={handleAmountBChange}
-            token={tokenB}
-          />
+      <CardContainer
+        title="Swap"
+        subtitle="Swap instantly Space Pirates tokens"
+      >
+        <TokenInput
+          handleShowModal={() => handleShowModal(true)}
+          amount={amountA}
+          handleAmountChange={handleAmountAChange}
+          token={tokenA}
+        />
+        <div className="flex justify-center">
           <button
-            className={`btn glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-8 ${
-              loading && 'loading'
-            }`}
-            onClick={() => onSwapTokens()}
+            className="btn btn-circle btn-outline border-0 my-4"
+            onClick={() => invertTokens()}
           >
-            SWAP
+            <DoubleArrows />
           </button>
         </div>
-      </div>
+        <TokenInput
+          handleShowModal={() => handleShowModal(false)}
+          amount={amountB}
+          handleAmountChange={handleAmountBChange}
+          token={tokenB}
+        />
+        <button
+          className={`btn glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-8 ${
+            loading && 'loading'
+          }`}
+          onClick={() => onSwapTokens()}
+        >
+          SWAP
+        </button>
+      </CardContainer>
     </div>
   )
 }

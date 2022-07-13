@@ -17,17 +17,17 @@ const TradeTab = ({}: TradeTabProps) => {
       </div>
       <div
         className={`tab md:tab-lg font-semibold ${
-          router.pathname === '/convert' && 'tab-active'
-        }`}
-      >
-        <Link href="/convert">Convert</Link>
-      </div>
-      <div
-        className={`tab md:tab-lg font-semibold ${
           router.pathname === '/split' && 'tab-active'
         }`}
       >
         <Link href="/split">Split</Link>
+      </div>
+      <div
+        className={`tab md:tab-lg font-semibold ${
+          router.pathname === '/convert' && 'tab-active'
+        }`}
+      >
+        <Link href="/convert">Convert</Link>
       </div>
     </div>
   )
