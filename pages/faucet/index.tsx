@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <p className="text-5xl font-bold text-primary mb-2">
           Space Pirates Faucet
         </p>
-        <p className="text-xl italic text-accent">
+        <p className="text-xl italic">
           Start here! Get your tokens and start playing in testnet!
         </p>
       </div>

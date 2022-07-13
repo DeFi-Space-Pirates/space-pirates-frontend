@@ -37,12 +37,10 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
             width={25}
             height={25}
           />
-          <p className="text-2xl font-bold text-accent">{name}</p>
+          <p className="text-2xl font-bold">{name}</p>
         </div>
         <div className="form-control">
-          <span className=" label label-text text-white">
-            Enter {name} amount
-          </span>
+          <span className=" label label-text">Enter {name} amount</span>
           <label className="input-group drop-shadow-md">
             <input
               type="number"
@@ -51,16 +49,14 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
               value={amount}
               onChange={(e) => setAmount(e.target.valueAsNumber)}
             />
-            <span className="btn border-0 text-white bg-accent hover:bg-accent-focus">
-              MAX
-            </span>
+            <span className="btn border-0 bg-neutral">MAX</span>
           </label>
-          <span className="label label-text text-gray-200 font-bold">
+          <span className="label label-text font-bold">
             Max mintable amount {maxAmount}
           </span>
         </div>
         <button
-          className={`btn btn-block glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-3 ${
+          className={`btn btn-block bg-primary border-0 drop-shadow-md mt-3 ${
             loading && 'loading'
           }`}
           onClick={() => onSubmit()}
