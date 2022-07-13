@@ -23,7 +23,7 @@ const TokensModal = ({
         readOnly
       />
       <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box bg-base-100">
           <div className="flex justify-between">
             <h3 className="font-bold text-lg">Select token</h3>
             <button
