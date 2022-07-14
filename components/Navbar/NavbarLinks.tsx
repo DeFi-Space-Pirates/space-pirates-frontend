@@ -28,10 +28,10 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <a>Pools</a>
+            <Link href="pools">Pools</Link>
           </li>
           <li>
-            <a>Staking</a>
+            <Link href="Staking">Staking</Link>
           </li>
         </ul>
       </li>

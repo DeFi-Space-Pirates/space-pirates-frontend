@@ -3,17 +3,17 @@ import Layout from '../../components/layout/Layout'
 import NavTab from '../../components/layout/NavTab'
 import { NextPageWithLayout } from '../_app'
 
-const Staking: NextPageWithLayout = () => {
+const Pools: NextPageWithLayout = () => {
   return (
     <div className="min-h-full p-5">
       <Head>
-        <title>Space Pirates Staking</title>
+        <title>Space Pirates Pools</title>
       </Head>
     </div>
   )
 }
 
-Staking.getLayout = function getLayout(page: React.ReactElement) {
+Pools.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout padding={0}>
       <NavTab page="earn" />
@@ -22,4 +22,4 @@ Staking.getLayout = function getLayout(page: React.ReactElement) {
   )
 }
 
-export default Staking
+export default Pools
