@@ -1,0 +1,95 @@
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { NextPageWithLayout } from '../_app'
+
+import CardContainer from '../../components/layout/CardContainer'
+import Layout from '../../components/layout/Layout'
+import TradeTab from '../../components/layout/TradeTab'
+import { useState } from 'react'
+import { useAlert } from '../../contexts/AlertContext'
+import LoadingButton from '../../components/layout/LoadingButton'
+import InfoBanner from '../../components/layout/InfoBanner'
+
+const Split: NextPageWithLayout = () => {
+  const [amount, setAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  const { toggleAlert } = useAlert()
+
+  const onSplitTokens = async () => {
+    setLoading(true)
+
+    //TODO validate tokens balance
+
+    try {
+      //TODO implement tronweb split logic
+    } catch (err) {
+      toggleAlert('Error during the split. Try again', 'danger')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <Head>
+        <title>Space Pirates Split</title>
+      </Head>
+      <CardContainer
+        title="Split"
+        subtitle="Split your ASTR into stk-ASTR and ve-ASTR"
+      >
+        <InfoBanner>
+          <span className="text-left font-semibold">
+            For each ASTR you will get 1 ve-ASTR and 1 stk-ASTR.
+          </span>
+          <span className="block">
+            Read more about ve-ASTR and str-ASTR on the{' '}
+            <span className="link">
+              <Link href="wiki">Wiki</Link>
+            </span>
+          </span>
+        </InfoBanner>
+        <div className="flex flex-col items-center">
+          <div className="flex flex-col w-11/12">
+            <div className="input-group drop-shadow-md">
+              <span className="gap-2">
+                <Image
+                  src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                  alt="token"
+                  height={20}
+                  width={20}
+                  layout="fixed"
+                />
+                ASTR
+              </span>
+              <input
+                type="number"
+                className="input md:input-md sm:input-md input-md w-full"
+                value={amount}
+                onChange={(e) => setAmount(e.target.valueAsNumber)}
+              />
+            </div>
+            <LoadingButton
+              text="SPLIT"
+              loading={loading}
+              onClick={() => onSplitTokens()}
+            />
+          </div>
+        </div>
+      </CardContainer>
+    </div>
+  )
+}
+
+Split.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <Layout padding={0}>
+      <TradeTab />
+      {page}
+    </Layout>
+  )
+}
+
+export default Split
