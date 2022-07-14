@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useAlert } from '../../contexts/AlertContext'
+import LoadingButton from '../layout/LoadingButton'
 
 type FaucetCardProps = {
   id: number
@@ -55,14 +56,11 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
             Max mintable amount {maxAmount}
           </span>
         </div>
-        <button
-          className={`btn btn-block bg-primary border-0 drop-shadow-md mt-3 ${
-            loading && 'loading'
-          }`}
+        <LoadingButton
+          text="MINT"
+          loading={loading}
           onClick={() => onSubmit()}
-        >
-          MINT
-        </button>
+        />
       </div>
     </div>
   )

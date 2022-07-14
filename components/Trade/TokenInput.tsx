@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Token } from '../../typings/Token'
 import ChevronDown from '../icons/ChevronDown'
+import { Token } from '../../typings/Token'
 
 type TokenInputProps = {
   handleShowModal: () => void

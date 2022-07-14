@@ -1,15 +1,16 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NextPageWithLayout } from '../_app'
 
-import CardContainer from '../../components/layout/CardContainer'
+import CardContainer from '../../components/Trade/CardContainer'
 import Layout from '../../components/layout/Layout'
-import TradeTab from '../../components/layout/TradeTab'
-import { useState } from 'react'
-import { useAlert } from '../../contexts/AlertContext'
+import NavTab from '../../components/layout/NavTab'
 import LoadingButton from '../../components/layout/LoadingButton'
 import InfoBanner from '../../components/layout/InfoBanner'
+
+import { useAlert } from '../../contexts/AlertContext'
 
 const Split: NextPageWithLayout = () => {
   const [amount, setAmount] = useState(0)
@@ -86,7 +87,7 @@ const Split: NextPageWithLayout = () => {
 Split.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout padding={0}>
-      <TradeTab />
+      <NavTab page="trade" />
       {page}
     </Layout>
   )

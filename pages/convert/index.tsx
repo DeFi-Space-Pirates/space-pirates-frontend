@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextPageWithLayout } from '../_app'
+
 import Layout from '../../components/layout/Layout'
-import TradeTab from '../../components/layout/TradeTab'
-import TokenInput from '../../components/Swap/TokenInput'
-import TokensModal from '../../components/Swap/TokensModal'
+import NavTab from '../../components/layout/NavTab'
+import TokenInput from '../../components/Trade/TokenInput'
+import TokensModal from '../../components/Trade/TokensModal'
+import CardContainer from '../../components/Trade/CardContainer'
+import LoadingButton from '../../components/layout/LoadingButton'
+import InfoBanner from '../../components/layout/InfoBanner'
+
 import { useAlert } from '../../contexts/AlertContext'
 import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
 import { Token } from '../../typings/Token'
-import CardContainer from '../../components/layout/CardContainer'
-import LoadingButton from '../../components/layout/LoadingButton'
-import Link from 'next/link'
-import InfoBanner from '../../components/layout/InfoBanner'
 
 const Convert: NextPageWithLayout = () => {
   const [token, setToken] = useState(wrappedTokensList.tokens[0])
@@ -95,7 +97,7 @@ const Convert: NextPageWithLayout = () => {
 Convert.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout padding={0}>
-      <TradeTab />
+      <NavTab page="trade" />
       {page}
     </Layout>
   )
