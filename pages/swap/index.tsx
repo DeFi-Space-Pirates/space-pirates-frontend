@@ -12,6 +12,7 @@ import DoubleArrows from '../../components/icons/DoubleArrows'
 import TokenInput from '../../components/Swap/TokenInput'
 import { useAlert } from '../../contexts/AlertContext'
 import CardContainer from '../../components/layout/CardContainer'
+import LoadingButton from '../../components/layout/LoadingButton'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -39,6 +40,7 @@ const Swap: NextPageWithLayout = () => {
   const handleAmountAChange = (amount: string) => {
     setAmountA(amount)
   }
+
   const handleAmountBChange = (amount: string) => {
     setAmountB(amount)
   }
@@ -73,6 +75,7 @@ const Swap: NextPageWithLayout = () => {
         showModal={showModal}
         handleShowModal={handleShowModal}
         handleTokenChange={handleTokenChange}
+        tokensList={tokensList.tokens}
       />
       <CardContainer
         title="Swap"
@@ -98,14 +101,11 @@ const Swap: NextPageWithLayout = () => {
           handleAmountChange={handleAmountBChange}
           token={tokenB}
         />
-        <button
-          className={`btn glass bg-primary hover:bg-primary-focus border-0 drop-shadow-md mt-8 ${
-            loading && 'loading'
-          }`}
+        <LoadingButton
+          text="SWAP"
+          loading={loading}
           onClick={() => onSwapTokens()}
-        >
-          SWAP
-        </button>
+        />
       </CardContainer>
     </div>
   )

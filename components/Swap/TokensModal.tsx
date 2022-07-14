@@ -1,18 +1,19 @@
 import Image from 'next/image'
 
-import tokensList from '../../config/constants/tokensList.json'
 import { Token } from '../../typings/Token'
 
 type TokensModalProps = {
   showModal: boolean
   handleShowModal: () => void
   handleTokenChange: (token: Token) => void
+  tokensList: Token[]
 }
 
 const TokensModal = ({
   showModal,
   handleShowModal,
   handleTokenChange,
+  tokensList,
 }: TokensModalProps) => {
   return (
     <>
@@ -34,7 +35,7 @@ const TokensModal = ({
             </button>
           </div>
           <div className="mt-4 overflow-y-auto max-h-96 scrollbar">
-            {tokensList.tokens.map((token: Token, index) => (
+            {tokensList.map((token: Token, index) => (
               <button
                 key={index}
                 className="w-full flex justify-between items-center px-4 py-4 first:pt-2 last:pb-2 hover:bg-base-200 hover:rounded-md"

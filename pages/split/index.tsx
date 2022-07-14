@@ -1,12 +1,36 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import DoubleArrows from '../../components/icons/DoubleArrows'
+import Link from 'next/link'
+import { NextPageWithLayout } from '../_app'
+
 import CardContainer from '../../components/layout/CardContainer'
 import Layout from '../../components/layout/Layout'
 import TradeTab from '../../components/layout/TradeTab'
-import { NextPageWithLayout } from '../_app'
+import { useState } from 'react'
+import { useAlert } from '../../contexts/AlertContext'
+import LoadingButton from '../../components/layout/LoadingButton'
+import InfoBanner from '../../components/layout/InfoBanner'
 
 const Split: NextPageWithLayout = () => {
+  const [amount, setAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  const { toggleAlert } = useAlert()
+
+  const onSplitTokens = async () => {
+    setLoading(true)
+
+    //TODO validate tokens balance
+
+    try {
+      //TODO implement tronweb split logic
+    } catch (err) {
+      toggleAlert('Error during the split. Try again', 'danger')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <Head>
@@ -14,63 +38,43 @@ const Split: NextPageWithLayout = () => {
       </Head>
       <CardContainer
         title="Split"
-        subtitle="Split your Asteroids into stk-Asteroids and ve-Asteroids"
+        subtitle="Split your ASTR into stk-ASTR and ve-ASTR"
       >
-        <div className="input-group justify-center">
-          <span className="gap-2">
-            <Image
-              src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-              alt="token"
-              height={25}
-              width={25}
-            />
-            BTC
+        <InfoBanner>
+          <span className="text-left font-semibold">
+            For each ASTR you will get 1 ve-ASTR and 1 stk-ASTR.
           </span>
-          <input
-            type="text"
-            placeholder="0.0"
-            className="input input-lg w-3/4 shadow-md"
-          />
-        </div>
-        <div className="flex justify-center">
-          <button
-            className="btn btn-circle btn-outline border-0 my-4"
-            // onClick={() => invertTokens()}
-          >
-            <DoubleArrows />
-          </button>
-        </div>
-        <div className="flex justify-between gap-3">
-          <div className="input-group">
-            <span className="gap-2">
-              <Image
-                src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-                alt="token"
-                height={25}
-                width={25}
-              />
-              BTC
+          <span className="block">
+            Read more about ve-ASTR and str-ASTR on the{' '}
+            <span className="link">
+              <Link href="wiki">Wiki</Link>
             </span>
-            <input
-              type="text"
-              placeholder="0.0"
-              className="input input-lg w-fit shadow-md"
-            />
-          </div>
-          <div className="input-group">
-            <span className="gap-2">
-              <Image
-                src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-                alt="token"
-                height={25}
-                width={25}
+          </span>
+        </InfoBanner>
+        <div className="flex flex-col items-center">
+          <div className="flex flex-col w-11/12">
+            <div className="input-group drop-shadow-md">
+              <span className="gap-2">
+                <Image
+                  src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                  alt="token"
+                  height={20}
+                  width={20}
+                  layout="fixed"
+                />
+                ASTR
+              </span>
+              <input
+                type="number"
+                className="input md:input-md sm:input-md input-md w-full"
+                value={amount}
+                onChange={(e) => setAmount(e.target.valueAsNumber)}
               />
-              BTC
-            </span>
-            <input
-              type="text"
-              placeholder="0.0"
-              className="input input-lg w-fit shadow-md"
+            </div>
+            <LoadingButton
+              text="SPLIT"
+              loading={loading}
+              onClick={() => onSplitTokens()}
             />
           </div>
         </div>
