@@ -7,7 +7,7 @@ type LoadingButtonProps = {
 const LoadingButton = ({ text, loading, onClick }: LoadingButtonProps) => {
   return (
     <button
-      className={`btn bg-primary btn-block hover:bg-primary-focus border-0 drop-shadow-md mt-8 ${
+      className={`btn bg-primary btn-block hover:bg-primary-focus border-0 drop-shadow-md ${
         loading && 'loading'
       }`}
       onClick={() => onClick()}

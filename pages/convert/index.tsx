@@ -84,11 +84,13 @@ const Convert: NextPageWithLayout = () => {
           handleAmountChange={handleAmountChange}
           token={token}
         />
-        <LoadingButton
-          text={`Convert in space${token.symbol}`}
-          loading={loading}
-          onClick={() => onConvertTokens()}
-        />
+        <div className="mt-8">
+          <LoadingButton
+            text={`Convert in space${token.symbol}`}
+            loading={loading}
+            onClick={() => onConvertTokens()}
+          />
+        </div>
       </CardContainer>
     </div>
   )

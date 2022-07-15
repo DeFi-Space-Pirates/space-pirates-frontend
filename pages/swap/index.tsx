@@ -101,11 +101,13 @@ const Swap: NextPageWithLayout = () => {
           handleAmountChange={handleAmountBChange}
           token={tokenB}
         />
-        <LoadingButton
-          text="SWAP"
-          loading={loading}
-          onClick={() => onSwapTokens()}
-        />
+        <div className="mt-8">
+          <LoadingButton
+            text="SWAP"
+            loading={loading}
+            onClick={() => onSwapTokens()}
+          />
+        </div>
       </CardContainer>
     </div>
   )

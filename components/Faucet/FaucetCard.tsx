@@ -40,7 +40,7 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
           />
           <p className="text-2xl font-bold">{name}</p>
         </div>
-        <div className="form-control">
+        <div className="form-control mb-8">
           <span className=" label label-text">Enter {name} amount</span>
           <label className="input-group drop-shadow-md">
             <input

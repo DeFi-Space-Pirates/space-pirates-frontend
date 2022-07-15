@@ -54,7 +54,7 @@ const Split: NextPageWithLayout = () => {
         </InfoBanner>
         <div className="flex flex-col items-center">
           <div className="flex flex-col w-11/12">
-            <div className="input-group drop-shadow-md">
+            <div className="input-group drop-shadow-md mb-10">
               <span className="gap-2">
                 <Image
                   src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
