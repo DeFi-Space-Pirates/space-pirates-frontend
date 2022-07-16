@@ -11,7 +11,7 @@ const Alert = () => {
           alertVariant === 'success'
             ? 'alert-success'
             : alertVariant === 'danger'
-            ? 'alert-danger'
+            ? 'alert-error'
             : 'alert-warning'
         } `}
       >
@@ -35,7 +35,7 @@ const Alert = () => {
               }
             />
           </svg>
-          <span>{alertMessage}</span>
+          <span className="text-base-100">{alertMessage}</span>
         </div>
       </div>
     </div>

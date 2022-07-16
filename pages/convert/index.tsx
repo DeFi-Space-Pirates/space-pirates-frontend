@@ -13,7 +13,10 @@ import InfoBanner from '../../components/layout/InfoBanner'
 
 import { useAlert } from '../../contexts/AlertContext'
 import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
-import { Token } from '../../typings/Token'
+import SpacePiratesWrapper from '../../config/artifacts/SpacePiratesWrapper.json'
+import { addresses } from '../../config/addresses'
+import { Token, Token20 } from '../../typings/Token'
+import { useTronWeb } from '../../contexts/TronWebContext'
 
 const Convert: NextPageWithLayout = () => {
   const [token, setToken] = useState(wrappedTokensList.tokens[0])
@@ -24,13 +27,14 @@ const Convert: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
+  const { tronWeb } = useTronWeb()
 
   const handleShowModal = (isTokenA?: boolean) => {
     setShowModal((prev) => !prev)
   }
 
   const handleTokenChange = (token: Token) => {
-    setToken(token)
+    setToken(token as Token20)
     setShowModal(false)
   }
 
@@ -44,8 +48,20 @@ const Convert: NextPageWithLayout = () => {
     //TODO validate tokens balance
 
     try {
-      //TODO implement tronweb conversion logic
+      const spacePiratesWrapper = await tronWeb.contract(
+        SpacePiratesWrapper.abi,
+        addresses.shasta.wrapperContract,
+      )
+      const txHash = await spacePiratesWrapper
+        .erc20Deposit(token.address, amount)
+        .send()
+
+      const res = await tronWeb.trx.getUnconfirmedTransactionInfo(
+        txHash.toString(),
+      )
+      console.log(res)
     } catch (err) {
+      console.log(err)
       toggleAlert('Error during the conversion. Try again', 'danger')
     } finally {
       setLoading(false)

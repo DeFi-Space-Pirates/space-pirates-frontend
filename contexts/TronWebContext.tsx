@@ -17,7 +17,12 @@ declare global {
 
 //TODO add new properties to tronWeb as we move forward
 type TronWebContextValue = {
-  tronWeb: { isConnected?: boolean; defaultAccount?: string; [x: string]: any }
+  tronWeb: {
+    isConnected?: boolean
+    defaultAccount?: string
+    contract: any
+    [x: string]: any
+  }
   address: string
   connectTronLink: () => void
 }

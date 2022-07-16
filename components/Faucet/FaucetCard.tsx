@@ -1,29 +1,61 @@
-import Image from 'next/image'
 import { useState } from 'react'
+import Image from 'next/image'
 import { useAlert } from '../../contexts/AlertContext'
 import LoadingButton from '../layout/LoadingButton'
+
+import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
+import { addresses } from '../../config/addresses'
+import { useTronWeb } from '../../contexts/TronWebContext'
 
 type FaucetCardProps = {
   id: number
   name: string
   maxAmount: number
-  onMintToken: (id: number, amount: number) => Promise<void>
 }
 
-const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
+const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
   const [amount, setAmount] = useState(0)
   const [loading, setLoading] = useState(false)
 
+  const { tronWeb } = useTronWeb()
   const { toggleAlert } = useAlert()
 
-  const onSubmit = async () => {
+  const onMintToken = async (id: number, amount: number) => {
     setLoading(true)
     try {
-      await onMintToken(id, amount)
+      const spacePiratesFaucet = await tronWeb.contract(
+        SpacePiratesFaucet.abi,
+        addresses.shasta.faucetContract,
+      )
+
+      if (id === 1) {
+        await spacePiratesFaucet.mintDoubloons(amount).send()
+      } else if (id === 2) {
+        await spacePiratesFaucet.mintAsteroids(amount).send()
+      }
     } catch (err) {
       toggleAlert('Error during the mint. Try again', 'danger')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const onGetMaxAmount = async (id: number) => {
+    const spacePiratesFaucet = await tronWeb.contract(
+      SpacePiratesFaucet.abi,
+      addresses.shasta.faucetContract,
+    )
+
+    if (id === 1) {
+      const minted = await spacePiratesFaucet
+        .mintedDoubloons(tronWeb.defaultAccount)
+        .call()
+      setAmount(maxAmount - minted)
+    } else if (id === 2) {
+      const minted = await spacePiratesFaucet
+        .mintedAsteroids(tronWeb.defaultAccount)
+        .call()
+      setAmount(maxAmount - minted)
     }
   }
 
@@ -50,7 +82,12 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
               value={amount}
               onChange={(e) => setAmount(e.target.valueAsNumber)}
             />
-            <span className="btn border-0 bg-neutral text-base-100">MAX</span>
+            <span
+              className="btn border-0 bg-neutral text-base-100"
+              onClick={() => onGetMaxAmount(id)}
+            >
+              MAX
+            </span>
           </label>
           <span className="label label-text font-bold">
             Max mintable amount {maxAmount}
@@ -59,7 +96,8 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
         <LoadingButton
           text="MINT"
           loading={loading}
-          onClick={() => onSubmit()}
+          onClick={() => onMintToken(id, amount)}
+          disabled={amount === 0}
         />
       </div>
     </div>

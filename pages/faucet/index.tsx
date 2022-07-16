@@ -2,18 +2,13 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import FaucetCard from '../../components/Faucet/FaucetCard'
 
-const Home: NextPage = () => {
+const Faucet: NextPage = () => {
   const tokens = [
     { id: 1, name: 'DOUBLOONS', maxAmount: 10000 },
     { id: 2, name: 'ASTEROIDS', maxAmount: 10000 },
     { id: 3, name: 'Breeding Gems', maxAmount: 10 },
     { id: 4, name: 'Evocations Gems', maxAmount: 10 },
   ]
-
-  const onMintToken = async (id: number, amount: number) => {
-    //TODO
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-  }
 
   return (
     <div className="min-h-full p-5">
@@ -36,7 +31,6 @@ const Home: NextPage = () => {
               id={token.id}
               name={token.name}
               maxAmount={token.maxAmount}
-              onMintToken={onMintToken}
             />
           ))}
         </div>
@@ -45,4 +39,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Faucet
