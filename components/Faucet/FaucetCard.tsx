@@ -50,7 +50,7 @@ const FaucetCard = ({ id, name, maxAmount, onMintToken }: FaucetCardProps) => {
               value={amount}
               onChange={(e) => setAmount(e.target.valueAsNumber)}
             />
-            <span className="btn border-0 bg-neutral">MAX</span>
+            <span className="btn border-0 bg-neutral text-base-100">MAX</span>
           </label>
           <span className="label label-text font-bold">
             Max mintable amount {maxAmount}

@@ -31,7 +31,7 @@ const NavbarLinks = () => {
             <Link href="pools">Pools</Link>
           </li>
           <li>
-            <Link href="Staking">Staking</Link>
+            <Link href="staking">Staking</Link>
           </li>
         </ul>
       </li>
