@@ -1,5 +1,5 @@
 {
-  "name": "SpacePirates tokens list",
+  "name": "SpacePirates Dex tokens list",
   "timestamp": "2022-07-12T11:45:09Z",
   "tokens": [
     {
@@ -15,20 +15,6 @@
       "symbol": "ASTR",
       "decimals": 18,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
-    },
-    {
-      "id": 3,
-      "name": "veAsteroids",
-      "symbol": "VE-ASTR",
-      "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png"
-    },
-    {
-      "id": 4,
-      "name": "stkAsteroids",
-      "symbol": "STK-ASTR",
-      "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png"
     },
     {
       "id": 100,

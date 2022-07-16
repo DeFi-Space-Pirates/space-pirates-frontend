@@ -10,6 +10,9 @@ export const addresses = {
     masterChefContract: 'TD1jKKAV664na8g9PkpxFTe34Emuhk4YQr',
     questRedeemContract: 'TUCtuPhpbAYm8osm1DPXAXizafWsJxxkzQ',
     battleFieldMintContract: 'TYRHA7rHFbJgyxpzagfLMp27AHB8pTN7un',
+    USDT: 'TUXYeqLUibq7m9MCMtyzLKptu296xrdoXq',
+    USDC: 'THFMQvfckg4UmauGW4DEaHmt35WA2A1afT',
+    USDD: 'TV6StXz41Z1zmHtjzBQ93Y9jNEAvHSDoQ7',
   },
   mainnet: {
     tokensContract: '',
@@ -22,5 +25,8 @@ export const addresses = {
     masterChefContract: '',
     questRedeemContract: '',
     battleFieldMintContract: '',
+    USDT: '',
+    USDC: '',
+    USDD: '',
   },
 }
