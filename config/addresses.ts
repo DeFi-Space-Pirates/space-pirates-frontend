@@ -1,3 +1,26 @@
 export const addresses = {
-  spacePiratesTokens: '',
+  shasta: {
+    tokensContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
+    stakingContract: 'TFtxfvP3pPV4xAxTzoC8vHXMnSByuzPYVz',
+    splitContract: 'TRwToMqhroYdAJvR56iU5H8TvYH8UaQFSH',
+    faucetContract: 'TGDck5m8ft9txunU5wRfkQWszfcSwpWtY2',
+    wrapperContract: 'TUYsERGz55gVPoNexx8qBwcGxZodt4LmZC',
+    factoryContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
+    routerContract: 'TV1tVj2R7J1FBNFVLbuj6ca7JXGu9kgmLt',
+    masterChefContract: 'TD1jKKAV664na8g9PkpxFTe34Emuhk4YQr',
+    questRedeemContract: 'TUCtuPhpbAYm8osm1DPXAXizafWsJxxkzQ',
+    battleFieldMintContract: 'TYRHA7rHFbJgyxpzagfLMp27AHB8pTN7un',
+  },
+  mainnet: {
+    tokensContract: '',
+    stakingContract: '',
+    splitContract: '',
+    faucetContract: '',
+    wrapperContract: '',
+    factoryContract: '',
+    routerContract: '',
+    masterChefContract: '',
+    questRedeemContract: '',
+    battleFieldMintContract: '',
+  },
 }
