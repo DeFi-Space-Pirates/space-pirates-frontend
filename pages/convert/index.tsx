@@ -68,6 +68,20 @@ const Convert: NextPageWithLayout = () => {
     }
   }
 
+  const onRedeemTokens = async () => {
+    setLoading(true)
+
+    //TODO validate tokens balance
+
+    try {
+      //TODO
+    } catch (err) {
+      toggleAlert('Error during the conversion. Try again', 'danger')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <Head>
@@ -100,12 +114,21 @@ const Convert: NextPageWithLayout = () => {
           handleAmountChange={handleAmountChange}
           token={token}
         />
-        <div className="mt-8">
-          <LoadingButton
-            text={`Convert in space${token.symbol}`}
-            loading={loading}
-            onClick={() => onConvertTokens()}
-          />
+        <div className="mt-8 flex justify-between gap-x-2">
+          <div>
+            <LoadingButton
+              text={`Convert in SP-${token.symbol}`}
+              loading={loading}
+              onClick={() => onConvertTokens()}
+            />
+          </div>
+          <div>
+            <LoadingButton
+              text={`Redeem ${amount} ${token.symbol}`}
+              loading={loading}
+              onClick={() => onRedeemTokens()}
+            />
+          </div>
         </div>
       </CardContainer>
     </div>

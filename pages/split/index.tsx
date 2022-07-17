@@ -32,6 +32,20 @@ const Split: NextPageWithLayout = () => {
     }
   }
 
+  const onMergeTokens = async () => {
+    setLoading(true)
+
+    //TODO validate tokens balance
+
+    try {
+      //TODO implement tronweb split logic
+    } catch (err) {
+      toggleAlert('Error during the split. Try again', 'danger')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <Head>
@@ -72,11 +86,22 @@ const Split: NextPageWithLayout = () => {
                 onChange={(e) => setAmount(e.target.valueAsNumber)}
               />
             </div>
-            <LoadingButton
-              text="SPLIT"
-              loading={loading}
-              onClick={() => onSplitTokens()}
-            />
+            <div className="flex justify-between gap-x-2">
+              <div>
+                <LoadingButton
+                  text="SPLIT"
+                  loading={loading}
+                  onClick={() => onSplitTokens()}
+                />
+              </div>
+              <div>
+                <LoadingButton
+                  text={`REDEEM ${amount} ASTR`}
+                  loading={loading}
+                  onClick={() => onMergeTokens()}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </CardContainer>
