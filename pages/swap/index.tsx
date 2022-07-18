@@ -33,7 +33,17 @@ const Swap: NextPageWithLayout = () => {
   }
 
   const handleTokenChange = (token: Token) => {
-    isTokenA ? setTokenA(token) : setTokenB(token)
+    if (isTokenA) {
+      if (token === tokenB) {
+        setTokenB(tokenA)
+      }
+      setTokenA(token)
+    } else {
+      if (token === tokenA) {
+        setTokenA(tokenB)
+      }
+      setTokenB(token)
+    }
     setShowModal(false)
   }
 
@@ -67,7 +77,7 @@ const Swap: NextPageWithLayout = () => {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="flex justify-center items-center py-20">
       <Head>
         <title>Space Pirates Swap</title>
       </Head>

@@ -1,32 +1,25 @@
 import Image from 'next/image'
-import ChevronDown from '../icons/ChevronDown'
 import { Token } from '../../typings/Token'
 
 import checkRegex from '../../lib/checkRegex'
 
-type TokenInputProps = {
-  handleShowModal: () => void
+type TokenNotSelectProps = {
   amount: string
   handleAmountChange: (amount: string) => void
   token: Token
 }
 
-const TokenInput = ({
-  handleShowModal,
+const TokenNotSelect = ({
   amount,
   handleAmountChange,
   token,
-}: TokenInputProps) => {
+}: TokenNotSelectProps) => {
   return (
     <div>
       <div>
-        <button
-          className="btn modal-button btn-ghost gap-2 mb-2"
-          onClick={() => handleShowModal()}
-        >
+        <button className="btn modal-button btn-ghost gap-2 mb-2">
           <Image src={token.logoURI} alt="token" height={20} width={20} />
           {token.symbol}
-          <ChevronDown />
         </button>
       </div>
       <input
@@ -34,7 +27,6 @@ const TokenInput = ({
         autoComplete="off"
         autoCorrect="off"
         type="text"
-        pattern="^[0-9]*[.,]?[0-9]*$"
         placeholder="0.0"
         minLength={1}
         maxLength={79}
@@ -49,4 +41,4 @@ const TokenInput = ({
   )
 }
 
-export default TokenInput
+export default TokenNotSelect
