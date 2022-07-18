@@ -64,24 +64,15 @@ const Staking: NextPageWithLayout = () => {
       </div>
       <div className="flex md:flex-col md:gap-y-7 md:items-center justify-around">
         <div className="md:w-11/12 bg-base-200 p-4 gap-y-4 md:gap-y-0 rounded-md drop-shadow-md flex flex-col md:flex-row md:justify-between md:items-center">
-          <div className="relative">
-            <div className="absolute">
-              <Image
-                src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-                alt="token"
-                height={20}
-                width={20}
-              />
-            </div>
-            <div className="absolute inset-2">
-              <Image
-                src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
-                alt="token"
-                height={25}
-                width={25}
-              />
-            </div>
-            <p className="ml-10 font-semibold text-lg">Stake DBL earn DBL</p>
+          <div className="flex items-center">
+            <Image
+              src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+              alt="token"
+              height={20}
+              width={20}
+              layout="fixed"
+            />
+            <p className="ml-2 font-semibold text-lg">Stake DBL earn DBL</p>
           </div>
           <div>
             <p className="text-sm font-light">Earned</p>
