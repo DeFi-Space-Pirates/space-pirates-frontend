@@ -13,8 +13,7 @@ const LoadingButton = ({
 }: LoadingButtonProps) => {
   return (
     <button
-      disabled={disabled}
-      className={`btn bg-primary btn-block hover:bg-primary-focus border-0 drop-shadow-md ${
+      className={`btn bg-primary btn-block hover:bg-primary-focus border-0 drop-shadow-md text-primary-content ${
         loading && 'loading'
       }`}
       onClick={() => onClick()}

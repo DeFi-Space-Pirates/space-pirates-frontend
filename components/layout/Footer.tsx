@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="flex justify-center bg-base-200">
-      <div className="footer p-10 max-w-screen-2xl justify-between">
+      <div className="footer py-10 max-w-screen-2xl justify-between mx-6">
         <div className="md:pr-[12rem]">
           <svg
             width="50"

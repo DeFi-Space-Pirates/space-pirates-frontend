@@ -28,7 +28,7 @@ const TokensModal = ({
           <div className="flex justify-between">
             <h3 className="font-bold text-lg">Select token</h3>
             <button
-              className="btn btn-sm btn-circle"
+              className="btn btn-sm btn-circle btn-ghost text-lg font-extrabold"
               onClick={() => handleShowModal()}
             >
               ✕
@@ -52,21 +52,13 @@ const TokensModal = ({
                   />
                   <div className="ml-3 font-semibold text-left">
                     {token.symbol}
-                    <p className="text-left text-gray-400 text-sm">
+                    <p className="text-left text-base-content text-sm text-opacity-60 font-normal">
                       {token.name}
                     </p>
                   </div>
                 </div>
               </button>
             ))}
-          </div>
-          <div className="modal-action">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleShowModal()}
-            >
-              Yay!
-            </button>
           </div>
         </div>
       </div>
