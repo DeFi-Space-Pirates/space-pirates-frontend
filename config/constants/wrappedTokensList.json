@@ -17,6 +17,13 @@
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
     },
     {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+    },
+    {
       "name": "Decentralized USD",
       "symbol": "USDD",
       "address": "0x55d398326f99059fF775485246999027B3197955",

@@ -7,6 +7,11 @@ import {
 } from 'react'
 import { useAlert } from './AlertContext'
 
+import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
+import tokensList from '../config/constants/tokensList.json'
+import { addresses } from '../config/addresses'
+import { Balance } from '../typings/Balance'
+
 declare global {
   interface Window {
     tronWeb: any
@@ -23,8 +28,9 @@ type TronWebContextValue = {
     contract: any
     [x: string]: any
   }
-  address: string
   connectTronLink: () => void
+  address: string
+  balances: Balance[] | null
 }
 
 type TronWebProviderProps = { children: React.ReactNode }
@@ -34,16 +40,48 @@ const TronWebContext = createContext<TronWebContextValue | undefined>(undefined)
 const TronWebProvider = ({ children }: TronWebProviderProps) => {
   const [tronWeb, setTronWeb] = useState<any>(null)
   const [address, setAddress] = useState('')
+  const [balances, setBalances] = useState<Balance[] | null>(null)
 
   const { toggleAlert } = useAlert()
+
+  const loadTronWeb = async (tronWeb: any, address: string) => {
+    setTronWeb(tronWeb)
+    setAddress(address)
+
+    const spacePiratesTokens = await tronWeb.contract(
+      SpacePiratesTokens.abi,
+      addresses.shasta.tokensContract,
+    )
+
+    try {
+      const batchBalances = await spacePiratesTokens
+        .balanceOfBatch(
+          Array(tokensList.ids.length).fill(address),
+          tokensList.ids,
+        )
+        .call()
+
+      const userBalances = tokensList.ids.map((id, index) => ({
+        id: id,
+        amount: tronWeb
+          .BigNumber(batchBalances[index]._hex)
+          .div(10e19)
+          .toNumber(),
+      }))
+
+      setBalances(userBalances)
+    } catch (err) {
+      setBalances(null)
+    }
+  }
 
   const connectTronLink = useCallback(async () => {
     // automatic connection without prompt if already approved
     if (window.tronWeb && window.tronLink.ready) {
       window.tronWeb.isConnected = true
       window.tronWeb.defaultAccount = window.tronWeb.defaultAddress.base58
-      setTronWeb(window.tronWeb)
-      setAddress(window.tronWeb.defaultAddress.base58)
+
+      loadTronWeb(window.tronWeb, window.tronWeb.defaultAddress.base58)
     }
 
     if (!window.tronWeb) {
@@ -65,8 +103,7 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
             ) {
               window.tronWeb.isConnected = true
               window.tronWeb.defaultAccount = e.data.message.data.address
-              setTronWeb(window.tronWeb)
-              setAddress(e.data.message.data.address)
+              loadTronWeb(window.tronWeb, e.data.message.data.address)
             }
           } else {
             window.location.reload()
@@ -82,8 +119,7 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
           window.tronWeb.isConnected = true
           window.tronWeb.defaultAccount = window.tronWeb.defaultAddress.base58
 
-          setTronWeb(window.tronWeb)
-          setAddress(window.tronWeb.defaultAddress.base58)
+          loadTronWeb(window.tronWeb, window.tronWeb.defaultAddress.base58)
         }
 
         if (e.data.message && e.data.message.action == 'disconnectWeb') {
@@ -96,8 +132,9 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
 
   const value = {
     tronWeb,
-    address,
     connectTronLink,
+    address,
+    balances,
   }
 
   return (

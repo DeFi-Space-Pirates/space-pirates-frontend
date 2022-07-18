@@ -3,7 +3,7 @@ export const addresses = {
     tokensContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
     stakingContract: 'TFtxfvP3pPV4xAxTzoC8vHXMnSByuzPYVz',
     splitContract: 'TRwToMqhroYdAJvR56iU5H8TvYH8UaQFSH',
-    faucetContract: 'TGDck5m8ft9txunU5wRfkQWszfcSwpWtY2',
+    faucetContract: 'TMKNhy3jXAu5ALnwimN74633ohRvJ2XBdr',
     wrapperContract: 'TUYsERGz55gVPoNexx8qBwcGxZodt4LmZC',
     factoryContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
     routerContract: 'TV1tVj2R7J1FBNFVLbuj6ca7JXGu9kgmLt',
