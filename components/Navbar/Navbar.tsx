@@ -7,11 +7,11 @@ const Navbar = () => {
   const { tronWeb, connectTronLink, address } = useTronWeb()
 
   return (
-    <nav className="flex justify-center bg-base-100 shadow-lg">
-      <div className="navbar max-w-screen-2xl">
+    <nav className="flex justify-center bg-base-300">
+      <div className="navbar max-w-screen-2xl p-0 mx-4">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost xl:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -29,7 +29,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52"
             >
               <NavbarLinks />
             </ul>
@@ -38,14 +38,14 @@ const Navbar = () => {
             <Link href="/">Space Pirates</Link>
           </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden xl:flex">
           <ul className="menu menu-horizontal p-0">
             <NavbarLinks />
           </ul>
         </div>
         <div className="navbar-end">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary text-content-primary"
             onClick={tronWeb ? () => {} : () => connectTronLink()}
           >
             {tronWeb ? (
@@ -62,13 +62,13 @@ const Navbar = () => {
                     id="Tracciato_3"
                     data-name="Tracciato 3"
                     d="M16.212,4.383,3.629,2.133l9,7.25,3.581-2.9V8.4l-1.7,1.411,1.7-.309v1.5l-2.871.517-.517,4.258H11.572l.585-4.832L2.775,3.2,7.8,15.783H6.283L0,0,16.212,2.979Z"
-                    fill="#27348b"
+                    fill="#FFF7E8"
                     fillRule="evenodd"
                   />
                 </svg>
               </>
             ) : (
-              'Connect wallet'
+              'Connect Wallet'
             )}
           </button>
         </div>

@@ -57,6 +57,20 @@ const NavbarLinks = () => {
       </li>
       <li tabIndex={3}>
         <a className="justify-between">
+          Mint
+          <ChevronDown />
+        </a>
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+          <li>
+            <Link href="faucet">Tokens pre-sale</Link>
+          </li>
+          <li>
+            <Link href="faucet">NFT mint</Link>
+          </li>
+        </ul>
+      </li>
+      <li tabIndex={4}>
+        <a className="justify-between">
           Quest
           <ChevronDown />
         </a>
@@ -69,7 +83,7 @@ const NavbarLinks = () => {
           </li>
         </ul>
       </li>
-      <li tabIndex={4}>
+      <li tabIndex={5}>
         <a className="justify-between">
           Governance
           <ChevronDown />

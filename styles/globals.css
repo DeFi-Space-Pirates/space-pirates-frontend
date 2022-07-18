@@ -37,3 +37,15 @@ a {
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }
+
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
+  --tw-bg-opacity: inherit;
+  background-color: inherit;
+  --tw-text-opacity: inherit;
+  color: inherit;
+}
+
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.1;
+}
