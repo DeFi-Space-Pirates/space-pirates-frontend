@@ -23,10 +23,25 @@ const TokensModal = ({
         checked={showModal}
         readOnly
       />
-      <label className="modal cursor-pointer modal-bottom sm:modal-middle">
-        <div className="modal-box bg-base-100">
+      <div
+        className="modal modal-bottom sm:modal-middle"
+        onClick={() => handleShowModal()}
+      >
+        <div
+          className="modal-box bg-base-100"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        >
           <div className="flex justify-between">
             <h3 className="font-bold text-lg">Select token</h3>
+            <button
+              className="btn btn-sm btn-circle btn-ghost text-lg font-extrabold"
+              onClick={() => handleShowModal()}
+            >
+              ✕
+            </button>
           </div>
           <div className="mt-4 overflow-y-auto max-h-96 scrollbar">
             {tokensList.map((token: Token, index) => (
@@ -55,7 +70,7 @@ const TokensModal = ({
             ))}
           </div>
         </div>
-      </label>
+      </div>
     </>
   )
 }
