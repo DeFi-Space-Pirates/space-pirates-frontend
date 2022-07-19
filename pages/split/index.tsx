@@ -9,13 +9,16 @@ import Layout from '../../components/layout/Layout'
 import NavTab from '../../components/layout/NavTab'
 import LoadingButton from '../../components/layout/LoadingButton'
 import InfoBanner from '../../components/layout/InfoBanner'
-
-import checkRegex from '../../lib/checkRegex'
-
-import tokenList from '../../config/constants/tokensList.json'
-import { useAlert } from '../../contexts/AlertContext'
 import ArrowsDown from '../../components/icons/ArrowsDown'
 import TokenInput from '../../components/Trade/TokenInput'
+import { useAlert } from '../../contexts/AlertContext'
+import { useTronWeb } from '../../contexts/TronWebContext'
+
+import tokenList from '../../config/constants/tokensList.json'
+import AsteroidsSplit from '../../config/artifacts/AsteroidsSplitContract.json'
+import SpacePiratesTokens from '../../config/artifacts/SpacePiratesTokens.json'
+
+import { addresses } from '../../config/addresses'
 
 const Split: NextPageWithLayout = () => {
   const [splitAmount, setSplitAmount] = useState('')
@@ -24,16 +27,37 @@ const Split: NextPageWithLayout = () => {
   const [mergeLoading, setMergeLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
+  const { tronWeb } = useTronWeb()
 
   const onSplitTokens = async () => {
     setSplitLoading(true)
 
-    //TODO validate tokens balance
-
     try {
-      //TODO implement tronweb split logic
+      const spacePiratesTokens = await tronWeb.contract(
+        SpacePiratesTokens.abi,
+        addresses.shasta.tokensContract,
+      )
+
+      await spacePiratesTokens
+        .setApprovalForAll(addresses.shasta.splitContract, true)
+        .send()
+
+      const asteroidsSplit = await tronWeb.contract(
+        AsteroidsSplit.abi,
+        addresses.shasta.splitContract,
+      )
+
+      await asteroidsSplit
+        .splitAsteroids(splitAmount)
+        .send({ shouldPoolResponse: true })
+
+      toggleAlert(
+        `Successfully minted ${splitAmount} veASTR and stkASTR`,
+        'success',
+      )
     } catch (err) {
-      toggleAlert('Error during the split. Try again', 'danger')
+      console.log(err)
+      toggleAlert('Error during the split. Try again', 'error')
     } finally {
       setSplitLoading(false)
     }
@@ -42,12 +66,19 @@ const Split: NextPageWithLayout = () => {
   const onMergeTokens = async () => {
     setMergeLoading(true)
 
-    //TODO validate tokens balance
-
     try {
-      //TODO implement tronweb split logic
+      const asteroidsSplit = await tronWeb.contract(
+        AsteroidsSplit.abi,
+        addresses.shasta.splitContract,
+      )
+
+      await asteroidsSplit
+        .mergeAsteroids(mergeAmount)
+        .send({ shouldPoolResponse: true })
+
+      toggleAlert(`Successfully redeemed ${mergeAmount} ASTR`, 'success')
     } catch (err) {
-      toggleAlert('Error during the split. Try again', 'danger')
+      toggleAlert('Error during the split. Try again', 'error')
     } finally {
       setMergeLoading(false)
     }
@@ -331,22 +362,22 @@ const Split: NextPageWithLayout = () => {
         <TokenInput
           amount={mergeAmount}
           handleAmountChange={setMergeAmount}
-          token={tokenList.tokens[1]}
+          token={tokenList.tokens[2]}
         />
         <TokenInput
           amount={mergeAmount}
           handleAmountChange={setMergeAmount}
-          token={tokenList.tokens[2]}
+          token={tokenList.tokens[3]}
         />
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenInput amount={mergeAmount} token={tokenList.tokens[3]} />
+        <TokenInput amount={mergeAmount} token={tokenList.tokens[1]} />
         <div className="mt-8">
           <LoadingButton
             text="SPLIT"
             loading={mergeLoading}
-            onClick={() => onSplitTokens()}
+            onClick={() => onMergeTokens()}
           />
         </div>
       </CardContainer>

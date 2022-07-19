@@ -17,12 +17,13 @@ import { useAlert } from '../../contexts/AlertContext'
 import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
 import SpacePiratesWrapper from '../../config/artifacts/SpacePiratesWrapper.json'
 import { addresses } from '../../config/addresses'
-import { Token, Token20 } from '../../typings/Token'
+import { Token, Token1155, Token20 } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
+import { getDecimals } from '../../lib/tokensType'
 
 const Convert: NextPageWithLayout = () => {
-  const [wrapToken, setWrapToken] = useState(wrappedTokensList.tokens[0])
-  const [unWrapToken, setUnWrapToken] = useState(wrappedTokensList.tokens[0])
+  const [wrapToken, setWrapToken] = useState(wrappedTokensList.unWrapped[0])
+  const [unWrapToken, setUnWrapToken] = useState(wrappedTokensList.wrapped[0])
   const [wrapAmount, setWrapAmount] = useState('')
   const [unWrapAmount, setUnWrapAmount] = useState('')
 
@@ -47,7 +48,7 @@ const Convert: NextPageWithLayout = () => {
     setShowWrapModal(false)
   }
   const handleUnWrapTokenChange = (token: Token) => {
-    setUnWrapToken(token as Token20)
+    setUnWrapToken(token as Token1155)
     setShowUnWrapModal(false)
   }
 
@@ -66,17 +67,25 @@ const Convert: NextPageWithLayout = () => {
         SpacePiratesWrapper.abi,
         addresses.shasta.wrapperContract,
       )
-      const txHash = await spacePiratesWrapper
-        .erc20Deposit(wrapToken.address, wrapAmount)
-        .send()
 
-      const res = await tronWeb.trx.getUnconfirmedTransactionInfo(
-        txHash.toString(),
+      if (wrapToken.symbol === 'TRX') {
+        await spacePiratesWrapper.ethDeposit().send({
+          callValue: tronWeb.toSun(wrapAmount),
+          shouldPollResponse: true,
+        })
+      } else {
+        await spacePiratesWrapper
+          .erc20Deposit(wrapToken.address, parseFloat(wrapAmount) * 1e18)
+          .send({ shouldPollResponse: true })
+      }
+
+      toggleAlert(
+        `Successfully minted ${wrapAmount} ${wrapToken.symbol}`,
+        'success',
       )
-      console.log(res)
     } catch (err) {
       console.log(err)
-      toggleAlert('Error during the conversion. Try again', 'danger')
+      toggleAlert('Error during the conversion. Try again', 'error')
     } finally {
       setWrapLoading(false)
     }
@@ -90,17 +99,28 @@ const Convert: NextPageWithLayout = () => {
         SpacePiratesWrapper.abi,
         addresses.shasta.wrapperContract,
       )
-      const txHash = await spacePiratesWrapper
-        .erc20Withdrawn(unWrapToken.address, unWrapAmount)
-        .send()
 
-      const res = await tronWeb.trx.getUnconfirmedTransactionInfo(
-        txHash.toString(),
+      const token = wrappedTokensList.unWrapped.find(
+        (token) => token.symbol === unWrapToken.symbol.replace('SP-', ''),
       )
-      console.log(res)
+
+      if (token!.symbol === 'TRX') {
+        await spacePiratesWrapper.ethWithdraw(unWrapAmount).send({
+          shouldPollResponse: true,
+        })
+      } else {
+        await spacePiratesWrapper
+          .erc20Withdraw(token!.address, parseFloat(unWrapAmount) * 1e18)
+          .send({ shouldPollResponse: true })
+      }
+
+      toggleAlert(
+        `Successfully redeemed ${unWrapAmount} ${token!.symbol}`,
+        'success',
+      )
     } catch (err) {
       console.log(err)
-      toggleAlert('Error during the conversion. Try again', 'danger')
+      toggleAlert('Error during the conversion. Try again', 'error')
     } finally {
       setUnWrapLoading(false)
     }
@@ -116,13 +136,13 @@ const Convert: NextPageWithLayout = () => {
         showModal={showWrapModal}
         handleShowModal={handleShowWrapModal}
         handleTokenChange={handleWrapTokenChange}
-        tokensList={wrappedTokensList.tokens}
+        tokensList={wrappedTokensList.unWrapped}
       />
       <TokensModal
         showModal={showUnWrapModal}
         handleShowModal={handleShowUnWrapModal}
         handleTokenChange={handleUnWrapTokenChange}
-        tokensList={wrappedTokensList.tokens}
+        tokensList={wrappedTokensList.wrapped}
       />
 
       <CardContainer
@@ -186,7 +206,6 @@ const Convert: NextPageWithLayout = () => {
             <Image src={wrapToken.logoURI} alt="token" height={64} width={64} />
           </div>
         </div>
-
         <InfoBanner>
           <span className="text-left font-semibold text-sm">
             The conversion ratio is 1:1
@@ -207,7 +226,10 @@ const Convert: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenInput amount={wrapAmount} token={wrapToken} />
+        <TokenInput
+          amount={wrapAmount}
+          token={{ ...wrapToken, symbol: `SP-${wrapToken.symbol}` }}
+        />
         <div className="mt-8">
           <LoadingButton
             text={`Wrap`}
@@ -308,7 +330,13 @@ const Convert: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenInput amount={unWrapAmount} token={unWrapToken} />
+        <TokenInput
+          amount={unWrapAmount}
+          token={{
+            ...unWrapToken,
+            symbol: unWrapToken.symbol.replace('SP-', ''),
+          }}
+        />
         <div className="mt-8">
           <LoadingButton
             text={`UN-WRAP`}
