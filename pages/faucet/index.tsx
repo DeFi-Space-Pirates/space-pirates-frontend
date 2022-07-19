@@ -1,15 +1,55 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import FaucetCard from '../../components/Faucet/FaucetCard'
+import { convertToNumber, getTronWebInstance } from '../../lib/tronweb'
 
-const Faucet: NextPage = () => {
-  const tokens = [
-    { id: 1, name: 'DOUBLOONS', maxAmount: 10000 },
-    { id: 2, name: 'ASTEROIDS', maxAmount: 10000 },
-    { id: 3, name: 'Breeding Gems', maxAmount: 10 },
-    { id: 4, name: 'Evocations Gems', maxAmount: 10 },
-  ]
+import tokensList from '../../config/constants/tokensList.json'
+import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
+import { addresses } from '../../config/addresses'
+import { Token1155 } from '../../typings/Token'
+import { isToken } from '../../lib/tokensType'
 
+type SupportedToken = Token1155 & { maxAmount: number }
+
+export const getStaticProps: GetStaticProps<{
+  supportedTokens: SupportedToken[]
+}> = async () => {
+  const tronWeb = getTronWebInstance()
+  const spacePiratesFaucet = await tronWeb.contract(
+    SpacePiratesFaucet.abi,
+    addresses.shasta.faucetContract,
+  )
+
+  const result: { type: string; _hex: string }[] = await spacePiratesFaucet
+    .getSupportedTokens()
+    .call()
+
+  const supportedIds = result.map((res) =>
+    tronWeb.BigNumber(res._hex).toNumber(),
+  )
+
+  let supportedTokens = []
+
+  for (const token of tokensList.tokens) {
+    if (supportedIds.includes(token.id)) {
+      const maxMintHex = await spacePiratesFaucet
+        .tokenMintLimit(token.id)
+        .call()
+
+      const maxAmount = convertToNumber(maxMintHex._hex, token.id)
+
+      supportedTokens.push({ ...token, maxAmount })
+    }
+  }
+
+  return {
+    props: { supportedTokens },
+  }
+}
+
+const Faucet = ({
+  supportedTokens,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="min-h-full p-5">
       <Head>
@@ -23,7 +63,7 @@ const Faucet: NextPage = () => {
       </div>
       <div className="flex justify-center">
         <div className="grid md:grid-cols-2 gap-4">
-          {tokens.map((token) => (
+          {supportedTokens.map((token) => (
             <FaucetCard
               key={token.id}
               id={token.id}
