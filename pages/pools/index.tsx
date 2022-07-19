@@ -20,7 +20,7 @@ const Pools: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb stake LP logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }
@@ -32,7 +32,7 @@ const Pools: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb unstake LP logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }
@@ -44,7 +44,7 @@ const Pools: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb harvest LP logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }

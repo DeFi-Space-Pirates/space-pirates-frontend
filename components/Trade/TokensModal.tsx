@@ -62,7 +62,7 @@ const TokensModal = ({
                   <div className="ml-3 font-semibold text-left">
                     {token.name}
                     <p className="text-left text-base-content text-sm text-opacity-60 font-normal">
-                      {token.name}
+                      {token.symbol}
                     </p>
                   </div>
                 </div>

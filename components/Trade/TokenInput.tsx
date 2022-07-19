@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import ChevronDown from '../icons/ChevronDown'
 import { Token } from '../../typings/Token'
+import { useTronWeb } from '../../contexts/TronWebContext'
 
 import checkRegex from '../../lib/checkRegex'
 
@@ -17,6 +18,8 @@ const TokenInput = ({
   handleAmountChange,
   token,
 }: TokenInputProps) => {
+  const { getBalanceById, getBalanceByAddress } = useTronWeb()
+
   return (
     <div>
       <div>
@@ -50,6 +53,14 @@ const TokenInput = ({
             : () => {}
         }
       />
+      {handleAmountChange && (
+        <label className="label">
+          Balance:{' '}
+          {'id' in token
+            ? getBalanceById(token.id)
+            : getBalanceByAddress(token.address)}
+        </label>
+      )}
     </div>
   )
 }

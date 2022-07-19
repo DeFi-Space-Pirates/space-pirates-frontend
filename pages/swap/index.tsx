@@ -12,7 +12,7 @@ import LoadingButton from '../../components/layout/LoadingButton'
 
 import { Token } from '../../typings/Token'
 import { useAlert } from '../../contexts/AlertContext'
-import tokensList from '../../config/constants/tokensList.json'
+import tokensList from '../../config/constants/dexTokensList.json'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -70,7 +70,7 @@ const Swap: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb swap logic
     } catch (err) {
-      toggleAlert('Error during the swap. Try again', 'danger')
+      toggleAlert('Error during the swap. Try again', 'error')
     } finally {
       setLoading(false)
     }

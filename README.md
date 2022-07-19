@@ -5,9 +5,10 @@
 - Create a `.env.development.local` file with the following content:
 
     ```env
-    NEXT_PUBLIC_TRON_GRID_KEY = <private_key>
+    TRON_GRID_KEY = <key>
+    TRON_PRIVATE_KEY = <key>
     ```
-    The private key is obtainable on the [TronGrid](https://www.trongrid.io/) website.
+    The Tron Grid key is obtainable on the [TronGrid](https://www.trongrid.io/) website. The private key from a wallet.
 
 - Install the [TronLink](https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec) extension.
 

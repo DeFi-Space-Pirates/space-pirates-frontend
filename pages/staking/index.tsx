@@ -20,7 +20,7 @@ const Staking: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb stake logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }
@@ -32,7 +32,7 @@ const Staking: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb unstake logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }
@@ -44,7 +44,7 @@ const Staking: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb harvest logic
     } catch (err) {
-      toggleAlert('Error during the staking. Try again', 'danger')
+      toggleAlert('Error during the staking. Try again', 'error')
     } finally {
       setLoading(false)
     }
