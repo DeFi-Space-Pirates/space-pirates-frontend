@@ -13,8 +13,6 @@ import {
 import WalletItem from '../../components/Wallet/WalletItem'
 
 const Wallet: NextPage = () => {
-  const { balances } = useTronWeb()
-
   return (
     <div className="min-h-full p-5">
       <Head>
@@ -28,6 +26,7 @@ const Wallet: NextPage = () => {
       </div>
       <div className="flex flex-col gap-y-7 items-center justify-around">
         <WalletItem tabIndex={0} title="Tokens" predicate={isToken} />
+        <WalletItem tabIndex={1} title="TRC20" />
         <WalletItem tabIndex={1} title="Items" predicate={isItem} />
         <WalletItem tabIndex={2} title="Titles" predicate={isTitle} />
         <WalletItem tabIndex={3} title="Decorations" predicate={isDecoration} />

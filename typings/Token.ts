@@ -1,4 +1,11 @@
-export type Token = Token20 | Token1155
+export type Token = {
+  id?: number
+  address?: string
+  name: string
+  symbol: string
+  decimals: number
+  logoURI: string
+}
 
 export type Token1155 = {
   id: number

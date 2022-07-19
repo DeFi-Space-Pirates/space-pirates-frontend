@@ -9,8 +9,10 @@ import { useAlert } from './AlertContext'
 
 import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
 import tokensList from '../config/constants/tokensList.json'
+import wrappedTokensList from '../config/constants/wrappedTokensList.json'
 import { addresses } from '../config/addresses'
-import { Balance } from '../typings/Balance'
+import { Balance1155, Balance20 } from '../typings/Balance'
+import { convertToNumber } from '../lib/tronweb'
 
 declare global {
   interface Window {
@@ -30,7 +32,10 @@ type TronWebContextValue = {
   }
   connectTronLink: () => void
   address: string
-  balances: Balance[] | null
+  balances1155: Balance1155[] | null
+  balances20: Balance20[] | null
+  getBalanceById: (id: number | undefined) => string
+  getBalanceByAddress: (address: string | undefined) => string
 }
 
 type TronWebProviderProps = { children: React.ReactNode }
@@ -40,11 +45,12 @@ const TronWebContext = createContext<TronWebContextValue | undefined>(undefined)
 const TronWebProvider = ({ children }: TronWebProviderProps) => {
   const [tronWeb, setTronWeb] = useState<any>(null)
   const [address, setAddress] = useState('')
-  const [balances, setBalances] = useState<Balance[] | null>(null)
+  const [balances1155, setBalances1155] = useState<Balance1155[] | null>(null)
+  const [balances20, setBalances20] = useState<Balance20[] | null>(null)
 
   const { toggleAlert } = useAlert()
 
-  const loadTronWeb = async (tronWeb: any, address: string) => {
+  const loadTronWeb = useCallback(async (tronWeb: any, address: string) => {
     setTronWeb(tronWeb)
     setAddress(address)
 
@@ -63,17 +69,47 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
 
       const userBalances = tokensList.ids.map((id, index) => ({
         id: id,
-        amount: tronWeb
-          .BigNumber(batchBalances[index]._hex)
-          .div(10e19)
-          .toNumber(),
+        amount: convertToNumber(batchBalances[index]._hex, id),
       }))
 
-      setBalances(userBalances)
+      setBalances1155(userBalances)
     } catch (err) {
-      setBalances(null)
+      setBalances1155(null)
     }
-  }
+
+    try {
+      let updatedBalances20: Balance20[] = []
+      for (const token of wrappedTokensList.unWrapped) {
+        if (token.symbol === 'TRX') {
+          const sunBalance = await tronWeb.trx.getBalance(address)
+
+          updatedBalances20.push({
+            address: token.address,
+            amount: parseFloat(tronWeb.fromSun(sunBalance)).toFixed(2),
+            symbol: token.symbol,
+          })
+        } else {
+          const contractInstance = await tronWeb.contract().at(token.address)
+
+          const balance = await contractInstance.balanceOf(address).call()
+
+          updatedBalances20.push({
+            address: token.address,
+            amount: tronWeb
+              .BigNumber(balance._hex)
+              .div(1e18)
+              .toNumber()
+              .toFixed(2),
+            symbol: token.symbol,
+          })
+        }
+      }
+
+      setBalances20(updatedBalances20)
+    } catch (err) {
+      setBalances20(null)
+    }
+  }, [])
 
   const connectTronLink = useCallback(async () => {
     // automatic connection without prompt if already approved
@@ -128,13 +164,28 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
         }
       })
     }
-  }, [toggleAlert])
+  }, [toggleAlert, loadTronWeb])
+
+  const getBalanceById = (id: number | undefined) => {
+    const balance = balances1155?.find((balance) => balance.id === id)
+
+    return balance ? balance.amount.toString() : '0.00'
+  }
+
+  const getBalanceByAddress = (address: string | undefined) => {
+    const balance = balances20?.find((balance) => balance.address === address)
+
+    return balance ? balance.amount.toString() : '0.00'
+  }
 
   const value = {
     tronWeb,
     connectTronLink,
     address,
-    balances,
+    balances1155,
+    balances20,
+    getBalanceById,
+    getBalanceByAddress,
   }
 
   return (
