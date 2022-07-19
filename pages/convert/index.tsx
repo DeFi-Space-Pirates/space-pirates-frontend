@@ -7,7 +7,6 @@ import { NextPageWithLayout } from '../_app'
 import Layout from '../../components/layout/Layout'
 import NavTab from '../../components/layout/NavTab'
 import TokenInput from '../../components/Trade/TokenInput'
-import TokenOutput from '../../components/Trade/TokenOutput'
 import TokensModal from '../../components/Trade/TokensModal'
 import CardContainer from '../../components/Trade/CardContainer'
 import LoadingButton from '../../components/layout/LoadingButton'
@@ -208,7 +207,7 @@ const Convert: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenOutput amount={wrapAmount} token={wrapToken} />
+        <TokenInput amount={wrapAmount} token={wrapToken} />
         <div className="mt-8">
           <LoadingButton
             text={`Wrap`}
@@ -309,7 +308,7 @@ const Convert: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenOutput amount={unWrapAmount} token={unWrapToken} />
+        <TokenInput amount={unWrapAmount} token={unWrapToken} />
         <div className="mt-8">
           <LoadingButton
             text={`UN-WRAP`}

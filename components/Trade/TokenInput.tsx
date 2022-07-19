@@ -5,9 +5,9 @@ import { Token } from '../../typings/Token'
 import checkRegex from '../../lib/checkRegex'
 
 type TokenInputProps = {
-  handleShowModal: () => void
+  handleShowModal?: () => void
   amount: string
-  handleAmountChange: (amount: string) => void
+  handleAmountChange?: (amount: string) => void
   token: Token
 }
 
@@ -22,11 +22,11 @@ const TokenInput = ({
       <div>
         <button
           className="btn modal-button btn-ghost gap-2 mb-2"
-          onClick={() => handleShowModal()}
+          onClick={handleShowModal ? () => handleShowModal() : () => {}}
         >
           <Image src={token.logoURI} alt="token" height={20} width={20} />
           {token.symbol}
-          <ChevronDown />
+          {handleShowModal && <ChevronDown />}
         </button>
       </div>
       <input
@@ -41,9 +41,14 @@ const TokenInput = ({
         spellCheck="false"
         className="input input-lg w-full shadow-md"
         value={amount}
-        onChange={(e) => {
-          if (checkRegex(e.target.value)) handleAmountChange(e.target.value)
-        }}
+        onChange={
+          handleAmountChange
+            ? (e) => {
+                if (checkRegex(e.target.value))
+                  handleAmountChange(e.target.value)
+              }
+            : () => {}
+        }
       />
     </div>
   )

@@ -14,9 +14,8 @@ import checkRegex from '../../lib/checkRegex'
 
 import tokenList from '../../config/constants/tokensList.json'
 import { useAlert } from '../../contexts/AlertContext'
-import TokenNotSelect from '../../components/Trade/TokenNoSelect'
 import ArrowsDown from '../../components/icons/ArrowsDown'
-import TokenOutput from '../../components/Trade/TokenOutput'
+import TokenInput from '../../components/Trade/TokenInput'
 
 const Split: NextPageWithLayout = () => {
   const [splitAmount, setSplitAmount] = useState('')
@@ -184,7 +183,7 @@ const Split: NextPageWithLayout = () => {
             </span>
           </span>
         </InfoBanner>
-        <TokenNotSelect
+        <TokenInput
           amount={splitAmount}
           handleAmountChange={setSplitAmount}
           token={tokenList.tokens[1]}
@@ -192,8 +191,8 @@ const Split: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenOutput amount={splitAmount} token={tokenList.tokens[2]} />
-        <TokenOutput amount={splitAmount} token={tokenList.tokens[3]} />
+        <TokenInput amount={splitAmount} token={tokenList.tokens[2]} />
+        <TokenInput amount={splitAmount} token={tokenList.tokens[3]} />
         <div className="mt-8">
           <LoadingButton
             text="SPLIT"
@@ -329,12 +328,12 @@ const Split: NextPageWithLayout = () => {
             </span>
           </span>
         </InfoBanner>
-        <TokenNotSelect
+        <TokenInput
           amount={mergeAmount}
           handleAmountChange={setMergeAmount}
           token={tokenList.tokens[1]}
         />
-        <TokenNotSelect
+        <TokenInput
           amount={mergeAmount}
           handleAmountChange={setMergeAmount}
           token={tokenList.tokens[2]}
@@ -342,7 +341,7 @@ const Split: NextPageWithLayout = () => {
         <div className="flex justify-center border-0 my-4">
           <ArrowsDown />
         </div>
-        <TokenOutput amount={mergeAmount} token={tokenList.tokens[3]} />
+        <TokenInput amount={mergeAmount} token={tokenList.tokens[3]} />
         <div className="mt-8">
           <LoadingButton
             text="SPLIT"
