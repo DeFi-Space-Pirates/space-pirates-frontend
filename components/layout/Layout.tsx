@@ -22,7 +22,9 @@ const Layout = ({ children, padding = 5 }: LayoutProps) => {
     <div className="min-h-screen flex flex-col justify-between">
       <Alert />
       <Navbar />
-      <main className={`mb-auto p-${padding}`}>{children}</main>
+      <main className={`max-w-screen-2xl self-center mb-auto p-${padding}`}>
+        {children}
+      </main>
       <Footer />
     </div>
   )

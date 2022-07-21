@@ -44,33 +44,46 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <button
-            className="btn btn-primary text-content-primary"
-            onClick={tronWeb ? () => {} : () => connectTronLink()}
-          >
-            {tronWeb ? (
-              <>
-                <p className="mr-2">{formatAddress(address)}</p>
-                <svg
-                  id="Livello_1-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16.212"
-                  height="15.783"
-                  viewBox="0 0 16.212 15.783"
-                >
-                  <path
-                    id="Tracciato_3"
-                    data-name="Tracciato 3"
-                    d="M16.212,4.383,3.629,2.133l9,7.25,3.581-2.9V8.4l-1.7,1.411,1.7-.309v1.5l-2.871.517-.517,4.258H11.572l.585-4.832L2.775,3.2,7.8,15.783H6.283L0,0,16.212,2.979Z"
-                    fill="#FFF7E8"
-                    fillRule="evenodd"
-                  />
-                </svg>
-              </>
-            ) : (
-              'Connect Wallet'
+          <div className="dropdown dropdown-end">
+            <button
+              tabIndex={0}
+              className="btn btn-primary text-content-primary"
+              onClick={tronWeb ? () => {} : () => connectTronLink()}
+            >
+              {tronWeb ? (
+                <>
+                  <p className="mr-2">{formatAddress(address)}</p>
+                  <svg
+                    id="Livello_1-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16.212"
+                    height="15.783"
+                    viewBox="0 0 16.212 15.783"
+                  >
+                    <path
+                      id="Tracciato_3"
+                      data-name="Tracciato 3"
+                      d="M16.212,4.383,3.629,2.133l9,7.25,3.581-2.9V8.4l-1.7,1.411,1.7-.309v1.5l-2.871.517-.517,4.258H11.572l.585-4.832L2.775,3.2,7.8,15.783H6.283L0,0,16.212,2.979Z"
+                      fill="#FFF7E8"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </>
+              ) : (
+                'Connect Wallet'
+              )}
+            </button>
+            {tronWeb && (
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 drop-shadow-md bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link href="wallet">Wallet</Link>
+                </li>
+              </ul>
             )}
-          </button>
+          </div>
         </div>
       </div>
     </nav>

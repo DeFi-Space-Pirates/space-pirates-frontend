@@ -1,6 +1,7 @@
 {
   "name": "SpacePirates tokens list",
   "timestamp": "2022-07-12T11:45:09Z",
+  "ids": [1, 2, 3, 4, 100, 101, 102, 103, 1000, 1001, 1002],
   "tokens": [
     {
       "id": 1,
@@ -34,7 +35,7 @@
       "id": 100,
       "name": "Space Tron",
       "symbol": "SP-TRX",
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"
     },
     {
@@ -56,6 +57,27 @@
       "name": "Space USDD",
       "symbol": "SP-USDD",
       "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
+    },
+    {
+      "id": 1000,
+      "name": "Starter Gem",
+      "symbol": "",
+      "decimals": 0,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
+    },
+    {
+      "id": 1001,
+      "name": "Evocation Gem",
+      "symbol": "",
+      "decimals": 0,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
+    },
+    {
+      "id": 1002,
+      "name": "Breeding Gem",
+      "symbol": "",
+      "decimals": 0,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
     }
   ]

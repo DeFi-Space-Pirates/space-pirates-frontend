@@ -1,28 +1,62 @@
 {
   "name": "SpacePirates Wrapped tokens list",
   "timestamp": "2022-07-12T11:45:09Z",
-  "tokens": [
+  "unWrapped": [
     {
       "name": "Tron",
       "symbol": "TRX",
-      "address": "0x85EAC5Ac2F758618dFa09bDbe0cf174e7d574D5B",
-      "chainId": 56,
-      "decimals": 18,
+      "address": "0x00",
+      "decimals": 6,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"
     },
     {
       "name": "Tether USD",
       "symbol": "USDT",
-      "address": "0x55d398326f99059fF775485246999027B3197955",
-      "chainId": 56,
+      "address": "TUXYeqLUibq7m9MCMtyzLKptu296xrdoXq",
       "decimals": 18,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
     },
     {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "address": "THFMQvfckg4UmauGW4DEaHmt35WA2A1afT",
+      "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+    },
+    {
       "name": "Decentralized USD",
       "symbol": "USDD",
-      "address": "0x55d398326f99059fF775485246999027B3197955",
-      "chainId": 56,
+      "address": "TV6StXz41Z1zmHtjzBQ93Y9jNEAvHSDoQ7",
+      "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
+    }
+  ],
+  "wrapped": [
+    {
+      "id": 100,
+      "name": "Space Tron",
+      "symbol": "SP-TRX",
+      "decimals": 6,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"
+    },
+    {
+      "id": 101,
+      "name": "Space USDT",
+      "symbol": "SP-USDT",
+      "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+    },
+    {
+      "id": 102,
+      "name": "Space USDC",
+      "symbol": "SP-USDC",
+      "decimals": 18,
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+    },
+    {
+      "id": 103,
+      "name": "Space USDD",
+      "symbol": "SP-USDD",
       "decimals": 18,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
     }

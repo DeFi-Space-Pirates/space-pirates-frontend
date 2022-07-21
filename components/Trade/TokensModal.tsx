@@ -23,8 +23,17 @@ const TokensModal = ({
         checked={showModal}
         readOnly
       />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box bg-base-100">
+      <div
+        className="modal modal-bottom sm:modal-middle"
+        onClick={() => handleShowModal()}
+      >
+        <div
+          className="modal-box bg-base-100"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        >
           <div className="flex justify-between">
             <h3 className="font-bold text-lg">Select token</h3>
             <button
@@ -51,9 +60,9 @@ const TokensModal = ({
                     layout="fixed"
                   />
                   <div className="ml-3 font-semibold text-left">
-                    {token.symbol}
+                    {token.name}
                     <p className="text-left text-base-content text-sm text-opacity-60 font-normal">
-                      {token.name}
+                      {token.symbol}
                     </p>
                   </div>
                 </div>

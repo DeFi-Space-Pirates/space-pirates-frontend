@@ -20,7 +20,7 @@
       "id": 100,
       "name": "Space Tron",
       "symbol": "SP-TRX",
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"
     },
     {

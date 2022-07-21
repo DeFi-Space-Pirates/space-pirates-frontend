@@ -12,7 +12,7 @@ import LoadingButton from '../../components/layout/LoadingButton'
 
 import { Token } from '../../typings/Token'
 import { useAlert } from '../../contexts/AlertContext'
-import tokensList from '../../config/constants/tokensList.json'
+import tokensList from '../../config/constants/dexTokensList.json'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -33,7 +33,17 @@ const Swap: NextPageWithLayout = () => {
   }
 
   const handleTokenChange = (token: Token) => {
-    isTokenA ? setTokenA(token) : setTokenB(token)
+    if (isTokenA) {
+      if (token === tokenB) {
+        setTokenB(tokenA)
+      }
+      setTokenA(token)
+    } else {
+      if (token === tokenA) {
+        setTokenA(tokenB)
+      }
+      setTokenB(token)
+    }
     setShowModal(false)
   }
 
@@ -60,14 +70,14 @@ const Swap: NextPageWithLayout = () => {
     try {
       //TODO implement tronweb swap logic
     } catch (err) {
-      toggleAlert('Error during the swap. Try again', 'danger')
+      toggleAlert('Error during the swap. Try again', 'error')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="flex justify-center items-center py-20">
       <Head>
         <title>Space Pirates Swap</title>
       </Head>

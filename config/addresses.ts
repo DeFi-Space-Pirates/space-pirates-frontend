@@ -2,8 +2,8 @@ export const addresses = {
   shasta: {
     tokensContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
     stakingContract: 'TFtxfvP3pPV4xAxTzoC8vHXMnSByuzPYVz',
-    splitContract: 'TRwToMqhroYdAJvR56iU5H8TvYH8UaQFSH',
-    faucetContract: 'TGDck5m8ft9txunU5wRfkQWszfcSwpWtY2',
+    splitContract: 'TUGJMdonQYXsmYXCEE324BeT4rnWst32px',
+    faucetContract: 'TUve8rW6ma59xSNEZAFv7cPW5xzERTsW2A',
     wrapperContract: 'TUYsERGz55gVPoNexx8qBwcGxZodt4LmZC',
     factoryContract: 'TUR6gvikRG6HFz348q49Lv17x39HbF64gw',
     routerContract: 'TV1tVj2R7J1FBNFVLbuj6ca7JXGu9kgmLt',
