@@ -11,7 +11,7 @@ import { isToken } from '../../lib/tokensType'
 type FaucetCardProps = {
   id: number
   name: string
-  maxAmount: number
+  maxAmount: string
 }
 
 const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
@@ -46,7 +46,7 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
   }
 
   const onGetMaxAmount = async (id: number) => {
-    const maxMintable = maxAmount - parseFloat(getBalanceById(id))
+    const maxMintable = parseFloat(maxAmount) - parseFloat(getBalanceById(id))
 
     setAmount(maxMintable > 0 ? maxMintable : 0)
   }

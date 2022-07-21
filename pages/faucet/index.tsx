@@ -9,7 +9,7 @@ import { addresses } from '../../config/addresses'
 import { Token1155 } from '../../typings/Token'
 import { isToken } from '../../lib/tokensType'
 
-type SupportedToken = Token1155 & { maxAmount: number }
+type SupportedToken = Token1155 & { maxAmount: string }
 
 export const getStaticProps: GetStaticProps<{
   supportedTokens: SupportedToken[]
