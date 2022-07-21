@@ -69,6 +69,9 @@ const NavbarLinks = () => {
           </li>
         </ul>
       </li>
+      <li>
+        <a>Game</a>
+      </li>
       <li tabIndex={4}>
         <a className="justify-between">
           Quest
@@ -97,11 +100,22 @@ const NavbarLinks = () => {
           </li>
         </ul>
       </li>
-      <li>
-        <a>Wiki</a>
-      </li>
-      <li>
-        <a>Game</a>
+      <li tabIndex={6}>
+        <a className="justify-between">
+          More
+          <ChevronDown />
+        </a>
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+          <li>
+            <Link href="wallet">Wallet</Link>
+          </li>
+          <li>
+            <a>Wiki</a>
+          </li>
+          <li>
+            <a>Inflation dashboard</a>
+          </li>
+        </ul>
       </li>
     </>
   )

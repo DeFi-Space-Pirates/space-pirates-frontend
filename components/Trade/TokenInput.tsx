@@ -20,6 +20,12 @@ const TokenInput = ({
 }: TokenInputProps) => {
   const { getBalanceById, getBalanceByAddress } = useTronWeb()
 
+  const handleGetBalance = (): string => {
+    return 'id' in token
+      ? getBalanceById(token.id)
+      : getBalanceByAddress(token.address)
+  }
+
   return (
     <div>
       <div>
@@ -32,34 +38,40 @@ const TokenInput = ({
           {handleShowModal && <ChevronDown />}
         </button>
       </div>
-      <input
-        inputMode="decimal"
-        autoComplete="off"
-        autoCorrect="off"
-        type="text"
-        pattern="^[0-9]*[.,]?[0-9]*$"
-        placeholder="0.0"
-        minLength={1}
-        maxLength={79}
-        spellCheck="false"
-        className="input input-lg w-full shadow-md"
-        value={amount}
-        onChange={
-          handleAmountChange
-            ? (e) => {
-                if (checkRegex(e.target.value))
-                  handleAmountChange(e.target.value)
-              }
-            : () => {}
-        }
-      />
+      <label className="input-group input-group-md drop-shadow-md">
+        <input
+          inputMode="decimal"
+          autoComplete="off"
+          autoCorrect="off"
+          type="text"
+          pattern="^[0-9]*[.,]?[0-9]*$"
+          placeholder="0.0"
+          minLength={1}
+          maxLength={79}
+          spellCheck="false"
+          className="input input-md w-full"
+          value={amount}
+          onChange={
+            handleAmountChange
+              ? (e) => {
+                  if (checkRegex(e.target.value))
+                    handleAmountChange(e.target.value)
+                }
+              : () => {}
+          }
+        />
+        {handleAmountChange && (
+          <span
+            className="btn btn-md btn-ghost bg-base-100 border-0"
+            onClick={() => handleAmountChange(handleGetBalance())}
+          >
+            MAX
+          </span>
+        )}
+      </label>
+
       {handleAmountChange && (
-        <label className="label">
-          Balance:{' '}
-          {'id' in token
-            ? getBalanceById(token.id)
-            : getBalanceByAddress(token.address)}
-        </label>
+        <label className="label">Balance: {handleGetBalance()}</label>
       )}
     </div>
   )

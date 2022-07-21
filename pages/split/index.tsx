@@ -27,7 +27,7 @@ const Split: NextPageWithLayout = () => {
   const [mergeLoading, setMergeLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb } = useTronWeb()
+  const { tronWeb, address } = useTronWeb()
 
   const onSplitTokens = async () => {
     setSplitLoading(true)
@@ -38,9 +38,14 @@ const Split: NextPageWithLayout = () => {
         addresses.shasta.tokensContract,
       )
 
-      await spacePiratesTokens
-        .setApprovalForAll(addresses.shasta.splitContract, true)
-        .send()
+      const isApproved = await spacePiratesTokens
+        .isApprovedForAll(address, addresses.shasta.splitContract)
+        .call()
+
+      !isApproved &&
+        (await spacePiratesTokens
+          .setApprovalForAll(addresses.shasta.splitContract, true)
+          .send())
 
       const asteroidsSplit = await tronWeb.contract(
         AsteroidsSplit.abi,
