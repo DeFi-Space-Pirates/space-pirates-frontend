@@ -20,6 +20,7 @@ import { addresses } from '../../config/addresses'
 import { Token, Token1155, Token20 } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { getDecimals } from '../../lib/tokensType'
+import { convertToHex } from '../../lib/tronweb'
 
 const Convert: NextPageWithLayout = () => {
   const [wrapToken, setWrapToken] = useState(wrappedTokensList.unWrapped[0])
@@ -75,7 +76,7 @@ const Convert: NextPageWithLayout = () => {
         })
       } else {
         await spacePiratesWrapper
-          .erc20Deposit(wrapToken.address, parseFloat(wrapAmount) * 1e18)
+          .erc20Deposit(wrapToken.address, convertToHex(wrapAmount, 1e18))
           .send({ shouldPollResponse: true })
       }
 
@@ -105,12 +106,14 @@ const Convert: NextPageWithLayout = () => {
       )
 
       if (token!.symbol === 'TRX') {
-        await spacePiratesWrapper.ethWithdraw(unWrapAmount).send({
-          shouldPollResponse: true,
-        })
+        await spacePiratesWrapper
+          .ethWithdraw(convertToHex(unWrapAmount, 1e6))
+          .send({
+            shouldPollResponse: true,
+          })
       } else {
         await spacePiratesWrapper
-          .erc20Withdraw(token!.address, parseFloat(unWrapAmount) * 1e18)
+          .erc20Withdraw(token!.address, convertToHex(unWrapAmount, 1e18))
           .send({ shouldPollResponse: true })
       }
 

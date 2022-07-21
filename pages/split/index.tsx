@@ -19,6 +19,7 @@ import AsteroidsSplit from '../../config/artifacts/AsteroidsSplitContract.json'
 import SpacePiratesTokens from '../../config/artifacts/SpacePiratesTokens.json'
 
 import { addresses } from '../../config/addresses'
+import { convertToHex, getTronWebInstance } from '../../lib/tronweb'
 
 const Split: NextPageWithLayout = () => {
   const [splitAmount, setSplitAmount] = useState('')
@@ -53,7 +54,7 @@ const Split: NextPageWithLayout = () => {
       )
 
       await asteroidsSplit
-        .splitAsteroids(splitAmount)
+        .splitAsteroids(convertToHex(splitAmount, 1e18))
         .send({ shouldPoolResponse: true })
 
       toggleAlert(
@@ -78,7 +79,7 @@ const Split: NextPageWithLayout = () => {
       )
 
       await asteroidsSplit
-        .mergeAsteroids(mergeAmount)
+        .mergeAsteroids(convertToHex(mergeAmount, 1e18))
         .send({ shouldPoolResponse: true })
 
       toggleAlert(`Successfully redeemed ${mergeAmount} ASTR`, 'success')

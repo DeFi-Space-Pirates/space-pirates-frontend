@@ -7,6 +7,7 @@ import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
 import { addresses } from '../../config/addresses'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { isToken } from '../../lib/tokensType'
+import { convertToHex } from '../../lib/tronweb'
 
 type FaucetCardProps = {
   id: number
@@ -15,13 +16,13 @@ type FaucetCardProps = {
 }
 
 const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState('')
   const [loading, setLoading] = useState(false)
 
   const { tronWeb, balances1155, getBalanceById } = useTronWeb()
   const { toggleAlert } = useAlert()
 
-  const onMintToken = async (id: number, amount: number) => {
+  const onMintToken = async (id: number, amount: string) => {
     setLoading(true)
     try {
       const spacePiratesFaucet = await tronWeb.contract(
@@ -29,12 +30,10 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
         addresses.shasta.faucetContract,
       )
 
-      const mintAmount = isToken(id)
-        ? tronWeb.BigNumber(amount.toString())
-        : amount
+      const mintAmount = isToken(id) ? convertToHex(amount, 1e18) : amount
 
       await spacePiratesFaucet
-        .mintToken(mintAmount, id)
+        .mintToken(id, mintAmount)
         .send({ shouldPollResponse: true })
 
       toggleAlert(`Successfully minted ${amount} ${name}`, 'success')
@@ -48,7 +47,7 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
   const onGetMaxAmount = async (id: number) => {
     const maxMintable = parseFloat(maxAmount) - parseFloat(getBalanceById(id))
 
-    setAmount(maxMintable > 0 ? maxMintable : 0)
+    setAmount(maxMintable > 0 ? maxMintable.toString() : '0')
   }
 
   return (
@@ -72,7 +71,7 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
               placeholder="0"
               className="input"
               value={amount}
-              onChange={(e) => setAmount(e.target.valueAsNumber)}
+              onChange={(e) => setAmount(e.target.value)}
             />
             <span
               className="btn btn-ghost bg-base-100 border-0"
@@ -89,7 +88,7 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
           text="MINT"
           loading={loading}
           onClick={() => onMintToken(id, amount)}
-          disabled={amount === 0}
+          disabled={amount === '0'}
         />
       </div>
     </div>

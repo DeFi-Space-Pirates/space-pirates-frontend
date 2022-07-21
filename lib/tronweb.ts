@@ -14,9 +14,17 @@ export const getTronWebInstance = () => {
 }
 
 export const convertToNumber = (hex: string, id: number): string => {
+  const decimals = getDecimals(id)
+
   return getTronWebInstance()
     .BigNumber(hex)
-    .div(getDecimals(id))
+    .div(decimals)
     .toNumber()
-    .toFixed(2)
+    .toFixed(decimals > 1 ? 2 : 0)
+}
+
+export const convertToHex = (amount: string, decimals: number): string => {
+  return getTronWebInstance().toHex(
+    getTronWebInstance().BigNumber(amount).multipliedBy(decimals),
+  )
 }
