@@ -38,7 +38,7 @@ const TokenInput = ({
           {handleShowModal && <ChevronDown />}
         </button>
       </div>
-      <label className="input-group input-group-md drop-shadow-md">
+      <div className="flex input-group-md drop-shadow-md">
         <input
           inputMode="decimal"
           autoComplete="off"
@@ -49,7 +49,9 @@ const TokenInput = ({
           minLength={1}
           maxLength={79}
           spellCheck="false"
-          className="input input-md w-full"
+          className={`input input-md w-full rounded-l-md rounded-r-${
+            handleAmountChange ? 'none' : 'md'
+          }`}
           value={amount}
           onChange={
             handleAmountChange
@@ -62,14 +64,13 @@ const TokenInput = ({
         />
         {handleAmountChange && (
           <span
-            className="btn btn-md btn-ghost bg-base-100 border-0"
+            className="btn btn-md btn-ghost bg-base-100 border-0 rounded-r-md rounded-l-none"
             onClick={() => handleAmountChange(handleGetBalance())}
           >
             MAX
           </span>
         )}
-      </label>
-
+      </div>
       {handleAmountChange && (
         <label className="label">Balance: {handleGetBalance()}</label>
       )}

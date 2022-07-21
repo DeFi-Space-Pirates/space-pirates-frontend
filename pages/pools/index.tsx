@@ -8,6 +8,9 @@ import LoadingButton from '../../components/layout/LoadingButton'
 import NavTab from '../../components/layout/NavTab'
 
 import { useAlert } from '../../contexts/AlertContext'
+import PoolsItem from '../../components/Earn/PoolsItem'
+
+import DexTokensList from '../../config/constants/dexTokensList.json'
 
 const Pools: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false)
@@ -51,13 +54,32 @@ const Pools: NextPageWithLayout = () => {
   }
 
   return (
-    <div className="min-h-full p-5 ">
+    <div className="min-h-full p-5">
       <Head>
         <title>Space Pirates Pools</title>
       </Head>
       <div className="text-center mb-8">
         <p className="text-5xl font-bold mb-2">Space Pirates Pools</p>
-        <p className="text-xl italic">provide liquidity to the dex</p>
+        <p className="text-xl italic">Provide liquidity to the dex</p>
+      </div>
+      <div className="grid grid-cols-12 gap-6">
+        <PoolsItem
+          tokenA={DexTokensList.tokens[0]}
+          tokenB={DexTokensList.tokens[1]}
+        />
+        <PoolsItem
+          tokenA={DexTokensList.tokens[0]}
+          tokenB={DexTokensList.tokens[1]}
+        />
+
+        <PoolsItem
+          tokenA={DexTokensList.tokens[0]}
+          tokenB={DexTokensList.tokens[1]}
+        />
+        <PoolsItem
+          tokenA={DexTokensList.tokens[0]}
+          tokenB={DexTokensList.tokens[1]}
+        />
       </div>
     </div>
   )
