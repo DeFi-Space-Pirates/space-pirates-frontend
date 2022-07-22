@@ -9,7 +9,7 @@ import {
   isItem,
   isTitle,
   isToken,
-} from '../../lib/tokensType'
+} from '../../lib/tokens'
 import WalletItem from '../../components/Wallet/WalletItem'
 
 const Wallet: NextPage = () => {

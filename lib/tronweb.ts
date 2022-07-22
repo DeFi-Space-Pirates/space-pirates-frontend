@@ -1,5 +1,5 @@
 import TronWeb from 'tronweb'
-import { getDecimals } from './tokensType'
+import { getDecimals } from './tokens'
 
 export const getTronWebInstance = () => {
   const tronWeb = new TronWeb({

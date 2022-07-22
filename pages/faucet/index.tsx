@@ -7,7 +7,7 @@ import tokensList from '../../config/constants/tokensList.json'
 import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
 import { addresses } from '../../config/addresses'
 import { Token1155 } from '../../typings/Token'
-import { isToken } from '../../lib/tokensType'
+import { isToken } from '../../lib/tokens'
 
 type SupportedToken = Token1155 & { maxAmount: string }
 

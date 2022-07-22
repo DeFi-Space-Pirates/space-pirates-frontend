@@ -19,7 +19,6 @@ import SpacePiratesWrapper from '../../config/artifacts/SpacePiratesWrapper.json
 import { addresses } from '../../config/addresses'
 import { Token, Token1155, Token20 } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
-import { getDecimals } from '../../lib/tokensType'
 import { convertToHex } from '../../lib/tronweb'
 
 const Convert: NextPageWithLayout = () => {

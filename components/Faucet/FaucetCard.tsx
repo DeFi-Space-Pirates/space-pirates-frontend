@@ -6,7 +6,7 @@ import LoadingButton from '../layout/LoadingButton'
 import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
 import { addresses } from '../../config/addresses'
 import { useTronWeb } from '../../contexts/TronWebContext'
-import { isToken } from '../../lib/tokensType'
+import { isToken } from '../../lib/tokens'
 import { convertToHex } from '../../lib/tronweb'
 
 type FaucetCardProps = {
