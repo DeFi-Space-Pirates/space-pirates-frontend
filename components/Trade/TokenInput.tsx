@@ -50,7 +50,7 @@ const TokenInput = ({
           maxLength={79}
           spellCheck="false"
           className={`input input-md w-full rounded-l-md rounded-r-${
-            handleAmountChange ? 'none' : 'md'
+            !handleAmountChange ? 'md' : 'none'
           }`}
           value={amount}
           onChange={

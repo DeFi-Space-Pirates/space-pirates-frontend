@@ -19,11 +19,13 @@ const Layout = ({ children, padding = 5 }: LayoutProps) => {
   }, [connectTronLink])
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="flex flex-col justify-between">
       <Alert />
       <Navbar />
-      <main className={`max-w-screen-2xl self-center mb-auto p-${padding}`}>
-        {children}
+      <main className="min-h-screen flex justify-center">
+        <div className={`w-full max-w-screen-2xl mb-auto p-${padding}`}>
+          {children}
+        </div>
       </main>
       <Footer />
     </div>
