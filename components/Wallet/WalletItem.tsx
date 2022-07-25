@@ -19,7 +19,7 @@ const WalletItem = ({ tabIndex, title, predicate }: WalletItemProps) => {
   return (
     <div
       tabIndex={tabIndex}
-      className="lg:w-3/6 md:w-4/6 w-full collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+      className="lg:w-3/6 md:w-4/6 w-full collapse collapse-arrow border border-base-300 bg-base-100 rounded-box drop-shadow"
     >
       <div className="collapse-title text-xl font-medium">{title}</div>
       <div className="collapse-content ">

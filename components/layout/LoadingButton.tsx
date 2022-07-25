@@ -3,6 +3,7 @@ type LoadingButtonProps = {
   loading: boolean
   onClick: () => void
   disabled?: boolean
+  customClasses?: string
 }
 
 const LoadingButton = ({
@@ -10,12 +11,14 @@ const LoadingButton = ({
   loading,
   onClick,
   disabled = false,
+  customClasses,
 }: LoadingButtonProps) => {
   return (
     <button
       className={`btn bg-primary btn-block hover:bg-primary-focus border-0 drop-shadow-md text-primary-content ${
         loading && 'loading'
-      }`}
+      } ${customClasses}`}
+      disabled={disabled}
       onClick={() => onClick()}
     >
       {text}
