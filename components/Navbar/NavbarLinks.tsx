@@ -37,6 +37,37 @@ const NavbarLinks = () => {
       </li>
       <li tabIndex={2}>
         <a className="justify-between">
+          NFTs
+          <ChevronDown />
+        </a>
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+          <li>
+            <Link href="marketplace">Marketplace</Link>
+          </li>
+          <li>
+            <Link href="faucet">NFT mint</Link>
+          </li>
+        </ul>
+      </li>
+      <li tabIndex={3}>
+        <a className="justify-between">
+          Quest
+          <ChevronDown />
+        </a>
+        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+          <li>
+            <a>Claim</a>
+          </li>
+          <li>
+            <a>List</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a>Game</a>
+      </li>
+      <li tabIndex={4}>
+        <a className="justify-between">
           Faucet
           <ChevronDown />
         </a>
@@ -52,37 +83,6 @@ const NavbarLinks = () => {
             >
               Shasta faucet
             </a>
-          </li>
-        </ul>
-      </li>
-      <li tabIndex={3}>
-        <a className="justify-between">
-          Mint
-          <ChevronDown />
-        </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
-          <li>
-            <Link href="faucet">Tokens pre-sale</Link>
-          </li>
-          <li>
-            <Link href="faucet">NFT mint</Link>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a>Game</a>
-      </li>
-      <li tabIndex={4}>
-        <a className="justify-between">
-          Quest
-          <ChevronDown />
-        </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
-          <li>
-            <a>Claim</a>
-          </li>
-          <li>
-            <a>List</a>
           </li>
         </ul>
       </li>
@@ -108,6 +108,9 @@ const NavbarLinks = () => {
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
             <Link href="wallet">Wallet</Link>
+          </li>
+          <li>
+            <Link href="faucet">Tokens pre-sale</Link>
           </li>
           <li>
             <a>Wiki</a>
