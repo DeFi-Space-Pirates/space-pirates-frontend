@@ -49,22 +49,11 @@ const NavbarLinks = () => {
           </li>
         </ul>
       </li>
-      <li tabIndex={3}>
-        <a className="justify-between">
-          Quest
-          <ChevronDown />
-        </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
-          <li>
-            <a>Claim</a>
-          </li>
-          <li>
-            <a>List</a>
-          </li>
-        </ul>
-      </li>
       <li>
         <a>Game</a>
+      </li>
+      <li>
+        <Link href="quest">Quest</Link>
       </li>
       <li tabIndex={4}>
         <a className="justify-between">
