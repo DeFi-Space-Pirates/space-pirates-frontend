@@ -14,7 +14,7 @@ const Marketplace: NextPage = (props: MarketplaceProps) => {
         <p className="text-5xl font-bold mb-2">Space Pirates Marketplace</p>
         <p className="text-xl italic">Explore and mint the available NFTs!</p>
       </div>
-      <div className="grid grid-cols-12 gap-5">
+      <div className="grid grid-cols-12 md:gap-5 gap-y-5 gap-x-2">
         <MarketplaceItem />
         <MarketplaceItem />
         <MarketplaceItem />
