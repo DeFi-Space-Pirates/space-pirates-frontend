@@ -4,6 +4,7 @@ type LoadingButtonProps = {
   onClick: () => void
   disabled?: boolean
   customClasses?: string
+  children?: React.ReactNode
 }
 
 const LoadingButton = ({
@@ -12,6 +13,7 @@ const LoadingButton = ({
   onClick,
   disabled = false,
   customClasses,
+  children,
 }: LoadingButtonProps) => {
   return (
     <button
@@ -21,7 +23,7 @@ const LoadingButton = ({
       disabled={disabled}
       onClick={() => onClick()}
     >
-      {text}
+      {text ? text : children}
     </button>
   )
 }

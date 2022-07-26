@@ -34,12 +34,12 @@ const QuestCategory = ({
           />
           <QuestItem
             text="Discover ecosystem"
-            claimable={false}
+            claimable={true}
             completed={false}
           />
           <QuestItem
             text="Discover ecosystem"
-            claimable={true}
+            claimable={false}
             completed={false}
           />
           <QuestItem
