@@ -31,12 +31,15 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52"
             >
+              <button className="btn btn-ghost normal-case text-xl sm:hidden inline">
+                <Link href="/">Space Pirates</Link>
+              </button>
               <NavbarLinks />
             </ul>
           </div>
-          <div className="btn btn-ghost normal-case text-xl">
+          <button className="btn btn-ghost normal-case text-xl sm:inline hidden">
             <Link href="/">Space Pirates</Link>
-          </div>
+          </button>
         </div>
         <div className="navbar-center hidden xl:flex">
           <ul className="menu menu-horizontal p-0">
@@ -47,7 +50,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <button
               tabIndex={0}
-              className="btn btn-primary text-content-primary"
+              className="btn md:btn-md btn-sm btn-primary text-content-primary"
               onClick={tronWeb ? () => {} : () => connectTronLink()}
             >
               {tronWeb ? (
@@ -70,7 +73,9 @@ const Navbar = () => {
                   </svg>
                 </>
               ) : (
-                'Connect Wallet'
+                <p>
+                  Connect <span className="hidden md:inline">Wallet</span>
+                </p>
               )}
             </button>
             {tronWeb && (
