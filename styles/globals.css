@@ -21,21 +21,21 @@ a {
 
 .scrollbar::-webkit-scrollbar {
   width: 10px;
-  height: 20px;
+  height: 10px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background: #f3f4f6;
+  background: #ffefe2;
   border-radius: 50vh;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #9ca3af;
+  background: #ffb47a;
   border-radius: 100vh;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: #e6a26e;
 }
 
 .menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
