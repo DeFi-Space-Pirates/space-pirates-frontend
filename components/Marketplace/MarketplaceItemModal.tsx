@@ -27,14 +27,14 @@ const MarketplaceItemModal = ({
       />
       <div className="modal" onClick={() => handleShowModal()}>
         <div
-          className="modal-box p-3 bg-base-100 max-w-6xl"
+          className="modal-box p-3 bg-base-200 max-w-5xl"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
           }}
         >
           <div className="flex flex-col">
-            <div className="grid grid-cols-12 md:border-b-2 border-base-300">
+            <div className="grid grid-cols-12 md:border-b border-base-300">
               <div className="md:col-span-4 md:inline-grid hidden justify-center items-center pr-3">
                 <Image
                   className="rounded-box"
@@ -44,7 +44,7 @@ const MarketplaceItemModal = ({
                   width={280}
                 />
               </div>
-              <div className="md:col-span-8 col-span-12 flex flex-col gap-y-4 md:border-l-2 border-base-300 md:pl-3">
+              <div className="md:col-span-8 col-span-12 flex flex-col gap-y-4 md:border-l border-base-300 md:pl-3">
                 <p className="text-2xl font-semibold">Collection items</p>
                 <div className="whitespace-nowrap overflow-x-auto scrollbar">
                   {Array(8)

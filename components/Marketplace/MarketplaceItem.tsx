@@ -21,7 +21,7 @@ const MarketplaceItem = (props: MarketplaceItemProps) => {
         // item={}
       />
       <div
-        className="card card-compact bg-base-200 drop-shadow-md lg:col-span-3 sm:col-span-4 col-span-6"
+        className="card card-compact bg-base-200 drop-shadow-md xl:col-span-2 sm:col-span-3 col-span-6"
         role="button"
         onClick={handleShowModal}
       >

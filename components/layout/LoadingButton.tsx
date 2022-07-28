@@ -1,5 +1,5 @@
 type LoadingButtonProps = {
-  text: string
+  text?: string
   loading: boolean
   onClick: () => void
   disabled?: boolean

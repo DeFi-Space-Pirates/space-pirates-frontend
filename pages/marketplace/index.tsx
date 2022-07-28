@@ -20,6 +20,9 @@ const Marketplace: NextPage = (props: MarketplaceProps) => {
         <MarketplaceItem />
         <MarketplaceItem />
         <MarketplaceItem />
+        <MarketplaceItem />
+        <MarketplaceItem />
+        <MarketplaceItem />
       </div>
     </div>
   )
