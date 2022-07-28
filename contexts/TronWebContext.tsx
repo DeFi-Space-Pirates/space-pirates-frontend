@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import { useAlert } from './AlertContext'
 
 import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
