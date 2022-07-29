@@ -28,3 +28,5 @@ export const convertToHex = (amount: string, decimals: number): string => {
     getTronWebInstance().BigNumber(amount).multipliedBy(decimals),
   )
 }
+
+export const NULL_ADDRESS = '410000000000000000000000000000000000000000'

@@ -10,6 +10,7 @@ type TokenInputProps = {
   amount: string
   handleAmountChange?: (amount: string) => void
   token: Token
+  loading?: boolean
 }
 
 const TokenInput = ({
@@ -17,6 +18,7 @@ const TokenInput = ({
   amount,
   handleAmountChange,
   token,
+  loading,
 }: TokenInputProps) => {
   const { getBalanceById, getBalanceByAddress } = useTronWeb()
 
@@ -62,6 +64,9 @@ const TokenInput = ({
               : () => {}
           }
         />
+        {loading && (
+          <div className="btn loading bg-base-100 border-0 rounded-none text-base-300 p-0"></div>
+        )}
         {handleAmountChange && (
           <span
             className="btn btn-md btn-ghost bg-base-100 border-0 rounded-r-md rounded-l-none"
