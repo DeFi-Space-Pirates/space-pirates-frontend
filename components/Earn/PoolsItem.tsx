@@ -1,23 +1,30 @@
-import Image from 'next/image'
 import { useState } from 'react'
+import Image from 'next/image'
+
+import TokenInput from '../Trade/TokenInput'
+import LoadingButton from '../layout/LoadingButton'
+
 import { useAlert } from '../../contexts/AlertContext'
 import { useTronWeb } from '../../contexts/TronWebContext'
+import { Pool } from '../../typings/Pools'
 import { Token1155 } from '../../typings/Token'
-import LoadingButton from '../layout/LoadingButton'
-import TokenInput from '../Trade/TokenInput'
+import SpacePiratesRouter from '../../config/artifacts/SpacePiratesRouter.json'
+import { addresses } from '../../config/addresses'
+import { convertToHex, getUnixTimestamp } from '../../lib/tronweb'
 
 type PoolsItemProps = {
-  tokenA: Token1155
-  tokenB: Token1155
+  pool: Pool
 }
 
-const PoolsItem = ({ tokenA, tokenB }: PoolsItemProps) => {
+const PoolsItem = ({
+  pool: { tokenA, tokenB, reserveA, reserveB },
+}: PoolsItemProps) => {
   const [loading, setLoading] = useState(false)
   const [amountA, setAmountA] = useState('')
   const [amountB, setAmountB] = useState('')
 
   const { toggleAlert } = useAlert()
-  const { tronWeb } = useTronWeb()
+  const { tronWeb, address } = useTronWeb()
 
   const handleAmountAChange = (amount: string) => {
     setAmountA(amount)
@@ -27,18 +34,29 @@ const PoolsItem = ({ tokenA, tokenB }: PoolsItemProps) => {
     setAmountB(amount)
   }
 
-  const onAddLiquidity = () => {
+  const onAddLiquidity = async () => {
     setLoading(true)
 
     try {
-      // const spacePiratesWrapper = await tronWeb.contract(
-      // )
-      // toggleAlert(
-      //   `Successfully redeemed ${unWrapAmount} ${token!.symbol}`,
-      //   'success',
-      // )
+      const spacePiratesRouter = await tronWeb.contract(
+        SpacePiratesRouter.abi,
+        addresses.shasta.routerContract,
+      )
+
+      await spacePiratesRouter
+        .addLiquidity(
+          tokenA.id,
+          tokenB.id,
+          convertToHex(amountA, 1e18),
+          convertToHex(amountB, 1e18),
+          convertToHex(amountA, 0.98 * 1e18),
+          convertToHex(amountB, 0.98 * 1e18),
+          address,
+          getUnixTimestamp(300),
+        )
+        .send({ shouldPollResponse: true })
     } catch (err) {
-      toggleAlert('Error during adding liquidity. Try again', 'error')
+      toggleAlert('Error while adding liquidity. Try again', 'error')
     } finally {
       setLoading(false)
     }
@@ -68,7 +86,9 @@ const PoolsItem = ({ tokenA, tokenB }: PoolsItemProps) => {
         </div>
         <div>
           <p className="text-lg font-semibold">APR: 7%</p>
-          <p className="text-lg font-semibold">Liquidity: $129.052.929</p>
+          <p className="text-lg font-semibold">
+            Liquidity: {reserveA + reserveB}
+          </p>
         </div>
         {/* {someState ? (
           <>

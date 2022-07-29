@@ -18,7 +18,12 @@ import SpacePiratesFactory from '../../config/artifacts/SpacePiratesFactory.json
 import SpacePiratesRouter from '../../config/artifacts/SpacePiratesRouter.json'
 import StaticRouterAbi from '../../config/artifacts/StaticRouterAbi.json'
 import { addresses } from '../../config/addresses'
-import { convertToHex, convertToNumber, NULL_ADDRESS } from '../../lib/tronweb'
+import {
+  convertToHex,
+  convertToNumber,
+  getUnixTimestamp,
+  NULL_ADDRESS,
+} from '../../lib/tronweb'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -134,7 +139,7 @@ const Swap: NextPageWithLayout = () => {
           convertToHex(amount, 0.98 * 1e18),
           [tokenA.id, tokenB.id],
           address,
-          Math.floor((new Date().getTime() + 300) / 1000), //300 is 5 minutes
+          getUnixTimestamp(300), //300 is 5 minutes
         )
         .call()
 
@@ -164,9 +169,9 @@ const Swap: NextPageWithLayout = () => {
           convertToHex(amountA, 0.98 * 1e18),
           [tokenA.id, tokenB.id],
           address,
-          Math.floor((new Date().getTime() + 300) / 1000), //300 is 5 minutes
+          getUnixTimestamp(300), //300 is 5 minutes
         )
-        .send()
+        .send({ shouldPollResponse: true })
 
       console.log(res)
     } catch (err) {

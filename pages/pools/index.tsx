@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { NextPageWithLayout } from '../_app'
@@ -11,8 +12,61 @@ import { useAlert } from '../../contexts/AlertContext'
 import PoolsItem from '../../components/Earn/PoolsItem'
 
 import DexTokensList from '../../config/constants/dexTokensList.json'
+import SpacePiratesFactory from '../../config/artifacts/SpacePiratesFactory.json'
+import SpacePiratesPair from '../../config/artifacts/SpacePiratesPair.json'
 
-const Pools: NextPageWithLayout = () => {
+import { getTronWebInstance } from '../../lib/tronweb'
+import { addresses } from '../../config/addresses'
+import { Pool } from '../../typings/Pools'
+import { getTokenById } from '../../lib/tokens'
+
+export const getStaticProps: GetStaticProps<{
+  pools: Pool[] //TODO define the Pair type
+}> = async () => {
+  const tronWeb = getTronWebInstance()
+  const spacePiratesFactory = await tronWeb.contract(
+    SpacePiratesFactory.abi,
+    addresses.shasta.factoryContract,
+  )
+
+  const poolsAmount = await spacePiratesFactory.allPairsLength().call()
+
+  const pools: Pool[] = []
+
+  for (let i = 0; i < tronWeb.BigNumber(poolsAmount._hex).toNumber(); i++) {
+    const pairAddress = await spacePiratesFactory.allPairs(i).call()
+
+    const spacePiratesPair = await tronWeb.contract(
+      SpacePiratesPair.abi,
+      pairAddress,
+    )
+
+    const tokenIds = await spacePiratesPair.getTokenIds().call()
+    const reserves = await spacePiratesPair.getReserves().call()
+
+    //TODO fetch APR info
+
+    pools.push({
+      tokenA: getTokenById(
+        tronWeb.BigNumber(tokenIds._token0._hex).toNumber(),
+      )!,
+      tokenB: getTokenById(
+        tronWeb.BigNumber(tokenIds._token1._hex).toNumber(),
+      )!,
+      reserveA: tronWeb.BigNumber(reserves._reserve0._hex).toNumber(),
+      reserveB: tronWeb.BigNumber(reserves._reserve1._hex).toNumber(),
+    })
+  }
+
+  return {
+    props: { pools },
+  }
+}
+
+type PoolsProps = NextPageWithLayout &
+  InferGetStaticPropsType<typeof getStaticProps>
+
+const Pools = ({ pools }: PoolsProps) => {
   const [loading, setLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
@@ -63,23 +117,9 @@ const Pools: NextPageWithLayout = () => {
         <p className="text-xl italic">Provide liquidity to the dex</p>
       </div>
       <div className="grid grid-cols-12 gap-6">
-        <PoolsItem
-          tokenA={DexTokensList.tokens[0]}
-          tokenB={DexTokensList.tokens[1]}
-        />
-        <PoolsItem
-          tokenA={DexTokensList.tokens[0]}
-          tokenB={DexTokensList.tokens[1]}
-        />
-
-        <PoolsItem
-          tokenA={DexTokensList.tokens[0]}
-          tokenB={DexTokensList.tokens[1]}
-        />
-        <PoolsItem
-          tokenA={DexTokensList.tokens[0]}
-          tokenB={DexTokensList.tokens[1]}
-        />
+        {pools.map((pool, index) => (
+          <PoolsItem key={index} pool={pool} />
+        ))}
       </div>
     </div>
   )
