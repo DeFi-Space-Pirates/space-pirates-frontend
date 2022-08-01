@@ -34,10 +34,9 @@ export const getStaticProps: GetStaticProps<{
   for (const id of poolIds) {
     let stakingPool = await spacePiratesStaking.stakingPools(id).call()
 
-    stakingPool.rewardTokenId = convertToNumber(
-      stakingPool.rewardTokenId._hex,
-      id,
-    )
+    stakingPool.rewardTokenId = tronWeb
+      .BigNumber(stakingPool.rewardTokenId._hex)
+      .toNumber()
     stakingPool.rewardRate = tronWeb
       .BigNumber(stakingPool.rewardRate._hex)
       .toNumber()
