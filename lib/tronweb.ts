@@ -30,3 +30,7 @@ export const convertToHex = (amount: string, decimals: number): string => {
 }
 
 export const NULL_ADDRESS = '410000000000000000000000000000000000000000'
+
+export const getUnixTimestamp = (secondsToAdd: number): number => {
+  return Math.floor((new Date().getTime() + secondsToAdd) / 1000)
+}
