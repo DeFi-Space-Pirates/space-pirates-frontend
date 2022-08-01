@@ -4,7 +4,6 @@ import { useAlert } from '../../contexts/AlertContext'
 import LoadingButton from '../layout/LoadingButton'
 
 import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
-import { addresses } from '../../config/addresses'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { isToken } from '../../lib/tokens'
 import { convertToHex } from '../../lib/tronweb'
@@ -20,15 +19,15 @@ const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
   const [amount, setAmount] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const { tronWeb, balances1155, getBalanceById } = useTronWeb()
+  const { getContractInstance, getBalanceById } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   const onMintToken = async (id: number, amount: string) => {
     setLoading(true)
     try {
-      const spacePiratesFaucet = await tronWeb.contract(
-        SpacePiratesFaucet.abi,
-        addresses.shasta.faucetContract,
+      const spacePiratesFaucet = await getContractInstance(
+        'faucetContract',
+        'faucetContract',
       )
 
       const mintAmount = isToken(id) ? convertToHex(amount, 1e18) : amount

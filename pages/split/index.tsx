@@ -16,9 +16,8 @@ import { useTronWeb } from '../../contexts/TronWebContext'
 
 import tokenList from '../../config/constants/tokensList.json'
 import AsteroidsSplit from '../../config/artifacts/AsteroidsSplitContract.json'
-import SpacePiratesTokens from '../../config/artifacts/SpacePiratesTokens.json'
 
-import { addresses } from '../../config/addresses'
+import { getAddress } from '../../config/addresses'
 import { convertToHex, getTronWebInstance } from '../../lib/tronweb'
 
 const Split: NextPageWithLayout = () => {
@@ -28,29 +27,29 @@ const Split: NextPageWithLayout = () => {
   const [mergeLoading, setMergeLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, address } = useTronWeb()
+  const { tronWeb, chain, address, getContractInstance } = useTronWeb()
 
   const onSplitTokens = async () => {
     setSplitLoading(true)
 
     try {
-      const spacePiratesTokens = await tronWeb.contract(
-        SpacePiratesTokens.abi,
-        addresses.shasta.tokensContract,
+      const spacePiratesTokens = await getContractInstance(
+        'tokensContract',
+        'tokensContract',
       )
 
       const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, addresses.shasta.splitContract)
+        .isApprovedForAll(address, getAddress('splitContract', chain))
         .call()
 
       !isApproved &&
         (await spacePiratesTokens
-          .setApprovalForAll(addresses.shasta.splitContract, true)
+          .setApprovalForAll(getAddress('splitContract', chain), true)
           .send())
 
       const asteroidsSplit = await tronWeb.contract(
         AsteroidsSplit.abi,
-        addresses.shasta.splitContract,
+        getAddress('splitContract', chain),
       )
 
       await asteroidsSplit
@@ -73,9 +72,9 @@ const Split: NextPageWithLayout = () => {
     setMergeLoading(true)
 
     try {
-      const asteroidsSplit = await tronWeb.contract(
-        AsteroidsSplit.abi,
-        addresses.shasta.splitContract,
+      const asteroidsSplit = await getContractInstance(
+        'splitContract',
+        'splitContract',
       )
 
       await asteroidsSplit

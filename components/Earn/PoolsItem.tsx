@@ -7,9 +7,6 @@ import LoadingButton from '../layout/LoadingButton'
 import { useAlert } from '../../contexts/AlertContext'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { Pool } from '../../typings/Pools'
-import { Token1155 } from '../../typings/Token'
-import SpacePiratesRouter from '../../config/artifacts/SpacePiratesRouter.json'
-import { addresses } from '../../config/addresses'
 import { convertToHex, getUnixTimestamp } from '../../lib/tronweb'
 
 type PoolsItemProps = {
@@ -24,7 +21,7 @@ const PoolsItem = ({
   const [amountB, setAmountB] = useState('')
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, address } = useTronWeb()
+  const { getContractInstance, address } = useTronWeb()
 
   const handleAmountAChange = (amount: string) => {
     setAmountA(amount)
@@ -38,9 +35,9 @@ const PoolsItem = ({
     setLoading(true)
 
     try {
-      const spacePiratesRouter = await tronWeb.contract(
-        SpacePiratesRouter.abi,
-        addresses.shasta.routerContract,
+      const spacePiratesRouter = await getContractInstance(
+        'routerContract',
+        'routerContract',
       )
 
       await spacePiratesRouter

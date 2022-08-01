@@ -4,15 +4,12 @@ import { useAlert } from '../../contexts/AlertContext'
 import LoadingButton from '../layout/LoadingButton'
 import { useTronWeb } from '../../contexts/TronWebContext'
 
-import SpacePiratesStaking from '../../config/artifacts/SpacePiratesStaking.json'
-import SpacePiratesTokens from '../../config/artifacts/SpacePiratesTokens.json'
-
-import { addresses } from '../../config/addresses'
 import { StakeModalData, StakingPool, UserInfo } from '../../typings/Staking'
 import { getTokenById } from '../../lib/tokens'
 import { convertToHex, convertToNumber } from '../../lib/tronweb'
 import StakeModal from './StakeModal'
 import { Token1155 } from '../../typings/Token'
+import { getAddress } from '../../config/addresses'
 
 type StakingItemProps = {
   stakingPool: StakingPool
@@ -37,7 +34,7 @@ const StakingItem = ({
   const rewardToken = getTokenById(rewardTokenId)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, address } = useTronWeb()
+  const { tronWeb, getContractInstance, address, chain } = useTronWeb()
 
   const handleShowModal = (mode?: 'stake' | 'unstake', token?: Token1155) => {
     setShowModal((prev) => !prev)
@@ -55,9 +52,9 @@ const StakingItem = ({
   useEffect(() => {
     const fetchPendingRewards = async () => {
       try {
-        const spacePiratesStaking = await tronWeb.contract(
-          SpacePiratesStaking.abi,
-          addresses.shasta.stakingContract,
+        const spacePiratesStaking = await getContractInstance(
+          'stakingContract',
+          'stakingContract',
         )
 
         const rewardsRes = await spacePiratesStaking
@@ -81,29 +78,36 @@ const StakingItem = ({
     }
 
     tronWeb && fetchPendingRewards()
-  }, [address, stakingTokenId, rewardTokenId, tronWeb, toggleAlert])
+  }, [
+    address,
+    stakingTokenId,
+    rewardTokenId,
+    getContractInstance,
+    tronWeb,
+    toggleAlert,
+  ])
 
   const onStakeTokens = async (amount: string) => {
     setLoading(true)
 
     try {
-      const spacePiratesTokens = await tronWeb.contract(
-        SpacePiratesTokens.abi,
-        addresses.shasta.tokensContract,
+      const spacePiratesTokens = await getContractInstance(
+        'tokensContract',
+        'tokensContract',
       )
 
       const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, addresses.shasta.stakingContract)
+        .isApprovedForAll(address, getAddress('stakingContract', chain))
         .call()
 
       !isApproved &&
         (await spacePiratesTokens
-          .setApprovalForAll(addresses.shasta.stakingContract, true)
+          .setApprovalForAll(getAddress('stakingContract', chain), true)
           .send())
 
-      const spacePiratesStaking = await tronWeb.contract(
-        SpacePiratesStaking.abi,
-        addresses.shasta.stakingContract,
+      const spacePiratesStaking = await getContractInstance(
+        'stakingContract',
+        'stakingContract',
       )
 
       await spacePiratesStaking
@@ -120,9 +124,9 @@ const StakingItem = ({
     setLoading(true)
 
     try {
-      const spacePiratesStaking = await tronWeb.contract(
-        SpacePiratesStaking.abi,
-        addresses.shasta.stakingContract,
+      const spacePiratesStaking = await getContractInstance(
+        'stakingContract',
+        'stakingContract',
       )
 
       await spacePiratesStaking
@@ -139,9 +143,9 @@ const StakingItem = ({
     setLoading(true)
 
     try {
-      const spacePiratesStaking = await tronWeb.contract(
-        SpacePiratesStaking.abi,
-        addresses.shasta.stakingContract,
+      const spacePiratesStaking = await getContractInstance(
+        'stakingContract',
+        'stakingContract',
       )
 
       await spacePiratesStaking

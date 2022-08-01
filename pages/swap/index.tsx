@@ -17,7 +17,6 @@ import tokensList from '../../config/constants/dexTokensList.json'
 import SpacePiratesFactory from '../../config/artifacts/SpacePiratesFactory.json'
 import SpacePiratesRouter from '../../config/artifacts/SpacePiratesRouter.json'
 import StaticRouterAbi from '../../config/artifacts/StaticRouterAbi.json'
-import { addresses } from '../../config/addresses'
 import {
   convertToHex,
   convertToNumber,
@@ -39,7 +38,7 @@ const Swap: NextPageWithLayout = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const { tronWeb, address } = useTronWeb()
+  const { tronWeb, address, getContractInstance } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   const handleShowModal = (isTokenA?: boolean) => {
@@ -75,9 +74,9 @@ const Swap: NextPageWithLayout = () => {
     tokenB: Token,
   ): Promise<boolean> => {
     try {
-      const spacePiratesFactory = await tronWeb.contract(
-        SpacePiratesFactory.abi,
-        addresses.shasta.factoryContract,
+      const spacePiratesFactory = await getContractInstance(
+        'factoryContract',
+        'factoryContract',
       )
 
       const pair = await spacePiratesFactory
@@ -129,9 +128,9 @@ const Swap: NextPageWithLayout = () => {
   //TODO: try again after liquidity added to the pool
   const getExpectedOutput = async (amount: string): Promise<string> => {
     try {
-      const spacePiratesRouterStatic = await tronWeb.contract(
-        StaticRouterAbi,
-        addresses.shasta.routerContract,
+      const spacePiratesRouterStatic = await getContractInstance(
+        'routerContract',
+        'routerContract',
       )
 
       const res = await spacePiratesRouterStatic
@@ -159,9 +158,9 @@ const Swap: NextPageWithLayout = () => {
     setLoading(true)
 
     try {
-      const spacePiratesRouter = await tronWeb.contract(
-        SpacePiratesRouter.abi,
-        addresses.shasta.routerContract,
+      const spacePiratesRouter = await getContractInstance(
+        'routerContract',
+        'routerContract',
       )
 
       const res = await spacePiratesRouter

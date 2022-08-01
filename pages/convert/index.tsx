@@ -15,8 +15,6 @@ import ArrowsDown from '../../components/icons/ArrowsDown'
 
 import { useAlert } from '../../contexts/AlertContext'
 import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
-import SpacePiratesWrapper from '../../config/artifacts/SpacePiratesWrapper.json'
-import { addresses } from '../../config/addresses'
 import { Token, Token1155, Token20 } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { convertToHex } from '../../lib/tronweb'
@@ -34,7 +32,7 @@ const Convert: NextPageWithLayout = () => {
   const [unWrapLoading, setUnWrapLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb } = useTronWeb()
+  const { tronWeb, getContractInstance } = useTronWeb()
 
   const handleShowWrapModal = (isTokenA?: boolean) => {
     setShowWrapModal((prev) => !prev)
@@ -63,9 +61,9 @@ const Convert: NextPageWithLayout = () => {
     setWrapLoading(true)
 
     try {
-      const spacePiratesWrapper = await tronWeb.contract(
-        SpacePiratesWrapper.abi,
-        addresses.shasta.wrapperContract,
+      const spacePiratesWrapper = await getContractInstance(
+        'wrapperContract',
+        'wrapperContract',
       )
 
       if (wrapToken.symbol === 'TRX') {
@@ -95,9 +93,9 @@ const Convert: NextPageWithLayout = () => {
     setUnWrapLoading(true)
 
     try {
-      const spacePiratesWrapper = await tronWeb.contract(
-        SpacePiratesWrapper.abi,
-        addresses.shasta.wrapperContract,
+      const spacePiratesWrapper = await getContractInstance(
+        'wrapperContract',
+        'wrapperContract',
       )
 
       const token = wrappedTokensList.unWrapped.find(
