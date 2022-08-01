@@ -7,7 +7,7 @@ const Navbar = () => {
   const { tronWeb, connectTronLink, address } = useTronWeb()
 
   return (
-    <nav className="flex justify-center bg-base-300">
+    <nav className="flex justify-center bg-base-200">
       <div className="navbar max-w-screen-2xl p-0 mx-4">
         <div className="navbar-start">
           <div className="dropdown">

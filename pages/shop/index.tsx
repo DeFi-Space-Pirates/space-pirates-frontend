@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
+import WIPBanner from '../../components/layout/WIPBanner'
 import ShopItem from '../../components/Shop/ShopItem'
 
 type ShopProps = {}
@@ -10,6 +11,7 @@ const Shop: NextPage = (props: ShopProps) => {
       <Head>
         <title>Space Pirates Shop</title>
       </Head>
+      <WIPBanner />
       <div className="text-center mb-8">
         <p className="text-5xl font-bold mb-2">Space Pirates Shop</p>
         <p className="text-xl italic">Explore and mint the available NFTs!</p>

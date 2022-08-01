@@ -69,6 +69,7 @@ const Faucet = ({
               id={token.id}
               name={token.name}
               maxAmount={token.maxAmount}
+              logoURI={token.logoURI}
             />
           ))}
         </div>

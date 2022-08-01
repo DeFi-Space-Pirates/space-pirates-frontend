@@ -13,9 +13,10 @@ type FaucetCardProps = {
   id: number
   name: string
   maxAmount: string
+  logoURI: string
 }
 
-const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
+const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
   const [amount, setAmount] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -55,7 +56,7 @@ const FaucetCard = ({ id, name, maxAmount }: FaucetCardProps) => {
       <div className="card-body items-center p-2">
         <div className="card-title justify-center">
           <Image
-            src="/favicon.ico"
+            src={logoURI}
             className="rounded-xl"
             alt={name}
             width={25}

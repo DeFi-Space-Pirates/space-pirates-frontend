@@ -35,9 +35,9 @@ const ShopItemModal = ({ showModal, handleShowModal }: ShopItemModalProps) => {
                 <Image
                   className="rounded-box"
                   alt="placeholderNFT"
-                  src="/placeholderNFT.jpg"
-                  height={280}
-                  width={280}
+                  src="/logo.png"
+                  height={720}
+                  width={1280}
                 />
               </div>
               <div className="md:col-span-8 col-span-12 flex flex-col gap-y-4 md:border-l border-base-300 md:pl-3">
@@ -50,10 +50,10 @@ const ShopItemModal = ({ showModal, handleShowModal }: ShopItemModalProps) => {
                         <Image
                           className="rounded-box"
                           alt="placeholderNFT"
-                          src="/placeholderNFT.jpg"
+                          src="/logo.png"
                           layout="intrinsic"
                           height={160}
-                          width={160}
+                          width={284}
                         />
                       </span>
                     ))}

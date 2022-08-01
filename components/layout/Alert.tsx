@@ -35,7 +35,7 @@ const Alert = () => {
               }
             />
           </svg>
-          <span className="text-base-100">{alertMessage}</span>
+          <span>{alertMessage}</span>
         </div>
       </div>
     </div>

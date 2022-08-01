@@ -26,10 +26,10 @@ const ShopItem = (props: ShopItemProps) => {
       >
         <Image
           alt="placeholderNFT"
-          src="/placeholderNFT.jpg"
+          src="/logo.png"
           layout="responsive"
-          height={336}
-          width={336}
+          height={720}
+          width={1280}
         />
         <div className="card-body items-center">
           <h2 className="card-title sm:text-xl text-base">

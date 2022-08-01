@@ -9,7 +9,7 @@ const NavbarLinks = () => {
           Trade
           <ChevronDown />
         </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
           <li>
             <Link href="/swap">Swap</Link>
           </li>
@@ -26,7 +26,7 @@ const NavbarLinks = () => {
           Earn
           <ChevronDown />
         </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
           <li>
             <Link href="/pools">Pools</Link>
           </li>
@@ -40,7 +40,7 @@ const NavbarLinks = () => {
           NFTs
           <ChevronDown />
         </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
           <li>
             <Link href="/shop">Shop</Link>
           </li>
@@ -64,7 +64,7 @@ const NavbarLinks = () => {
           Governance
           <ChevronDown />
         </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
           <li>
             <Link href="/governance">Dashboard</Link>
           </li>
@@ -78,7 +78,7 @@ const NavbarLinks = () => {
           More
           <ChevronDown />
         </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
           <li>
             <Link href="/wallet">Wallet</Link>
           </li>
