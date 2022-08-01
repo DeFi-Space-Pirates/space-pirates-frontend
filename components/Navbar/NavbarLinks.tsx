@@ -11,13 +11,13 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <Link href="swap">Swap</Link>
+            <Link href="/swap">Swap</Link>
           </li>
           <li>
-            <Link href="convert">Convert</Link>
+            <Link href="/convert">Convert</Link>
           </li>
           <li>
-            <Link href="split">Split</Link>
+            <Link href="/split">Split</Link>
           </li>
         </ul>
       </li>
@@ -28,10 +28,10 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <Link href="pools">Pools</Link>
+            <Link href="/pools">Pools</Link>
           </li>
           <li>
-            <Link href="staking">Staking</Link>
+            <Link href="/staking">Staking</Link>
           </li>
         </ul>
       </li>
@@ -42,39 +42,23 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <Link href="marketplace">Marketplace</Link>
+            <Link href="/shop">Shop</Link>
           </li>
           <li>
-            <Link href="faucet">NFT mint</Link>
+            <Link href="/mint">Mint</Link>
           </li>
         </ul>
       </li>
       <li>
-        <a>Game</a>
+        <Link href="/game">Game</Link>
       </li>
       <li>
-        <Link href="quest">Quest</Link>
+        <Link href="/quest">Quest</Link>
       </li>
-      <li tabIndex={4}>
-        <a className="justify-between">
-          Faucet
-          <ChevronDown />
-        </a>
-        <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
-          <li>
-            <Link href="faucet">Tokens</Link>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              href="https://www.trongrid.io/faucet"
-              rel="noopener noreferrer"
-            >
-              Shasta faucet
-            </a>
-          </li>
-        </ul>
+      <li>
+        <Link href="/faucet">Faucet</Link>
       </li>
+
       <li tabIndex={5}>
         <a className="justify-between">
           Governance
@@ -82,10 +66,10 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <a>Dashboard</a>
+            <Link href="/governance">Dashboard</Link>
           </li>
           <li>
-            <a>Vote</a>
+            <Link href="/governance/vote">Vote</Link>
           </li>
         </ul>
       </li>
@@ -96,16 +80,22 @@ const NavbarLinks = () => {
         </a>
         <ul className="p-2 bg-base-100 z-50 drop-shadow-md">
           <li>
-            <Link href="wallet">Wallet</Link>
+            <Link href="/wallet">Wallet</Link>
           </li>
           <li>
-            <Link href="faucet">Tokens pre-sale</Link>
+            <a
+              target="_blank"
+              href="https://docs.space-pirates-testnet.com/"
+              rel="noopener noreferrer"
+            >
+              Docs
+            </a>
           </li>
           <li>
-            <a>Wiki</a>
+            <Link href="/presale">Tokens pre-sale</Link>
           </li>
           <li>
-            <a>Inflation dashboard</a>
+            <Link href="/inflation">Inflation dashboard</Link>
           </li>
         </ul>
       </li>

@@ -25,7 +25,7 @@ const NavTab = ({ page }: NavTabProps) => {
       {tabs.map((tab) => (
         <div
           key={tab.name}
-          className={`tab tab-bordered font-semibold mx-4 ${
+          className={`tab tab-bordered font-semibold md:mx-4 mx-1 ${
             router.pathname === tab.link ? 'tab-active' : ''
           }`}
         >

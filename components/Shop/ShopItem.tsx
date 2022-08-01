@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
-import LoadingButton from '../layout/LoadingButton'
-import MarketplaceItemModal from './MarketplaceItemModal'
+import ShopItemModal from './ShopItemModal'
 
-type MarketplaceItemProps = {}
+type ShopItemProps = {}
 
-const MarketplaceItem = (props: MarketplaceItemProps) => {
+const ShopItem = (props: ShopItemProps) => {
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -15,7 +14,7 @@ const MarketplaceItem = (props: MarketplaceItemProps) => {
 
   return (
     <>
-      <MarketplaceItemModal
+      <ShopItemModal
         showModal={showModal}
         handleShowModal={handleShowModal}
         // item={}
@@ -48,4 +47,4 @@ const MarketplaceItem = (props: MarketplaceItemProps) => {
   )
 }
 
-export default MarketplaceItem
+export default ShopItem

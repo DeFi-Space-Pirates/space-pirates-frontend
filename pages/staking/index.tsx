@@ -10,6 +10,7 @@ import { convertToNumber, getTronWebInstance } from '../../lib/tronweb'
 import SpacePiratesStaking from '../../config/artifacts/SpacePiratesStaking.json'
 import { addresses } from '../../config/addresses'
 import { StakingPool } from '../../typings/Staking'
+import WIPBanner from '../../components/layout/WIPBanner'
 
 export const getStaticProps: GetStaticProps<{
   stakingPools: StakingPool[]
@@ -79,9 +80,9 @@ const Staking = ({ stakingPools }: StakingProps) => {
       <Head>
         <title>Space Pirates Staking</title>
       </Head>
+      <WIPBanner />
       <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold mb-2">Space Pirates Staking</h1>
-        <h2 className="text-3xl font-bold mb-2 pt-10">Vault</h2>
+        <h2 className="text-3xl font-bold mb-2">Vault</h2>
         <p className="text-xl italic">
           Do not let your tokens sit idle. Stake and earn DBL!
         </p>

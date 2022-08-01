@@ -24,6 +24,7 @@ import {
   getUnixTimestamp,
   NULL_ADDRESS,
 } from '../../lib/tronweb'
+import WIPBanner from '../../components/layout/WIPBanner'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -193,6 +194,7 @@ const Swap: NextPageWithLayout = () => {
         handleTokenChange={handleTokenChange}
         tokensList={tokensList.tokens}
       />
+      <WIPBanner />
       <CardContainer
         title="Swap"
         subtitle="Swap instantly Space Pirates tokens"

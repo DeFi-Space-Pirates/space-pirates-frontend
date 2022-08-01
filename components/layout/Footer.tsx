@@ -19,7 +19,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://github.com/DeFi-Space-Pirates"
             className="link link-hover"
           >
             GitHub
@@ -27,7 +27,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Documentation
@@ -35,7 +35,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Bug Bounty
@@ -43,7 +43,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Audits
@@ -54,7 +54,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Token Inflation Dashboard
@@ -62,7 +62,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Contact
@@ -70,7 +70,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Tokenomics
@@ -78,7 +78,7 @@ const Footer = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/DeFi-Space-Pirates/space-pirates-contracts"
+            href="https://docs.space-pirates-testnet.com/"
             className="link link-hover"
           >
             Tutorial

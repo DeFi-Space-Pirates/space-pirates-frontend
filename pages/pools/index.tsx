@@ -19,6 +19,7 @@ import { getTronWebInstance } from '../../lib/tronweb'
 import { addresses } from '../../config/addresses'
 import { Pool } from '../../typings/Pools'
 import { getTokenById } from '../../lib/tokens'
+import WIPBanner from '../../components/layout/WIPBanner'
 
 export const getStaticProps: GetStaticProps<{
   pools: Pool[] //TODO define the Pair type
@@ -112,6 +113,7 @@ const Pools = ({ pools }: PoolsProps) => {
       <Head>
         <title>Space Pirates Pools</title>
       </Head>
+      <WIPBanner />
       <div className="text-center mb-8">
         <p className="text-5xl font-bold mb-2">Space Pirates Pools</p>
         <p className="text-xl italic">Provide liquidity to the dex</p>

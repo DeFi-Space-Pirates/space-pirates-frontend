@@ -2,18 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import LoadingButton from '../layout/LoadingButton'
-import TokenInput from '../Trade/TokenInput'
 
-type MarketplaceItemModalProps = {
+type ShopItemModalProps = {
   showModal: boolean
   handleShowModal: () => void
   //   item:
 }
 
-const MarketplaceItemModal = ({
-  showModal,
-  handleShowModal,
-}: MarketplaceItemModalProps) => {
+const ShopItemModal = ({ showModal, handleShowModal }: ShopItemModalProps) => {
   const [amount, setAmount] = useState(0)
   const [loading, setLoading] = useState(false)
 
@@ -136,4 +132,4 @@ const MarketplaceItemModal = ({
   )
 }
 
-export default MarketplaceItemModal
+export default ShopItemModal
