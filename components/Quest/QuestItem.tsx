@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import { getTokenById } from '../../lib/tokens'
+import { Quest } from '../../typings/Quest'
 import LoadingButton from '../layout/LoadingButton'
 
 type QuestItemProps = {
-  text: string
-  claimable: boolean
-  completed: boolean
+  quest: Quest
+  claimable?: boolean
+  completed?: boolean
 }
 
-const QuestItem = ({ text, claimable, completed }: QuestItemProps) => {
+const QuestItem = ({ quest, claimable, completed }: QuestItemProps) => {
   const [loading, setLoading] = useState(false)
   return (
     <div className="flex justify-between items-center gap-x-2 first:pt-0 last:pb-0 sm:p-3 p-1 last:border-none border-b border-base-200">
@@ -17,7 +19,7 @@ const QuestItem = ({ text, claimable, completed }: QuestItemProps) => {
           completed ? 'line-through' : ''
         }`}
       >
-        {text}
+        {quest.questName}
       </p>
       <div className="">
         <LoadingButton
@@ -27,7 +29,9 @@ const QuestItem = ({ text, claimable, completed }: QuestItemProps) => {
           disabled={completed || !claimable}
           onClick={() => {}}
         >
-          <span className="md:mr-2">Claim 1 ASTR</span>
+          <span className="md:mr-2">
+            Claim {quest.amounts[0]} {getTokenById(quest.ids[0])?.symbol}
+          </span>
           <div className={`hidden md:inline ${!claimable ? 'opacity-40' : ''}`}>
             <Image
               src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"

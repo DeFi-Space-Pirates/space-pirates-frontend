@@ -5,6 +5,7 @@ type QuestCategoryProps = {
   title: string
   description: string
   claimable: boolean
+  children: React.ReactNode
 }
 
 const QuestCategory = ({
@@ -12,6 +13,7 @@ const QuestCategory = ({
   title,
   description,
   claimable,
+  children,
 }: QuestCategoryProps) => {
   return (
     <div className="indicator lg:w-9/12 w-full">
@@ -27,26 +29,7 @@ const QuestCategory = ({
           <small className="text-sm">{description}</small>
         </div>
         <div className="collapse-content flex flex-col justify-center">
-          <QuestItem
-            text="Discover ecosystem"
-            claimable={true}
-            completed={false}
-          />
-          <QuestItem
-            text="Discover ecosystem"
-            claimable={true}
-            completed={false}
-          />
-          <QuestItem
-            text="Discover ecosystem"
-            claimable={false}
-            completed={false}
-          />
-          <QuestItem
-            text="Discover ecosystem"
-            claimable={false}
-            completed={true}
-          />
+          {children}
         </div>
       </div>
     </div>
