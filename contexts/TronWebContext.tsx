@@ -2,12 +2,15 @@ import { createContext, useCallback, useContext, useState } from 'react'
 import { useAlert } from './AlertContext'
 
 import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
+import SpacePiratesFactory from '../config/artifacts/SpacePiratesFactory.json'
 import tokensList from '../config/constants/tokensList.json'
 import wrappedTokensList from '../config/constants/wrappedTokensList.json'
 import { addresses, getAbi, getAddress } from '../config/addresses'
-import { Balance1155, Balance20 } from '../typings/Balance'
+import { Balance1155, Balance20, BalanceLP } from '../typings/Balance'
 import { convertToNumber } from '../lib/tronweb'
 import { ABIsList, AddressesList, SupportedChains } from '../typings/Tron'
+import PairContract from '../config/artifacts/SpacePiratesPair.json'
+import { getTokenById } from '../lib/tokens'
 
 declare global {
   interface Window {
@@ -22,14 +25,19 @@ type TronWebContextValue = {
   tronWeb: {
     isConnected?: boolean
     defaultAccount?: string
+    defaultAddress?: {
+      base58: string
+      hex: string
+    }
     contract: any
     [x: string]: any
   }
   connectTronLink: () => void
   address: string
   chain: SupportedChains
-  balances1155: Balance1155[] | null
-  balances20: Balance20[] | null
+  balances1155: Balance1155[]
+  balances20: Balance20[]
+  balancesLP: BalanceLP[]
   getBalanceById: (id: number | undefined) => string
   getBalanceByAddress: (address: string | undefined) => string
   getContractInstance: (
@@ -46,8 +54,9 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
   const [tronWeb, setTronWeb] = useState<any>(null)
   const [chain, setChain] = useState<SupportedChains>('mainnet')
   const [address, setAddress] = useState('')
-  const [balances1155, setBalances1155] = useState<Balance1155[] | null>(null)
-  const [balances20, setBalances20] = useState<Balance20[] | null>(null)
+  const [balances1155, setBalances1155] = useState<Balance1155[]>([])
+  const [balances20, setBalances20] = useState<Balance20[]>([])
+  const [balancesLP, setBalancesLP] = useState<BalanceLP[]>([])
 
   const { toggleAlert } = useAlert()
 
@@ -86,11 +95,11 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
 
           setBalances1155(userBalances)
         } catch (err) {
-          setBalances1155(null)
+          setBalances1155([])
         }
 
+        let updatedBalances20: Balance20[] = []
         try {
-          let updatedBalances20: Balance20[] = []
           for (const token of wrappedTokensList.unWrapped) {
             if (token.symbol === 'TRX') {
               const sunBalance = await tronWeb.trx.getBalance(address)
@@ -121,7 +130,55 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
 
           setBalances20(updatedBalances20)
         } catch (err) {
-          setBalances20(null)
+          setBalances20([])
+        }
+
+        let updatedBalancesLP: BalanceLP[] = []
+        try {
+          const spacePiratesFactory = await tronWeb.contract(
+            SpacePiratesFactory.abi,
+            addresses.shasta.factoryContract,
+          )
+
+          const poolsAmount = await spacePiratesFactory.allPairsLength().call()
+
+          const convertedAmount = tronWeb.BigNumber(poolsAmount._hex).toNumber()
+
+          for (let i = 0; i < convertedAmount; i++) {
+            const pairAddress = await spacePiratesFactory.allPairs(i).call()
+
+            const pairContract = await tronWeb.contract(
+              PairContract.abi,
+              pairAddress,
+            )
+
+            const balance = await pairContract.balanceOf(address).call()
+
+            const tokenIds = await pairContract.getTokenIds().call()
+
+            const tokenA = getTokenById(
+              tronWeb.BigNumber(tokenIds._token0._hex).toNumber(),
+            )
+
+            const tokenB = getTokenById(
+              tronWeb.BigNumber(tokenIds._token1._hex).toNumber(),
+            )
+
+            updatedBalancesLP.push({
+              address: pairAddress,
+              balance: tronWeb
+                .BigNumber(balance._hex)
+                .div(1e18)
+                .toNumber()
+                .toFixed(2),
+              name: `${tokenA?.symbol}/${tokenB?.symbol}`,
+              symbol: '',
+            })
+          }
+
+          setBalancesLP(updatedBalancesLP)
+        } catch (err) {
+          setBalancesLP([])
         }
 
         toggleAlert(
@@ -230,6 +287,7 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     chain,
     balances1155,
     balances20,
+    balancesLP,
     getBalanceById,
     getBalanceByAddress,
     getContractInstance,

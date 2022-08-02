@@ -7,6 +7,13 @@
     ```env
     TRON_GRID_KEY = <key>
     TRON_PRIVATE_KEY = <key>
+
+    # if empty will fallback to https://api.shasta.trongrid.io 
+    TRON_WEB_NODE = https://api.trongrid.io
+
+    NEXT_PUBLIC_NPC_ADDRESS = <base58_address>
+    NEXT_PUBLIC_NPC_ADDRESS_HEX = <0x....>
+    NEXT_PUBLIC_NPC_PRIVATE_KEY = <key>
     ```
     The Tron Grid key is obtainable on the [TronGrid](https://www.trongrid.io/) website. The private key from a wallet.
 

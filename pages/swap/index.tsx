@@ -14,9 +14,6 @@ import { Token } from '../../typings/Token'
 import { useAlert } from '../../contexts/AlertContext'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import tokensList from '../../config/constants/dexTokensList.json'
-import SpacePiratesFactory from '../../config/artifacts/SpacePiratesFactory.json'
-import SpacePiratesRouter from '../../config/artifacts/SpacePiratesRouter.json'
-import StaticRouterAbi from '../../config/artifacts/StaticRouterAbi.json'
 import {
   convertToHex,
   convertToNumber,
@@ -24,6 +21,7 @@ import {
   NULL_ADDRESS,
 } from '../../lib/tronweb'
 import WIPBanner from '../../components/layout/WIPBanner'
+import { getAddress } from '../../config/addresses'
 
 const Swap: NextPageWithLayout = () => {
   const [tokenA, setTokenA] = useState<Token>(tokensList.tokens[0])
@@ -33,12 +31,14 @@ const Swap: NextPageWithLayout = () => {
   const [loadingA, setLoadingA] = useState(false)
   const [loadingB, setLoadingB] = useState(false)
 
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout>()
+
   const [isTokenA, setIsTokenA] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
   const [loading, setLoading] = useState(false)
 
-  const { tronWeb, address, getContractInstance } = useTronWeb()
+  const { tronWeb, address, getContractInstance, chain } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   const handleShowModal = (isTokenA?: boolean) => {
@@ -97,25 +97,32 @@ const Swap: NextPageWithLayout = () => {
 
   const handleAmountAChange = async (amount: string) => {
     setAmountA(amount)
-
     setLoadingB(true)
 
-    setTimeout(async () => {
-      const amountB = await getExpectedOutput(amount)
-      setAmountB('amountB')
-      setLoadingB(false)
-    }, 2000)
+    if (typingTimeout) clearTimeout(typingTimeout)
+
+    setTypingTimeout(
+      setTimeout(async () => {
+        const amountB = await getExpectedOutput(amount, true)
+        setAmountB(amountB)
+        setLoadingB(false)
+      }, 2000),
+    )
   }
 
   const handleAmountBChange = async (amount: string) => {
     setAmountB(amount)
     setLoadingA(true)
 
-    setTimeout(async () => {
-      const amountA = await getExpectedOutput(amount)
-      setAmountA(amountA)
-      setLoadingA(false)
-    }, 2000)
+    if (typingTimeout) clearTimeout(typingTimeout)
+
+    setTypingTimeout(
+      setTimeout(async () => {
+        const amountA = await getExpectedOutput(amount, false)
+        setAmountA(amountA)
+        setLoadingA(false)
+      }, 2000),
+    )
   }
 
   const invertTokens = () => {
@@ -125,39 +132,50 @@ const Swap: NextPageWithLayout = () => {
     setAmountB(amountA)
   }
 
-  //TODO: try again after liquidity added to the pool
-  const getExpectedOutput = async (amount: string): Promise<string> => {
+  const getExpectedOutput = async (
+    amount: string,
+    isTokenA: boolean,
+  ): Promise<string> => {
     try {
-      const spacePiratesRouterStatic = await getContractInstance(
+      const spacePiratesRouter = await getContractInstance(
         'routerContract',
         'routerContract',
       )
 
-      const res = await spacePiratesRouterStatic
-        .swapExactTokensForTokens(
-          convertToHex(amount, 1e18),
-          convertToHex(amount, 0.98 * 1e18),
-          [tokenA.id, tokenB.id],
-          address,
-          getUnixTimestamp(300), //300 is 5 minutes
-        )
+      const ids = isTokenA ? [tokenA.id, tokenB.id] : [tokenB.id, tokenA.id]
+
+      const amountsOut = await spacePiratesRouter
+        .getAmountsOut(convertToHex(amount, 1e18), ids)
         .call()
 
-      console.log(res)
-
-      return convertToNumber(res._hex, 1e18)
+      return convertToNumber(
+        tronWeb.BigNumber(amountsOut[isTokenA ? 1 : 0]._hex),
+        isTokenA ? tokenB.id! : tokenA.id!,
+      )
     } catch (err) {
-      console.log(err)
       toggleAlert('Cannot calculate the output. Try again.', 'error')
       return '0.0'
     }
   }
 
-  //TODO: try again after liquidity added to the pool
   const onSwapTokens = async () => {
     setLoading(true)
 
     try {
+      const spacePiratesTokens = await getContractInstance(
+        'tokensContract',
+        'tokensContract',
+      )
+
+      const isApproved = await spacePiratesTokens
+        .isApprovedForAll(address, getAddress('routerContract', chain))
+        .call()
+
+      !isApproved &&
+        (await spacePiratesTokens
+          .setApprovalForAll(getAddress('routerContract', chain), true)
+          .send())
+
       const spacePiratesRouter = await getContractInstance(
         'routerContract',
         'routerContract',
@@ -166,16 +184,13 @@ const Swap: NextPageWithLayout = () => {
       const res = await spacePiratesRouter
         .swapExactTokensForTokens(
           convertToHex(amountA, 1e18),
-          convertToHex(amountA, 0.98 * 1e18),
+          1,
           [tokenA.id, tokenB.id],
           address,
           getUnixTimestamp(300), //300 is 5 minutes
         )
         .send({ shouldPollResponse: true })
-
-      console.log(res)
     } catch (err) {
-      console.log(err)
       toggleAlert('Error during the swap. Try again', 'error')
     } finally {
       setLoading(false)
@@ -193,7 +208,6 @@ const Swap: NextPageWithLayout = () => {
         handleTokenChange={handleTokenChange}
         tokensList={tokensList.tokens}
       />
-      <WIPBanner />
       <CardContainer
         title="Swap"
         subtitle="Swap instantly Space Pirates tokens"

@@ -20,11 +20,13 @@ const TokenInput = ({
   token,
   loading,
 }: TokenInputProps) => {
-  const { getBalanceById, getBalanceByAddress } = useTronWeb()
+  const { getBalanceById, getBalanceByAddress, balancesLP } = useTronWeb()
 
   const handleGetBalance = (): string => {
     return 'id' in token
-      ? getBalanceById(token.id)
+      ? token.id === -1
+        ? balancesLP.find((lp) => lp.name === token.name)?.balance!
+        : getBalanceById(token.id)
       : getBalanceByAddress(token.address)
   }
 

@@ -7,13 +7,16 @@ type WalletItemProps = {
   tabIndex: number
   title: string
   predicate?: (id: number) => boolean
+  lp?: boolean
 }
 
-const WalletItem = ({ tabIndex, title, predicate }: WalletItemProps) => {
-  const { getBalanceById, getBalanceByAddress } = useTronWeb()
+const WalletItem = ({ tabIndex, title, predicate, lp }: WalletItemProps) => {
+  const { getBalanceById, getBalanceByAddress, balancesLP } = useTronWeb()
 
   let tokens = predicate
     ? tokensList.tokens.filter((token) => predicate(token.id))
+    : lp
+    ? balancesLP!
     : wrappedTokensList.unWrapped
 
   return (
@@ -30,7 +33,7 @@ const WalletItem = ({ tabIndex, title, predicate }: WalletItemProps) => {
           >
             <div className="flex items-center">
               <Image
-                src={token.logoURI}
+                src={'logoURI' in token ? token.logoURI : '/favicon.ico'}
                 alt={token.name}
                 height={20}
                 width={20}
@@ -41,7 +44,9 @@ const WalletItem = ({ tabIndex, title, predicate }: WalletItemProps) => {
               </p>
             </div>
             <div>
-              {'id' in token
+              {'balance' in token
+                ? token.balance
+                : 'id' in token
                 ? getBalanceById(token.id)
                 : getBalanceByAddress(token.address)}
             </div>

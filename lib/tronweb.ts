@@ -3,10 +3,7 @@ import { getDecimals } from './tokens'
 
 export const getTronWebInstance = () => {
   const tronWeb = new TronWeb({
-    fullHost: 'https://api.shasta.trongrid.io',
-    solidityNode: 'https://api.shasta.trongrid.io',
-    eventServer: 'https://api.shasta.trongrid.io',
-
+    fullHost: process.env.TRON_WEB_NODE || 'https://api.shasta.trongrid.io',
     privateKey: process.env.TRON_PRIVATE_KEY,
   })
 
@@ -30,7 +27,7 @@ export const convertToHex = (amount: string, decimals: number): string => {
 }
 
 export const getUnixTimestamp = (secondsToAdd: number): number => {
-  return Math.floor((new Date().getTime() + secondsToAdd) / 1000)
+  return Math.floor(new Date().getTime() / 1000) + secondsToAdd
 }
 
 export const NULL_ADDRESS = '410000000000000000000000000000000000000000'

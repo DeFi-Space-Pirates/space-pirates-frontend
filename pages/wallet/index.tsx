@@ -27,11 +27,12 @@ const Wallet: NextPage = () => {
       <div className="flex flex-col gap-y-7 items-center justify-around">
         <WalletItem tabIndex={0} title="Tokens" predicate={isToken} />
         <WalletItem tabIndex={1} title="TRC20" />
-        <WalletItem tabIndex={1} title="Items" predicate={isItem} />
-        <WalletItem tabIndex={2} title="Titles" predicate={isTitle} />
-        <WalletItem tabIndex={3} title="Decorations" predicate={isDecoration} />
+        <WalletItem tabIndex={2} title="LP tokens" lp={true} />
+        <WalletItem tabIndex={3} title="Items" predicate={isItem} />
+        <WalletItem tabIndex={4} title="Titles" predicate={isTitle} />
+        <WalletItem tabIndex={5} title="Decorations" predicate={isDecoration} />
         <WalletItem
-          tabIndex={0}
+          tabIndex={6}
           title="Battlefields"
           predicate={isBattlefield}
         />

@@ -61,7 +61,6 @@ const Split: NextPageWithLayout = () => {
         'success',
       )
     } catch (err) {
-      console.log(err)
       toggleAlert('Error during the split. Try again', 'error')
     } finally {
       setSplitLoading(false)
@@ -380,7 +379,7 @@ const Split: NextPageWithLayout = () => {
         <TokenInput amount={mergeAmount} token={tokenList.tokens[1]} />
         <div className="mt-8">
           <LoadingButton
-            text="SPLIT"
+            text="MERGE"
             loading={mergeLoading}
             onClick={() => onMergeTokens()}
           />

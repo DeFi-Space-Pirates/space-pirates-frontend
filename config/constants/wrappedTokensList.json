@@ -41,8 +41,8 @@
     },
     {
       "id": 102,
-      "name": "Space USDC",
-      "symbol": "SP-USDC",
+      "name": "Space USDD",
+      "symbol": "SP-USDD",
       "decimals": 18,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
     }

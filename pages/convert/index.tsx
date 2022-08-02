@@ -18,6 +18,7 @@ import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
 import { Token, Token1155, Token20 } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { convertToHex } from '../../lib/tronweb'
+import { getAddress } from '../../config/addresses'
 
 const Convert: NextPageWithLayout = () => {
   const [wrapToken, setWrapToken] = useState(wrappedTokensList.unWrapped[0])
@@ -32,7 +33,7 @@ const Convert: NextPageWithLayout = () => {
   const [unWrapLoading, setUnWrapLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, getContractInstance } = useTronWeb()
+  const { tronWeb, getContractInstance, address, chain } = useTronWeb()
 
   const handleShowWrapModal = (isTokenA?: boolean) => {
     setShowWrapModal((prev) => !prev)
@@ -82,7 +83,6 @@ const Convert: NextPageWithLayout = () => {
         'success',
       )
     } catch (err) {
-      console.log(err)
       toggleAlert('Error during the conversion. Try again', 'error')
     } finally {
       setWrapLoading(false)
@@ -93,6 +93,20 @@ const Convert: NextPageWithLayout = () => {
     setUnWrapLoading(true)
 
     try {
+      const spacePiratesTokens = await getContractInstance(
+        'tokensContract',
+        'tokensContract',
+      )
+
+      const isApproved = await spacePiratesTokens
+        .isApprovedForAll(address, getAddress('wrapperContract', chain))
+        .call()
+
+      !isApproved &&
+        (await spacePiratesTokens
+          .setApprovalForAll(getAddress('wrapperContract', chain), true)
+          .send())
+
       const spacePiratesWrapper = await getContractInstance(
         'wrapperContract',
         'wrapperContract',
@@ -119,7 +133,6 @@ const Convert: NextPageWithLayout = () => {
         'success',
       )
     } catch (err) {
-      console.log(err)
       toggleAlert('Error during the conversion. Try again', 'error')
     } finally {
       setUnWrapLoading(false)
