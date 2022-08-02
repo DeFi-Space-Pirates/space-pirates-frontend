@@ -5,8 +5,9 @@
 - Create a `.env.development.local` file with the following content:
 
     ```env
-    TRON_GRID_KEY = <key>
     TRON_PRIVATE_KEY = <key>
+
+    NEXT_PUBLIC_BANK_KEY = <key>
 
     # if empty will fallback to https://api.shasta.trongrid.io 
     TRON_WEB_NODE = https://api.trongrid.io

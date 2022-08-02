@@ -63,16 +63,18 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
   const loadTronWeb = useCallback(
     async (tronWeb: any, address: string) => {
       if (
-        tronWeb.fullNode.host === 'https://api.trongrid.io' ||
+        // tronWeb.fullNode.host === 'https://api.trongrid.io' ||
         tronWeb.fullNode.host === 'https://api.shasta.trongrid.io'
       ) {
         setTronWeb(tronWeb)
         setAddress(address)
 
         setChain(
-          tronWeb.fullNode.host === 'https://api.trongrid.io'
-            ? 'mainnet'
-            : 'shasta',
+          // tronWeb.fullNode.host === 'https://api.trongrid.io'
+          //   ? 'mainnet'
+          //   :
+          'shasta',
+          // ,
         )
 
         const spacePiratesTokens = await tronWeb.contract(
@@ -191,7 +193,7 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
         )
       } else {
         toggleAlert(
-          'Wrong chain! Supported chains are mainnet and Shasta testnet',
+          'Wrong chain! Contracts are deployed Shasta testnet',
           'error',
         )
       }

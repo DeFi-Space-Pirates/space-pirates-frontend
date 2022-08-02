@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { NextPageWithLayout } from '../_app'
 
 import Layout from '../../components/layout/Layout'
@@ -21,7 +20,7 @@ import { Pool } from '../../typings/Pools'
 import { getTokenById } from '../../lib/tokens'
 import WIPBanner from '../../components/layout/WIPBanner'
 
-export const getStaticProps: GetStaticProps<{
+export const getServerSideProps: GetServerSideProps<{
   pools: Pool[] //TODO define the Pair type
 }> = async () => {
   const tronWeb = getTronWebInstance()
@@ -65,7 +64,7 @@ export const getStaticProps: GetStaticProps<{
 }
 
 type PoolsProps = NextPageWithLayout &
-  InferGetStaticPropsType<typeof getStaticProps>
+  InferGetServerSidePropsType<typeof getServerSideProps>
 
 const Pools = ({ pools }: PoolsProps) => {
   const [loading, setLoading] = useState(false)
@@ -113,7 +112,6 @@ const Pools = ({ pools }: PoolsProps) => {
       <Head>
         <title>Space Pirates Pools</title>
       </Head>
-      <WIPBanner />
       <div className="text-center mb-8">
         <p className="text-5xl font-bold mb-2">Space Pirates Pools</p>
         <p className="text-xl italic">Provide liquidity to the dex</p>

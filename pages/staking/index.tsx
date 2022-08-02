@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { NextPageWithLayout } from '../_app'
 
@@ -12,7 +12,7 @@ import { addresses } from '../../config/addresses'
 import { StakingPool } from '../../typings/Staking'
 import WIPBanner from '../../components/layout/WIPBanner'
 
-export const getStaticProps: GetStaticProps<{
+export const getServerSideProps: GetServerSideProps<{
   stakingPools: StakingPool[]
 }> = async () => {
   const tronWeb = getTronWebInstance()
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<{
 }
 
 type StakingProps = NextPageWithLayout &
-  InferGetStaticPropsType<typeof getStaticProps>
+  InferGetServerSidePropsType<typeof getServerSideProps>
 
 const Staking = ({ stakingPools }: StakingProps) => {
   return (

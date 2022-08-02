@@ -55,8 +55,19 @@ const NavbarLinks = () => {
       <li>
         <Link href="/quest">Quest</Link>
       </li>
-      <li>
-        <Link href="/faucet">Faucet</Link>
+      <li tabIndex={2}>
+        <a className="justify-between">
+          Faucet
+          <ChevronDown />
+        </a>
+        <ul className="p-2 bg-base-200 z-50 drop-shadow-md">
+          <li>
+            <Link href="/faucet">Space faucet</Link>
+          </li>
+          <li>
+            <Link href="/faucet/trx">TRX faucet</Link>
+          </li>
+        </ul>
       </li>
 
       <li tabIndex={5}>
