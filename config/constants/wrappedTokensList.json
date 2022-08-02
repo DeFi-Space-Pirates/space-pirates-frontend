@@ -17,13 +17,6 @@
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
     },
     {
-      "name": "USD Coin",
-      "symbol": "USDC",
-      "address": "THFMQvfckg4UmauGW4DEaHmt35WA2A1afT",
-      "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
-    },
-    {
       "name": "Decentralized USD",
       "symbol": "USDD",
       "address": "TV6StXz41Z1zmHtjzBQ93Y9jNEAvHSDoQ7",
@@ -52,13 +45,6 @@
       "symbol": "SP-USDC",
       "decimals": 18,
       "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
-    },
-    {
-      "id": 103,
-      "name": "Space USDD",
-      "symbol": "SP-USDD",
-      "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
     }
   ]
 }

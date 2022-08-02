@@ -15,20 +15,22 @@ import ChainIdContract from './artifacts/ChainId.json'
 
 export const addresses: AddressesConfig = {
   shasta: {
-    tokensContract: 'TGWs8t3qyKPLK4qZpFKu6CbFLSwqJQv7G6',
-    stakingContract: 'TVGWGVJCbFFvA653ssqeMYQsZGpSB2wex6',
-    splitContract: 'TXrkEan1KVH4WRcMm9uvH24FYBNheWNfp9',
-    faucetContract: 'TCk7F8cy4z6eGCSDEV7n4vNUkrY5xJLLq3',
-    wrapperContract: 'TATbv6Nhe6qj2GMZEYNwudRqH1UxyvjvJT',
-    factoryContract: 'TMtYcy5du4mJTgdbdUjA3hjb8DCe1g64xc',
-    routerContract: 'TEQNWY2YxeJ6hjNon8D8KmTnDj8ic63Wye',
-    masterChefContract: 'TQM1NVobX1K2gVSXgzjQNPSA3L29UkZLb9',
-    questRedeemContract: 'TBwQgRPG37d1cZenmTDEZHc8cXQg6kVhag',
-    battleFieldMintContract: 'TYsdaKNa441uuUWd2YEEYVHghsiqi9ZAAm',
-    marketPlaceContract: 'TXv9UVcdRreQWGoL8d9Rhj9mwxaMkGACNX',
+    tokensContract: 'TFi7jf8LUaRtRKQj2qX1scAvV3N6PNY1sn',
+    stakingContract: 'TVGWGVJCbFFvA653ssqeMYQsZGpSB2wex6', //TODO update
+    splitContract: 'TWKDXLfDD9GUgD1TXwYwZzKhK4sR8eV6zF',
+    faucetContract: 'TDTvQK2mvE8BbbDMAJwUinB9YenWSJfryG',
+    wrapperContract: 'THZ96fDPNnyxdfo8duDXopeR1iVE3Q5jok',
+    factoryContract: 'TAmKKxNEarCQ9CHjmkb7njgJgxE23PhAmM',
+    routerContract: 'TLZHKCxrLLJfLzW85JGUwJQuQrCcDjUGd1',
+    masterChefContract: 'TQ794PvgfR9TV6ewZq2GiJLkc15T82fris',
+    questRedeemContract: 'TJLepsv189xaY4v1YFJV9rtthKEhoBYW92',
+    battleFieldMintContract: 'TFZZTjq4XqnY4Y29zqYgXXf56ywVeiDGmC',
+    marketPlaceContract: 'TWVqwTHbY6ZmcxhA6TkfbhQLTzTa7BLrZ9',
+    nftContract: 'TNAweNj5SUnmpNxHgSmiP6BAkchkipKNs7',
+    nftCollectionContract: 'TRzCUXtZV6VuqXTB23ErhDijTnPv7xN8P1',
+    nftStarterContract: 'TTYawiSnY9gyN4CQCYhmT5Tw9KbhofezGb',
     chainId: 'TUcNroFU1HSgNJDMjNLoFuhdNj45oaFAbT',
     USDT: 'TUXYeqLUibq7m9MCMtyzLKptu296xrdoXq',
-    USDC: 'THFMQvfckg4UmauGW4DEaHmt35WA2A1afT',
     USDD: 'TV6StXz41Z1zmHtjzBQ93Y9jNEAvHSDoQ7',
   },
   mainnet: {
@@ -43,9 +45,11 @@ export const addresses: AddressesConfig = {
     questRedeemContract: '',
     battleFieldMintContract: '',
     marketPlaceContract: '',
+    nftContract: '',
+    nftCollectionContract: '',
+    nftStarterContract: '',
     chainId: 'TB8L6uZ8g9YWPFqrAfxD2sE7TuVxRwhrGR',
     USDT: '',
-    USDC: '',
     USDD: '',
   },
 }
@@ -84,7 +88,7 @@ export const getAbi = (contract: ABIsList) => {
     case 'chainId':
       return ChainIdContract.abi
     case 'battleFieldMintContract':
-      return BattlefieldContract
+      return BattlefieldContract.abi
     default:
       return null //return null when we don't have the ABI and so we use tronWeb.contract.at("address")
   }

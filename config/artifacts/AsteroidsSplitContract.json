@@ -129,30 +129,30 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x60a060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506040516105d33803806105d38339810160408190526100499161005e565b60601b6001600160601b031916608052610097565b60006020828403121561007057600080fd5b81516001600160a81b038116811461008757600080fd5b6001600160a01b03169392505050565b60805160601c6105036100d06000396000818160a9015281816101360152818161019c0152818161026b015261032001526105036000f3fe608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506004361061007c5760003560e01c806331e61ea6146100815780633c71cfa21461009c57806355a373d6146100a45780636712627d146100e3578063b2b9f032146100eb578063ce19e83414610100575b600080fd5b610089600381565b6040519081526020015b60405180910390f35b610089600481565b6100cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610093565b610089600281565b6100fe6100f9366004610423565b610113565b005b6100fe61010e366004610423565b610269565b604051637a94c56560e11b815233600482015260248101829052600260448201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063f5298aca90606401600060405180830381600087803b15801561018257600080fd5b505af1158015610196573d6000803e3d6000fd5b505050507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663d81d0a15336101d6600360046103b8565b6101e085866103b8565b6040518463ffffffff1660e01b81526004016101fe93929190610477565b600060405180830381600087803b15801561021857600080fd5b505af115801561022c573d6000803e3d6000fd5b50506040518381523392507fef87d5252d5343fa340e6a89d6700b1ce725aa12b7eb3a09356fb6ba7f47ea5091506020015b60405180910390a250565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636b20c454336102a5600360046103b8565b6102af85866103b8565b6040518463ffffffff1660e01b81526004016102cd93929190610477565b600060405180830381600087803b1580156102e757600080fd5b505af11580156102fb573d6000803e3d6000fd5b5050604051630ab714fb60e11b815233600482015260248101849052600260448201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316925063156e29f69150606401600060405180830381600087803b15801561036e57600080fd5b505af1158015610382573d6000803e3d6000fd5b50506040518381523392507f8e045e0d309a4c5a99463814b0e3b1dafd3d35a7516dae9177da549961c4adf2915060200161025e565b6040805160028082526060808301845292600092919060208301908036833701905050905083816000815181106103f1576103f16104b7565b6020026020010181815250508281600181518110610411576104116104b7565b60209081029190910101529392505050565b60006020828403121561043557600080fd5b5035919050565b600081518084526020808501945080840160005b8381101561046c57815187529582019590820190600101610450565b509495945050505050565b6001600160a01b038416815260606020820181905260009061049b9083018561043c565b82810360408401526104ad818561043c565b9695505050505050565b634e487b7160e01b600052603260045260246000fdfea26474726f6e5822122045d042cd89238f505864a87db461420086d6d679aab318f1ce429954567c0a3264736f6c63430008060033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506004361061007c5760003560e01c806331e61ea6146100815780633c71cfa21461009c57806355a373d6146100a45780636712627d146100e3578063b2b9f032146100eb578063ce19e83414610100575b600080fd5b610089600381565b6040519081526020015b60405180910390f35b610089600481565b6100cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610093565b610089600281565b6100fe6100f9366004610423565b610113565b005b6100fe61010e366004610423565b610269565b604051637a94c56560e11b815233600482015260248101829052600260448201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063f5298aca90606401600060405180830381600087803b15801561018257600080fd5b505af1158015610196573d6000803e3d6000fd5b505050507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663d81d0a15336101d6600360046103b8565b6101e085866103b8565b6040518463ffffffff1660e01b81526004016101fe93929190610477565b600060405180830381600087803b15801561021857600080fd5b505af115801561022c573d6000803e3d6000fd5b50506040518381523392507fef87d5252d5343fa340e6a89d6700b1ce725aa12b7eb3a09356fb6ba7f47ea5091506020015b60405180910390a250565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636b20c454336102a5600360046103b8565b6102af85866103b8565b6040518463ffffffff1660e01b81526004016102cd93929190610477565b600060405180830381600087803b1580156102e757600080fd5b505af11580156102fb573d6000803e3d6000fd5b5050604051630ab714fb60e11b815233600482015260248101849052600260448201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316925063156e29f69150606401600060405180830381600087803b15801561036e57600080fd5b505af1158015610382573d6000803e3d6000fd5b50506040518381523392507f8e045e0d309a4c5a99463814b0e3b1dafd3d35a7516dae9177da549961c4adf2915060200161025e565b6040805160028082526060808301845292600092919060208301908036833701905050905083816000815181106103f1576103f16104b7565b6020026020010181815250508281600181518110610411576104116104b7565b60209081029190910101529392505050565b60006020828403121561043557600080fd5b5035919050565b600081518084526020808501945080840160005b8381101561046c57815187529582019590820190600101610450565b509495945050505050565b6001600160a01b038416815260606020820181905260009061049b9083018561043c565b82810360408401526104ad818561043c565b9695505050505050565b634e487b7160e01b600052603260045260246000fdfea26474726f6e5822122045d042cd89238f505864a87db461420086d6d679aab318f1ce429954567c0a3264736f6c63430008060033",
+  "bytecode": "0x60a060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506040516105d33803806105d38339810160408190526100499161005e565b60601b6001600160601b031916608052610097565b60006020828403121561007057600080fd5b81516001600160a81b038116811461008757600080fd5b6001600160a01b03169392505050565b60805160601c6105036100d06000396000818160a9015281816101360152818161019c0152818161026b015261032001526105036000f3fe608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506004361061007c5760003560e01c806331e61ea6146100815780633c71cfa21461009c57806355a373d6146100a45780636712627d146100e3578063b2b9f032146100eb578063ce19e83414610100575b600080fd5b610089600381565b6040519081526020015b60405180910390f35b610089600481565b6100cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610093565b610089600281565b6100fe6100f9366004610423565b610113565b005b6100fe61010e366004610423565b610269565b604051637a94c56560e11b815233600482015260026024820152604481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063f5298aca90606401600060405180830381600087803b15801561018257600080fd5b505af1158015610196573d6000803e3d6000fd5b505050507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663d81d0a15336101d6600360046103b8565b6101e085866103b8565b6040518463ffffffff1660e01b81526004016101fe93929190610477565b600060405180830381600087803b15801561021857600080fd5b505af115801561022c573d6000803e3d6000fd5b50506040518381523392507fef87d5252d5343fa340e6a89d6700b1ce725aa12b7eb3a09356fb6ba7f47ea5091506020015b60405180910390a250565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636b20c454336102a5600360046103b8565b6102af85866103b8565b6040518463ffffffff1660e01b81526004016102cd93929190610477565b600060405180830381600087803b1580156102e757600080fd5b505af11580156102fb573d6000803e3d6000fd5b5050604051630ab714fb60e11b815233600482015260026024820152604481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316925063156e29f69150606401600060405180830381600087803b15801561036e57600080fd5b505af1158015610382573d6000803e3d6000fd5b50506040518381523392507f8e045e0d309a4c5a99463814b0e3b1dafd3d35a7516dae9177da549961c4adf2915060200161025e565b6040805160028082526060808301845292600092919060208301908036833701905050905083816000815181106103f1576103f16104b7565b6020026020010181815250508281600181518110610411576104116104b7565b60209081029190910101529392505050565b60006020828403121561043557600080fd5b5035919050565b600081518084526020808501945080840160005b8381101561046c57815187529582019590820190600101610450565b509495945050505050565b6001600160a01b038416815260606020820181905260009061049b9083018561043c565b82810360408401526104ad818561043c565b9695505050505050565b634e487b7160e01b600052603260045260246000fdfea26474726f6e5822122007589b948234a44cd34b2c3fc8c6d25cce30a85bc8a071ff6b970d5becf9176364736f6c63430008060033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506004361061007c5760003560e01c806331e61ea6146100815780633c71cfa21461009c57806355a373d6146100a45780636712627d146100e3578063b2b9f032146100eb578063ce19e83414610100575b600080fd5b610089600381565b6040519081526020015b60405180910390f35b610089600481565b6100cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610093565b610089600281565b6100fe6100f9366004610423565b610113565b005b6100fe61010e366004610423565b610269565b604051637a94c56560e11b815233600482015260026024820152604481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063f5298aca90606401600060405180830381600087803b15801561018257600080fd5b505af1158015610196573d6000803e3d6000fd5b505050507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663d81d0a15336101d6600360046103b8565b6101e085866103b8565b6040518463ffffffff1660e01b81526004016101fe93929190610477565b600060405180830381600087803b15801561021857600080fd5b505af115801561022c573d6000803e3d6000fd5b50506040518381523392507fef87d5252d5343fa340e6a89d6700b1ce725aa12b7eb3a09356fb6ba7f47ea5091506020015b60405180910390a250565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636b20c454336102a5600360046103b8565b6102af85866103b8565b6040518463ffffffff1660e01b81526004016102cd93929190610477565b600060405180830381600087803b1580156102e757600080fd5b505af11580156102fb573d6000803e3d6000fd5b5050604051630ab714fb60e11b815233600482015260026024820152604481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316925063156e29f69150606401600060405180830381600087803b15801561036e57600080fd5b505af1158015610382573d6000803e3d6000fd5b50506040518381523392507f8e045e0d309a4c5a99463814b0e3b1dafd3d35a7516dae9177da549961c4adf2915060200161025e565b6040805160028082526060808301845292600092919060208301908036833701905050905083816000815181106103f1576103f16104b7565b6020026020010181815250508281600181518110610411576104116104b7565b60209081029190910101529392505050565b60006020828403121561043557600080fd5b5035919050565b600081518084526020808501945080840160005b8381101561046c57815187529582019590820190600101610450565b509495945050505050565b6001600160a01b038416815260606020820181905260009061049b9083018561043c565b82810360408401526104ad818561043c565b9695505050505050565b634e487b7160e01b600052603260045260246000fdfea26474726f6e5822122007589b948234a44cd34b2c3fc8c6d25cce30a85bc8a071ff6b970d5becf9176364736f6c63430008060033",
   "sourceMap": "327:1185:0:-:0;;;701:96;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;759:30;;-1:-1:-1;;;;;;759:30:0;;;327:1185;;14:343:60;111:6;164:2;152:9;143:7;139:23;135:32;132:2;;;180:1;177;170:12;132:2;206:16;;-1:-1:-1;;;;;251:31:60;;241:42;;231:2;;297:1;294;287:12;231:2;-1:-1:-1;;;;;320:31:60;;122:235;-1:-1:-1;;;122:235:60:o;:::-;327:1185:0;;;;;;;;;;;;",
-  "deployedSourceMap": "327:1185:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;410:40;;449:1;410:40;;;;;1937:25:60;;;1925:2;1910:18;410:40:0;;;;;;;;457:41;;497:1;457:41;;507:49;;;;;;;;-1:-1:-1;;;;;1747:32:60;;;1729:51;;1717:2;1702:18;507:49:0;1684:102:60;366:37:0;;402:1;366:37;;805:348;;;;;;:::i;:::-;;:::i;:::-;;1161;;;;;;:::i;:::-;;:::i;805:::-;863:49;;-1:-1:-1;;;863:49:0;;882:10;863:49;;;1408:51:60;1475:18;;;1468:34;;;402:1:0;1518:18:60;;;1511:34;863:13:0;-1:-1:-1;;;;;863:18:0;;;;1381::60;;863:49:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;923:13;-1:-1:-1;;;;;923:23:0;;961:10;986:47;449:1;497;986:18;:47::i;:::-;1048:34;1067:6;1075;1048:18;:34::i;:::-;923:170;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1111:34:0;;1937:25:60;;;1126:10:0;;-1:-1:-1;1111:34:0;;-1:-1:-1;1925:2:60;1910:18;1111:34:0;;;;;;;;805:348;:::o;1161:::-;1219:13;-1:-1:-1;;;;;1219:23:0;;1257:10;1282:47;449:1;497;1282:18;:47::i;:::-;1344:34;1363:6;1371;1344:18;:34::i;:::-;1219:170;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1400:49:0;;-1:-1:-1;;;1400:49:0;;1419:10;1400:49;;;1408:51:60;1475:18;;;1468:34;;;402:1:0;1518:18:60;;;1511:34;1400:13:0;-1:-1:-1;;;;;1400:18:0;;-1:-1:-1;1400:18:0;;-1:-1:-1;1381:18:60;;1400:49:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1467:34:0;;1937:25:60;;;1482:10:0;;-1:-1:-1;1467:34:0;;-1:-1:-1;1925:2:60;1910:18;1467:34:0;1892:76:60;270:246:31;423:16;;;437:1;423:16;;;364;423;;;;;364;398:22;;423:16;437:1;423:16;;;;;;;;;;-1:-1:-1;423:16:31;398:41;;461:1;450:5;456:1;450:8;;;;;;;;:::i;:::-;;;;;;:12;;;;;484:1;473:5;479:1;473:8;;;;;;;;:::i;:::-;;;;;;;;;;:12;503:5;270:246;-1:-1:-1;;;270:246:31:o;14:180:60:-;73:6;126:2;114:9;105:7;101:23;97:32;94:2;;;142:1;139;132:12;94:2;-1:-1:-1;165:23:60;;84:110;-1:-1:-1;84:110:60:o;199:435::-;252:3;290:5;284:12;317:6;312:3;305:19;343:4;372:2;367:3;363:12;356:19;;409:2;402:5;398:14;430:1;440:169;454:6;451:1;448:13;440:169;;;515:13;;503:26;;549:12;;;;584:15;;;;476:1;469:9;440:169;;;-1:-1:-1;625:3:60;;260:374;-1:-1:-1;;;;;260:374:60:o;639:562::-;-1:-1:-1;;;;;924:32:60;;906:51;;993:2;988;973:18;;966:30;;;-1:-1:-1;;1019:56:60;;1056:18;;1048:6;1019:56;:::i;:::-;1123:9;1115:6;1111:22;1106:2;1095:9;1091:18;1084:50;1151:44;1188:6;1180;1151:44;:::i;:::-;1143:52;896:305;-1:-1:-1;;;;;;896:305:60:o;1973:127::-;2034:10;2029:3;2025:20;2022:1;2015:31;2065:4;2062:1;2055:15;2089:4;2086:1;2079:15",
-  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"./SpacePiratesTokens.sol\";\r\nimport \"./libraries/Array.sol\";\r\n\r\n/**\r\n * @title Asteroids Split Contract\r\n * @author @Gr3it, @yuripaoloni (reviewer), @MatteoLeonesi (reviewer)\r\n * @notice Split Asteroids tokens in their underlying tokens and vice versa\r\n */\r\n\r\ncontract AsteroidsSplitContract {\r\n    uint256 public constant ASTEROIDS = 2;\r\n    uint256 public constant VE_ASTEROIDS = 3;\r\n    uint256 public constant STK_ASTEROIDS = 4;\r\n\r\n    SpacePiratesTokens public immutable tokenContract;\r\n\r\n    event SplitAsteroids(address indexed sender, uint256 amount);\r\n    event MergeAsteroids(address indexed sender, uint256 amount);\r\n\r\n    constructor(SpacePiratesTokens _tokenContract) {\r\n        tokenContract = _tokenContract;\r\n    }\r\n\r\n    function splitAsteroids(uint256 amount) public {\r\n        tokenContract.burn(msg.sender, amount, ASTEROIDS);\r\n        tokenContract.mintBatch(\r\n            msg.sender,\r\n            Array.getArrayPair(VE_ASTEROIDS, STK_ASTEROIDS),\r\n            Array.getArrayPair(amount, amount)\r\n        );\r\n\r\n        emit SplitAsteroids(msg.sender, amount);\r\n    }\r\n\r\n    function mergeAsteroids(uint256 amount) public {\r\n        tokenContract.burnBatch(\r\n            msg.sender,\r\n            Array.getArrayPair(VE_ASTEROIDS, STK_ASTEROIDS),\r\n            Array.getArrayPair(amount, amount)\r\n        );\r\n        tokenContract.mint(msg.sender, amount, ASTEROIDS);\r\n\r\n        emit MergeAsteroids(msg.sender, amount);\r\n    }\r\n}\r\n",
-  "sourcePath": "C:/Users/emanu/space-pirates-tronbox/contracts/AsteroidsSplitContract.sol",
+  "deployedSourceMap": "327:1185:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;410:40;;449:1;410:40;;;;;1937:25:60;;;1925:2;1910:18;410:40:0;;;;;;;;457:41;;497:1;457:41;;507:49;;;;;;;;-1:-1:-1;;;;;1747:32:60;;;1729:51;;1717:2;1702:18;507:49:0;1684:102:60;366:37:0;;402:1;366:37;;805:348;;;;;;:::i;:::-;;:::i;:::-;;1161;;;;;;:::i;:::-;;:::i;805:::-;863:49;;-1:-1:-1;;;863:49:0;;882:10;863:49;;;1408:51:60;402:1:0;1475:18:60;;;1468:34;1518:18;;;1511:34;;;863:13:0;-1:-1:-1;;;;;863:18:0;;;;1381::60;;863:49:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;923:13;-1:-1:-1;;;;;923:23:0;;961:10;986:47;449:1;497;986:18;:47::i;:::-;1048:34;1067:6;1075;1048:18;:34::i;:::-;923:170;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1111:34:0;;1937:25:60;;;1126:10:0;;-1:-1:-1;1111:34:0;;-1:-1:-1;1925:2:60;1910:18;1111:34:0;;;;;;;;805:348;:::o;1161:::-;1219:13;-1:-1:-1;;;;;1219:23:0;;1257:10;1282:47;449:1;497;1282:18;:47::i;:::-;1344:34;1363:6;1371;1344:18;:34::i;:::-;1219:170;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1400:49:0;;-1:-1:-1;;;1400:49:0;;1419:10;1400:49;;;1408:51:60;402:1:0;1475:18:60;;;1468:34;1518:18;;;1511:34;;;1400:13:0;-1:-1:-1;;;;;1400:18:0;;-1:-1:-1;1400:18:0;;-1:-1:-1;1381:18:60;;1400:49:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1467:34:0;;1937:25:60;;;1482:10:0;;-1:-1:-1;1467:34:0;;-1:-1:-1;1925:2:60;1910:18;1467:34:0;1892:76:60;270:246:32;423:16;;;437:1;423:16;;;364;423;;;;;364;398:22;;423:16;437:1;423:16;;;;;;;;;;-1:-1:-1;423:16:32;398:41;;461:1;450:5;456:1;450:8;;;;;;;;:::i;:::-;;;;;;:12;;;;;484:1;473:5;479:1;473:8;;;;;;;;:::i;:::-;;;;;;;;;;:12;503:5;270:246;-1:-1:-1;;;270:246:32:o;14:180:60:-;73:6;126:2;114:9;105:7;101:23;97:32;94:2;;;142:1;139;132:12;94:2;-1:-1:-1;165:23:60;;84:110;-1:-1:-1;84:110:60:o;199:435::-;252:3;290:5;284:12;317:6;312:3;305:19;343:4;372:2;367:3;363:12;356:19;;409:2;402:5;398:14;430:1;440:169;454:6;451:1;448:13;440:169;;;515:13;;503:26;;549:12;;;;584:15;;;;476:1;469:9;440:169;;;-1:-1:-1;625:3:60;;260:374;-1:-1:-1;;;;;260:374:60:o;639:562::-;-1:-1:-1;;;;;924:32:60;;906:51;;993:2;988;973:18;;966:30;;;-1:-1:-1;;1019:56:60;;1056:18;;1048:6;1019:56;:::i;:::-;1123:9;1115:6;1111:22;1106:2;1095:9;1091:18;1084:50;1151:44;1188:6;1180;1151:44;:::i;:::-;1143:52;896:305;-1:-1:-1;;;;;;896:305:60:o;1973:127::-;2034:10;2029:3;2025:20;2022:1;2015:31;2065:4;2062:1;2055:15;2089:4;2086:1;2079:15",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"./SpacePiratesTokens.sol\";\r\nimport \"./libraries/Array.sol\";\r\n\r\n/**\r\n * @title Asteroids Split Contract\r\n * @author @Gr3it, @yuripaoloni (reviewer), @MatteoLeonesi (reviewer)\r\n * @notice Split Asteroids tokens in their underlying tokens and vice versa\r\n */\r\n\r\ncontract AsteroidsSplitContract {\r\n    uint256 public constant ASTEROIDS = 2;\r\n    uint256 public constant VE_ASTEROIDS = 3;\r\n    uint256 public constant STK_ASTEROIDS = 4;\r\n\r\n    SpacePiratesTokens public immutable tokenContract;\r\n\r\n    event SplitAsteroids(address indexed sender, uint256 amount);\r\n    event MergeAsteroids(address indexed sender, uint256 amount);\r\n\r\n    constructor(SpacePiratesTokens _tokenContract) {\r\n        tokenContract = _tokenContract;\r\n    }\r\n\r\n    function splitAsteroids(uint256 amount) public {\r\n        tokenContract.burn(msg.sender, ASTEROIDS, amount);\r\n        tokenContract.mintBatch(\r\n            msg.sender,\r\n            Array.getArrayPair(VE_ASTEROIDS, STK_ASTEROIDS),\r\n            Array.getArrayPair(amount, amount)\r\n        );\r\n\r\n        emit SplitAsteroids(msg.sender, amount);\r\n    }\r\n\r\n    function mergeAsteroids(uint256 amount) public {\r\n        tokenContract.burnBatch(\r\n            msg.sender,\r\n            Array.getArrayPair(VE_ASTEROIDS, STK_ASTEROIDS),\r\n            Array.getArrayPair(amount, amount)\r\n        );\r\n        tokenContract.mint(msg.sender, ASTEROIDS, amount);\r\n\r\n        emit MergeAsteroids(msg.sender, amount);\r\n    }\r\n}\r\n",
+  "sourcePath": "C:/Users/emanu/space-pirates-contracts/contracts/AsteroidsSplitContract.sol",
   "ast": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/AsteroidsSplitContract.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/AsteroidsSplitContract.sol",
     "exportedSymbols": {
-      "AccessControl": [12137],
-      "Address": [13718],
-      "Array": [10695],
+      "AccessControl": [12583],
+      "Address": [14122],
+      "Array": [11153],
       "AsteroidsSplitContract": [116],
-      "Context": [13740],
-      "ERC1155Custom": [1753],
-      "ERC165": [14551],
-      "IAccessControl": [12210],
-      "IERC1155": [12593],
-      "IERC1155MetadataURI": [12649],
-      "IERC1155Receiver": [12634],
-      "IERC165": [14563],
-      "Pausable": [12431],
-      "SpacePiratesTokens": [3770],
-      "Strings": [13966]
+      "Context": [14144],
+      "ERC1155Custom": [1751],
+      "ERC165": [14932],
+      "IAccessControl": [12656],
+      "IERC1155": [13015],
+      "IERC1155MetadataURI": [13071],
+      "IERC1155Receiver": [13056],
+      "IERC165": [14944],
+      "Pausable": [12853],
+      "SpacePiratesTokens": [4092],
+      "Strings": [14347]
     },
     "id": 117,
     "license": "MIT",
@@ -165,25 +165,25 @@
         "src": "33:23:0"
       },
       {
-        "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/SpacePiratesTokens.sol",
+        "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/SpacePiratesTokens.sol",
         "file": "./SpacePiratesTokens.sol",
         "id": 2,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 117,
-        "sourceUnit": 3771,
+        "sourceUnit": 4093,
         "src": "60:34:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/libraries/Array.sol",
+        "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/libraries/Array.sol",
         "file": "./libraries/Array.sol",
         "id": 3,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 117,
-        "sourceUnit": 10696,
+        "sourceUnit": 11154,
         "src": "96:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -351,7 +351,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+              "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
               "typeString": "contract SpacePiratesTokens"
             },
             "typeName": {
@@ -361,13 +361,13 @@
                 "id": 14,
                 "name": "SpacePiratesTokens",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 3770,
+                "referencedDeclaration": 4092,
                 "src": "507:18:0"
               },
-              "referencedDeclaration": 3770,
+              "referencedDeclaration": 4092,
               "src": "507:18:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                 "typeString": "contract SpacePiratesTokens"
               }
             },
@@ -538,7 +538,7 @@
                       "referencedDeclaration": 16,
                       "src": "759:13:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                         "typeString": "contract SpacePiratesTokens"
                       }
                     },
@@ -552,13 +552,13 @@
                       "referencedDeclaration": 31,
                       "src": "775:14:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                         "typeString": "contract SpacePiratesTokens"
                       }
                     },
                     "src": "759:30:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                       "typeString": "contract SpacePiratesTokens"
                     }
                   },
@@ -591,7 +591,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                    "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                     "typeString": "contract SpacePiratesTokens"
                   },
                   "typeName": {
@@ -601,13 +601,13 @@
                       "id": 29,
                       "name": "SpacePiratesTokens",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3770,
+                      "referencedDeclaration": 4092,
                       "src": "713:18:0"
                     },
-                    "referencedDeclaration": 3770,
+                    "referencedDeclaration": 4092,
                     "src": "713:18:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                       "typeString": "contract SpacePiratesTokens"
                     }
                   },
@@ -665,11 +665,11 @@
                       },
                       {
                         "id": 49,
-                        "name": "amount",
+                        "name": "ASTEROIDS",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41,
-                        "src": "894:6:0",
+                        "referencedDeclaration": 7,
+                        "src": "894:9:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -677,11 +677,11 @@
                       },
                       {
                         "id": 50,
-                        "name": "ASTEROIDS",
+                        "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 7,
-                        "src": "902:9:0",
+                        "referencedDeclaration": 41,
+                        "src": "905:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -711,7 +711,7 @@
                         "referencedDeclaration": 16,
                         "src": "863:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -722,7 +722,7 @@
                       "lValueRequested": false,
                       "memberName": "burn",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3302,
+                      "referencedDeclaration": 3624,
                       "src": "863:18:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -820,10 +820,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "986:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -834,7 +834,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "986:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -899,10 +899,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1048:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -913,7 +913,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1048:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -959,7 +959,7 @@
                         "referencedDeclaration": 16,
                         "src": "923:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -970,7 +970,7 @@
                       "lValueRequested": false,
                       "memberName": "mintBatch",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3333,
+                      "referencedDeclaration": 3655,
                       "src": "923:23:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$returns$__$",
@@ -1213,10 +1213,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1282:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -1227,7 +1227,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1282:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -1292,10 +1292,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1344:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -1306,7 +1306,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1344:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -1352,7 +1352,7 @@
                         "referencedDeclaration": 16,
                         "src": "1219:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -1363,7 +1363,7 @@
                       "lValueRequested": false,
                       "memberName": "burnBatch",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3361,
+                      "referencedDeclaration": 3683,
                       "src": "1219:23:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$returns$__$",
@@ -1420,11 +1420,11 @@
                       },
                       {
                         "id": 104,
-                        "name": "amount",
+                        "name": "ASTEROIDS",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 79,
-                        "src": "1431:6:0",
+                        "referencedDeclaration": 7,
+                        "src": "1431:9:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1432,11 +1432,11 @@
                       },
                       {
                         "id": 105,
-                        "name": "ASTEROIDS",
+                        "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 7,
-                        "src": "1439:9:0",
+                        "referencedDeclaration": 79,
+                        "src": "1442:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1466,7 +1466,7 @@
                         "referencedDeclaration": 16,
                         "src": "1400:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -1477,7 +1477,7 @@
                       "lValueRequested": false,
                       "memberName": "mint",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3262,
+                      "referencedDeclaration": 3584,
                       "src": "1400:18:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -1651,23 +1651,23 @@
     "src": "33:1481:0"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/AsteroidsSplitContract.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/AsteroidsSplitContract.sol",
     "exportedSymbols": {
-      "AccessControl": [12137],
-      "Address": [13718],
-      "Array": [10695],
+      "AccessControl": [12583],
+      "Address": [14122],
+      "Array": [11153],
       "AsteroidsSplitContract": [116],
-      "Context": [13740],
-      "ERC1155Custom": [1753],
-      "ERC165": [14551],
-      "IAccessControl": [12210],
-      "IERC1155": [12593],
-      "IERC1155MetadataURI": [12649],
-      "IERC1155Receiver": [12634],
-      "IERC165": [14563],
-      "Pausable": [12431],
-      "SpacePiratesTokens": [3770],
-      "Strings": [13966]
+      "Context": [14144],
+      "ERC1155Custom": [1751],
+      "ERC165": [14932],
+      "IAccessControl": [12656],
+      "IERC1155": [13015],
+      "IERC1155MetadataURI": [13071],
+      "IERC1155Receiver": [13056],
+      "IERC165": [14944],
+      "Pausable": [12853],
+      "SpacePiratesTokens": [4092],
+      "Strings": [14347]
     },
     "id": 117,
     "license": "MIT",
@@ -1680,25 +1680,25 @@
         "src": "33:23:0"
       },
       {
-        "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/SpacePiratesTokens.sol",
+        "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/SpacePiratesTokens.sol",
         "file": "./SpacePiratesTokens.sol",
         "id": 2,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 117,
-        "sourceUnit": 3771,
+        "sourceUnit": 4093,
         "src": "60:34:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/libraries/Array.sol",
+        "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/libraries/Array.sol",
         "file": "./libraries/Array.sol",
         "id": 3,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 117,
-        "sourceUnit": 10696,
+        "sourceUnit": 11154,
         "src": "96:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1866,7 +1866,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+              "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
               "typeString": "contract SpacePiratesTokens"
             },
             "typeName": {
@@ -1876,13 +1876,13 @@
                 "id": 14,
                 "name": "SpacePiratesTokens",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 3770,
+                "referencedDeclaration": 4092,
                 "src": "507:18:0"
               },
-              "referencedDeclaration": 3770,
+              "referencedDeclaration": 4092,
               "src": "507:18:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                 "typeString": "contract SpacePiratesTokens"
               }
             },
@@ -2053,7 +2053,7 @@
                       "referencedDeclaration": 16,
                       "src": "759:13:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                         "typeString": "contract SpacePiratesTokens"
                       }
                     },
@@ -2067,13 +2067,13 @@
                       "referencedDeclaration": 31,
                       "src": "775:14:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                        "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                         "typeString": "contract SpacePiratesTokens"
                       }
                     },
                     "src": "759:30:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                       "typeString": "contract SpacePiratesTokens"
                     }
                   },
@@ -2106,7 +2106,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                    "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                     "typeString": "contract SpacePiratesTokens"
                   },
                   "typeName": {
@@ -2116,13 +2116,13 @@
                       "id": 29,
                       "name": "SpacePiratesTokens",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3770,
+                      "referencedDeclaration": 4092,
                       "src": "713:18:0"
                     },
-                    "referencedDeclaration": 3770,
+                    "referencedDeclaration": 4092,
                     "src": "713:18:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                      "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                       "typeString": "contract SpacePiratesTokens"
                     }
                   },
@@ -2180,11 +2180,11 @@
                       },
                       {
                         "id": 49,
-                        "name": "amount",
+                        "name": "ASTEROIDS",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41,
-                        "src": "894:6:0",
+                        "referencedDeclaration": 7,
+                        "src": "894:9:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2192,11 +2192,11 @@
                       },
                       {
                         "id": 50,
-                        "name": "ASTEROIDS",
+                        "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 7,
-                        "src": "902:9:0",
+                        "referencedDeclaration": 41,
+                        "src": "905:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2226,7 +2226,7 @@
                         "referencedDeclaration": 16,
                         "src": "863:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -2237,7 +2237,7 @@
                       "lValueRequested": false,
                       "memberName": "burn",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3302,
+                      "referencedDeclaration": 3624,
                       "src": "863:18:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -2335,10 +2335,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "986:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -2349,7 +2349,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "986:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -2414,10 +2414,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1048:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -2428,7 +2428,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1048:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -2474,7 +2474,7 @@
                         "referencedDeclaration": 16,
                         "src": "923:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -2485,7 +2485,7 @@
                       "lValueRequested": false,
                       "memberName": "mintBatch",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3333,
+                      "referencedDeclaration": 3655,
                       "src": "923:23:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$returns$__$",
@@ -2728,10 +2728,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1282:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -2742,7 +2742,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1282:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -2807,10 +2807,10 @@
                             "name": "Array",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 10695,
+                            "referencedDeclaration": 11153,
                             "src": "1344:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Array_$10695_$",
+                              "typeIdentifier": "t_type$_t_contract$_Array_$11153_$",
                               "typeString": "type(library Array)"
                             }
                           },
@@ -2821,7 +2821,7 @@
                           "lValueRequested": false,
                           "memberName": "getArrayPair",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 10657,
+                          "referencedDeclaration": 11115,
                           "src": "1344:18:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -2867,7 +2867,7 @@
                         "referencedDeclaration": 16,
                         "src": "1219:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -2878,7 +2878,7 @@
                       "lValueRequested": false,
                       "memberName": "burnBatch",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3361,
+                      "referencedDeclaration": 3683,
                       "src": "1219:23:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$returns$__$",
@@ -2935,11 +2935,11 @@
                       },
                       {
                         "id": 104,
-                        "name": "amount",
+                        "name": "ASTEROIDS",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 79,
-                        "src": "1431:6:0",
+                        "referencedDeclaration": 7,
+                        "src": "1431:9:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2947,11 +2947,11 @@
                       },
                       {
                         "id": 105,
-                        "name": "ASTEROIDS",
+                        "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 7,
-                        "src": "1439:9:0",
+                        "referencedDeclaration": 79,
+                        "src": "1442:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2981,7 +2981,7 @@
                         "referencedDeclaration": 16,
                         "src": "1400:13:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$3770",
+                          "typeIdentifier": "t_contract$_SpacePiratesTokens_$4092",
                           "typeString": "contract SpacePiratesTokens"
                         }
                       },
@@ -2992,7 +2992,7 @@
                       "lValueRequested": false,
                       "memberName": "mint",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3262,
+                      "referencedDeclaration": 3584,
                       "src": "1400:18:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -3171,5 +3171,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2022-07-16T14:55:56.022Z"
+  "updatedAt": "2022-07-23T23:58:53.743Z"
 }

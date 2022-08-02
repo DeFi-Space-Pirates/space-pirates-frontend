@@ -20,18 +20,18 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * @title Helper Dex Contract Interface\r\n * @author @Gr3it\r\n */\r\n\r\ninterface IHelperDexContract {\r\n    function getPairInitCodeHash() external pure returns (bytes32);\r\n}\r\n",
-  "sourcePath": "C:/Users/emanu/space-pirates-tronbox/contracts/interfaces/IHelperDexContract.sol",
+  "sourcePath": "C:/Users/emanu/space-pirates-contracts/contracts/interfaces/IHelperDexContract.sol",
   "ast": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/interfaces/IHelperDexContract.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/interfaces/IHelperDexContract.sol",
     "exportedSymbols": {
-      "IHelperDexContract": [8739]
+      "IHelperDexContract": [9068]
     },
-    "id": 8740,
+    "id": 9069,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8732,
+        "id": 9061,
         "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:18"
@@ -42,21 +42,21 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 8733,
+          "id": 9062,
           "nodeType": "StructuredDocumentation",
           "src": "60:68:18",
           "text": " @title Helper Dex Contract Interface\n @author @Gr3it"
         },
         "fullyImplemented": false,
-        "id": 8739,
-        "linearizedBaseContracts": [8739],
+        "id": 9068,
+        "linearizedBaseContracts": [9068],
         "name": "IHelperDexContract",
         "nameLocation": "142:18:18",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "24e43f3d",
-            "id": 8738,
+            "id": 9067,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -64,23 +64,23 @@
             "nameLocation": "177:19:18",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8734,
+              "id": 9063,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "196:2:18"
             },
             "returnParameters": {
-              "id": 8737,
+              "id": 9066,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8736,
+                  "id": 9065,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8738,
+                  "scope": 9067,
                   "src": "222:7:18",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -89,7 +89,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8735,
+                    "id": 9064,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:18",
@@ -103,14 +103,14 @@
               ],
               "src": "221:9:18"
             },
-            "scope": 8739,
+            "scope": 9068,
             "src": "168:63:18",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 8740,
+        "scope": 9069,
         "src": "132:102:18",
         "usedErrors": []
       }
@@ -118,16 +118,16 @@
     "src": "33:203:18"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/interfaces/IHelperDexContract.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/interfaces/IHelperDexContract.sol",
     "exportedSymbols": {
-      "IHelperDexContract": [8739]
+      "IHelperDexContract": [9068]
     },
-    "id": 8740,
+    "id": 9069,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8732,
+        "id": 9061,
         "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:18"
@@ -138,21 +138,21 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 8733,
+          "id": 9062,
           "nodeType": "StructuredDocumentation",
           "src": "60:68:18",
           "text": " @title Helper Dex Contract Interface\n @author @Gr3it"
         },
         "fullyImplemented": false,
-        "id": 8739,
-        "linearizedBaseContracts": [8739],
+        "id": 9068,
+        "linearizedBaseContracts": [9068],
         "name": "IHelperDexContract",
         "nameLocation": "142:18:18",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "24e43f3d",
-            "id": 8738,
+            "id": 9067,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -160,23 +160,23 @@
             "nameLocation": "177:19:18",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8734,
+              "id": 9063,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "196:2:18"
             },
             "returnParameters": {
-              "id": 8737,
+              "id": 9066,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8736,
+                  "id": 9065,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8738,
+                  "scope": 9067,
                   "src": "222:7:18",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -185,7 +185,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8735,
+                    "id": 9064,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:18",
@@ -199,14 +199,14 @@
               ],
               "src": "221:9:18"
             },
-            "scope": 8739,
+            "scope": 9068,
             "src": "168:63:18",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 8740,
+        "scope": 9069,
         "src": "132:102:18",
         "usedErrors": []
       }
@@ -219,5 +219,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2022-07-16T14:55:56.036Z"
+  "updatedAt": "2022-07-23T23:58:53.796Z"
 }

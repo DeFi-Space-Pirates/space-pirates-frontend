@@ -35,21 +35,21 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * @title Space Pirates Callee Interface\r\n * @author @Gr3it\r\n */\r\n\r\ninterface ISpacePiratesCallee {\r\n    function spacePiratesCall(address sender, uint256 amount0, uint256 amount1, bytes calldata data) external;\r\n}\r\n",
-  "sourcePath": "C:/Users/emanu/space-pirates-tronbox/contracts/interfaces/ISpacePiratesCallee.sol",
+  "sourcePath": "C:\\Users\\emanu\\space-pirates-contracts\\contracts\\interfaces\\ISpacePiratesCallee.sol",
   "ast": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/interfaces/ISpacePiratesCallee.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/interfaces/ISpacePiratesCallee.sol",
     "exportedSymbols": {
-      "ISpacePiratesCallee": [8810]
+      "ISpacePiratesCallee": [6162]
     },
-    "id": 8811,
+    "id": 6163,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8797,
+        "id": 6149,
         "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
-        "src": "33:23:20"
+        "src": "33:23:8"
       },
       {
         "abstract": false,
@@ -57,40 +57,40 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 8798,
+          "id": 6150,
           "nodeType": "StructuredDocumentation",
-          "src": "60:69:20",
+          "src": "60:69:8",
           "text": " @title Space Pirates Callee Interface\n @author @Gr3it"
         },
         "fullyImplemented": false,
-        "id": 8810,
-        "linearizedBaseContracts": [8810],
+        "id": 6162,
+        "linearizedBaseContracts": [6162],
         "name": "ISpacePiratesCallee",
-        "nameLocation": "143:19:20",
+        "nameLocation": "143:19:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "46783642",
-            "id": 8809,
+            "id": 6161,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "spacePiratesCall",
-            "nameLocation": "179:16:20",
+            "nameLocation": "179:16:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8807,
+              "id": 6159,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8800,
+                  "id": 6152,
                   "mutability": "mutable",
                   "name": "sender",
-                  "nameLocation": "204:6:20",
+                  "nameLocation": "204:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "196:14:20",
+                  "scope": 6161,
+                  "src": "196:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -98,10 +98,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8799,
+                    "id": 6151,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "196:7:20",
+                    "src": "196:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -112,13 +112,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8802,
+                  "id": 6154,
                   "mutability": "mutable",
                   "name": "amount0",
-                  "nameLocation": "220:7:20",
+                  "nameLocation": "220:7:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "212:15:20",
+                  "scope": 6161,
+                  "src": "212:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -126,10 +126,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8801,
+                    "id": 6153,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "212:7:20",
+                    "src": "212:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -139,13 +139,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8804,
+                  "id": 6156,
                   "mutability": "mutable",
                   "name": "amount1",
-                  "nameLocation": "237:7:20",
+                  "nameLocation": "237:7:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "229:15:20",
+                  "scope": 6161,
+                  "src": "229:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -153,10 +153,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8803,
+                    "id": 6155,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "229:7:20",
+                    "src": "229:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -166,13 +166,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8806,
+                  "id": 6158,
                   "mutability": "mutable",
                   "name": "data",
-                  "nameLocation": "261:4:20",
+                  "nameLocation": "261:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "246:19:20",
+                  "scope": 6161,
+                  "src": "246:19:8",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -180,10 +180,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 8805,
+                    "id": 6157,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "246:5:20",
+                    "src": "246:5:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -192,42 +192,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "195:71:20"
+              "src": "195:71:8"
             },
             "returnParameters": {
-              "id": 8808,
+              "id": 6160,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "275:0:20"
+              "src": "275:0:8"
             },
-            "scope": 8810,
-            "src": "170:106:20",
+            "scope": 6162,
+            "src": "170:106:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 8811,
-        "src": "133:146:20",
+        "scope": 6163,
+        "src": "133:146:8",
         "usedErrors": []
       }
     ],
-    "src": "33:248:20"
+    "src": "33:248:8"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/emanu/space-pirates-tronbox/contracts/interfaces/ISpacePiratesCallee.sol",
+    "absolutePath": "/C/Users/emanu/space-pirates-contracts/contracts/interfaces/ISpacePiratesCallee.sol",
     "exportedSymbols": {
-      "ISpacePiratesCallee": [8810]
+      "ISpacePiratesCallee": [6162]
     },
-    "id": 8811,
+    "id": 6163,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8797,
+        "id": 6149,
         "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
-        "src": "33:23:20"
+        "src": "33:23:8"
       },
       {
         "abstract": false,
@@ -235,40 +235,40 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 8798,
+          "id": 6150,
           "nodeType": "StructuredDocumentation",
-          "src": "60:69:20",
+          "src": "60:69:8",
           "text": " @title Space Pirates Callee Interface\n @author @Gr3it"
         },
         "fullyImplemented": false,
-        "id": 8810,
-        "linearizedBaseContracts": [8810],
+        "id": 6162,
+        "linearizedBaseContracts": [6162],
         "name": "ISpacePiratesCallee",
-        "nameLocation": "143:19:20",
+        "nameLocation": "143:19:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "46783642",
-            "id": 8809,
+            "id": 6161,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "spacePiratesCall",
-            "nameLocation": "179:16:20",
+            "nameLocation": "179:16:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8807,
+              "id": 6159,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8800,
+                  "id": 6152,
                   "mutability": "mutable",
                   "name": "sender",
-                  "nameLocation": "204:6:20",
+                  "nameLocation": "204:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "196:14:20",
+                  "scope": 6161,
+                  "src": "196:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -276,10 +276,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8799,
+                    "id": 6151,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "196:7:20",
+                    "src": "196:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -290,13 +290,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8802,
+                  "id": 6154,
                   "mutability": "mutable",
                   "name": "amount0",
-                  "nameLocation": "220:7:20",
+                  "nameLocation": "220:7:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "212:15:20",
+                  "scope": 6161,
+                  "src": "212:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -304,10 +304,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8801,
+                    "id": 6153,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "212:7:20",
+                    "src": "212:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -317,13 +317,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8804,
+                  "id": 6156,
                   "mutability": "mutable",
                   "name": "amount1",
-                  "nameLocation": "237:7:20",
+                  "nameLocation": "237:7:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "229:15:20",
+                  "scope": 6161,
+                  "src": "229:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -331,10 +331,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8803,
+                    "id": 6155,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "229:7:20",
+                    "src": "229:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -344,13 +344,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8806,
+                  "id": 6158,
                   "mutability": "mutable",
                   "name": "data",
-                  "nameLocation": "261:4:20",
+                  "nameLocation": "261:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8809,
-                  "src": "246:19:20",
+                  "scope": 6161,
+                  "src": "246:19:8",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -358,10 +358,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 8805,
+                    "id": 6157,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "246:5:20",
+                    "src": "246:5:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -370,27 +370,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "195:71:20"
+              "src": "195:71:8"
             },
             "returnParameters": {
-              "id": 8808,
+              "id": 6160,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "275:0:20"
+              "src": "275:0:8"
             },
-            "scope": 8810,
-            "src": "170:106:20",
+            "scope": 6162,
+            "src": "170:106:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 8811,
-        "src": "133:146:20",
+        "scope": 6163,
+        "src": "133:146:8",
         "usedErrors": []
       }
     ],
-    "src": "33:248:20"
+    "src": "33:248:8"
   },
   "compiler": {
     "name": "solc",
@@ -398,5 +398,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2022-07-16T14:55:56.037Z"
+  "updatedAt": "2022-08-01T17:12:29.254Z"
 }

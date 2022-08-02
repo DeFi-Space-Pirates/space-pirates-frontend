@@ -10,9 +10,11 @@ export type Addresses = {
   questRedeemContract: string
   battleFieldMintContract: string
   marketPlaceContract: string
+  nftContract: string
+  nftCollectionContract: string
+  nftStarterContract: string
   chainId: string
   USDT: string
-  USDC: string
   USDD: string
 }
 
@@ -28,9 +30,11 @@ export type AddressesList =
   | 'questRedeemContract'
   | 'battleFieldMintContract'
   | 'marketPlaceContract'
+  | 'nftContract'
+  | 'nftCollectionContract'
+  | 'nftStarterContract'
   | 'chainId'
   | 'USDT'
-  | 'USDC'
   | 'USDD'
 
 export type ABIsList = AddressesList | 'staticRouterContract'
