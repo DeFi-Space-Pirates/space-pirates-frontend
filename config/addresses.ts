@@ -1,4 +1,9 @@
-import { ABIsList, AddressesConfig, AddressesList } from '../typings/Tron'
+import {
+  ABIsList,
+  AddressesConfig,
+  AddressesList,
+  SupportedChains,
+} from '../typings/Tron'
 import TokensContract from './artifacts/SpacePiratesTokens.json'
 import StakingContract from './artifacts/SpacePiratesStaking.json'
 import SplitContract from './artifacts/AsteroidsSplitContract.json'
@@ -56,7 +61,7 @@ export const addresses: AddressesConfig = {
 
 export const getAddress = (
   contract: AddressesList,
-  chain: 'mainnet' | 'shasta',
+  chain: SupportedChains,
 ): string => {
   return addresses[chain][contract]
 }

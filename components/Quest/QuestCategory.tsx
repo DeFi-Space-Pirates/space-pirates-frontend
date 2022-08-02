@@ -28,7 +28,7 @@ const QuestCategory = ({
           <p className="text-xl font-bold">{title}</p>
           <small className="text-sm">{description}</small>
         </div>
-        <div className="collapse-content flex flex-col justify-center">
+        <div className="collapse-content flex flex-col justify-center ">
           {children}
         </div>
       </div>
