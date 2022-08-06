@@ -37,7 +37,7 @@ export type AddressesList =
   | 'USDT'
   | 'USDD'
 
-export type ABIsList = AddressesList | 'staticRouterContract'
+export type ABIsList = AddressesList
 
 export type AddressesConfig = {
   shasta: Addresses
