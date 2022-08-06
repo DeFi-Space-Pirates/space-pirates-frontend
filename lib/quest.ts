@@ -1,7 +1,7 @@
 import { ethers, BigNumber } from 'ethers'
 import { Quest } from '../typings/Quest'
 import { hasMintedFromFaucet, mockVerifier } from './questVerifiers'
-import { convertToNumber, SHASTA_CHAIN_ID } from './tronweb'
+import { SHASTA_CHAIN_ID } from './tronweb'
 
 export const getSignature = async (
   hexAddress: string,
@@ -25,7 +25,9 @@ export const getSignature = async (
   }
 
   const signature = await signer._signTypedData(domain, types, {
-    ...quest,
+    questName: quest.questName,
+    ids: quest.ids,
+    amounts: quest.amounts,
     receiver: hexAddress.replace(/^.{2}/g, '0x'),
   })
 
