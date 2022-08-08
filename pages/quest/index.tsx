@@ -30,7 +30,6 @@ const Quests: NextPage = (props: QuestProps) => {
       </div>
       <div className="flex flex-col gap-y-7 items-center justify-around">
         <QuestCategory
-          tabIndex={1}
           title="Off-game quests"
           description="Off-game contests, social networks tasks, etc..."
           claimable={false}
@@ -40,7 +39,6 @@ const Quests: NextPage = (props: QuestProps) => {
           ))}
         </QuestCategory>
         <QuestCategory
-          tabIndex={2}
           title="Achievements"
           description="In-game tasks"
           claimable={false}
@@ -50,7 +48,6 @@ const Quests: NextPage = (props: QuestProps) => {
           ))}
         </QuestCategory>
         <QuestCategory
-          tabIndex={3}
           title="Server-wide achievements"
           description="Obtainable just once in the whole game: first place on tournaments, first in the game to..."
           claimable={false}
@@ -60,7 +57,6 @@ const Quests: NextPage = (props: QuestProps) => {
           ))}
         </QuestCategory>
         <QuestCategory
-          tabIndex={4}
           title="Limited-time quests"
           description="Events-specific quests available for a restricted amount of time"
           claimable={false}
@@ -70,7 +66,6 @@ const Quests: NextPage = (props: QuestProps) => {
           ))}
         </QuestCategory>
         <QuestCategory
-          tabIndex={5}
           title="Repetable quest"
           description="Quests that can be completed more than one time"
           claimable={false}
