@@ -195,6 +195,7 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
         toggleAlert(
           'Wrong chain! Contracts are deployed Shasta testnet',
           'error',
+          500000,
         )
       }
     },
