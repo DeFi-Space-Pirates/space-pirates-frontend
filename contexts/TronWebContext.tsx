@@ -223,6 +223,10 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
         if (e.data.message && e.data.message.action == 'setAccount') {
           if (window.tronWeb) {
             // switch account
+            if (e.data.message.data.address === false) {
+              setTronWeb(null)
+              setAddress('')
+            }
             if (
               e.data.message.data.address != window.tronWeb?.defaultAccount &&
               window.tronWeb !== null
