@@ -4,6 +4,7 @@ import { AlertProvider } from '../contexts/AlertContext'
 import Layout from '../components/layout/Layout'
 import { TronWebProvider } from '../contexts/TronWebContext'
 import { NextPage } from 'next'
+import ErrorBoundary from '../components/layout/ErrorBoundary'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -19,7 +20,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <AlertProvider>
       <TronWebProvider>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>,
+        )}
       </TronWebProvider>
     </AlertProvider>
   )
