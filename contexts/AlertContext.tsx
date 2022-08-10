@@ -6,7 +6,11 @@ type AlertContextValue = {
   showAlert: boolean
   alertMessage: string
   alertVariant: Variant
-  toggleAlert: (alertMessage: string, alertVariant: Variant) => void
+  toggleAlert: (
+    alertMessage: string,
+    alertVariant: Variant,
+    alertDuration?: number,
+  ) => void
 }
 type AlertProviderProps = { children: React.ReactNode }
 
@@ -18,14 +22,18 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
   const [alertVariant, setAlertVariant] = useState<Variant>('success')
 
   const toggleAlert = useCallback(
-    (alertMessage: string, alertVariant: Variant) => {
+    (
+      alertMessage: string,
+      alertVariant: Variant,
+      alertDuration: number = 3000,
+    ) => {
       setAlertVariant(alertVariant)
       setAlertMessage(alertMessage)
       setShowAlert(true)
 
       setTimeout(() => {
         setShowAlert(false)
-      }, 5000)
+      }, alertDuration)
     },
     [],
   )
