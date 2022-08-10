@@ -1,4 +1,9 @@
-import { ABIsList, AddressesConfig, AddressesList } from '../typings/Tron'
+import {
+  ABIsList,
+  AddressesConfig,
+  AddressesList,
+  SupportedChains,
+} from '../typings/Tron'
 import TokensContract from './artifacts/SpacePiratesTokens.json'
 import StakingContract from './artifacts/SpacePiratesStaking.json'
 import SplitContract from './artifacts/AsteroidsSplitContract.json'
@@ -6,7 +11,6 @@ import FaucetContract from './artifacts/SpacePiratesFaucet.json'
 import WrapperContract from './artifacts/SpacePiratesWrapper.json'
 import FactoryContract from './artifacts/SpacePiratesFactory.json'
 import RouterContract from './artifacts/SpacePiratesRouter.json'
-import StaticRouterContract from './StaticRouterAbi.json'
 import QuestRedeemContract from './artifacts/SpacePiratesQuestRedeem.json'
 import MasterChefContract from './artifacts/SpacePiratesMasterChef.json'
 import BattlefieldContract from './artifacts/BattleFieldFirstCollection.json'
@@ -56,7 +60,7 @@ export const addresses: AddressesConfig = {
 
 export const getAddress = (
   contract: AddressesList,
-  chain: 'mainnet' | 'shasta',
+  chain: SupportedChains,
 ): string => {
   return addresses[chain][contract]
 }
@@ -71,8 +75,6 @@ export const getAbi = (contract: ABIsList) => {
       return StakingContract.abi
     case 'splitContract':
       return SplitContract.abi
-    case 'staticRouterContract':
-      return StaticRouterContract
     case 'routerContract':
       return RouterContract.abi
     case 'questRedeemContract':
