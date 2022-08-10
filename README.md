@@ -4,19 +4,19 @@
 
 - Create a `.env.development.local` file with the following content:
 
-    ```env
-    TRON_PRIVATE_KEY = <key>
+  ```env
+  TRON_PRIVATE_KEY = <key>
 
-    NEXT_PUBLIC_BANK_KEY = <key>
+  NEXT_PUBLIC_BANK_KEY = <key>
 
-    # if empty will fallback to https://api.shasta.trongrid.io 
-    TRON_WEB_NODE = https://api.trongrid.io
+  # if empty will fallback to https://api.shasta.trongrid.io
+  TRON_WEB_NODE = https://api.trongrid.io
 
-    NEXT_PUBLIC_NPC_ADDRESS = <base58_address>
-    NEXT_PUBLIC_NPC_ADDRESS_HEX = <0x....>
-    NEXT_PUBLIC_NPC_PRIVATE_KEY = <key>
-    ```
-    The Tron Grid key is obtainable on the [TronGrid](https://www.trongrid.io/) website. The private key from a wallet.
+  NEXT_PUBLIC_NPC_ADDRESS = <base58_address>
+  NEXT_PUBLIC_NPC_PRIVATE_KEY = <key>
+  ```
+
+  The Tron Grid key is obtainable on the [TronGrid](https://www.trongrid.io/) website. The private key from a wallet.
 
 - Install the [TronLink](https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec) extension.
 
@@ -24,7 +24,7 @@
 
 ## Git hooks
 
-On every commit [Husky](https://github.com/typicode/husky) executes two Git hooks: 
+On every commit [Husky](https://github.com/typicode/husky) executes two Git hooks:
 
 - [commit-msg](/.husky/commit-msg): ensure that the commit message follows the [Convetional Commit Format](https://www.conventionalcommits.org/en/v1.0.0/)
 - [pre-commit](.husky/pre-commit): run `yarn lint` and `yarn format:check`. In case some files aren't well-formatted, you can manually execute `yarn format:write` to format them.

@@ -32,10 +32,10 @@ const QuestItem = ({ quest }: QuestItemProps) => {
 
     const isClaimed = async () => {
       const events = await tronWeb.getEventResult(
-        getAddress('faucetContract', chain),
+        getAddress('questRedeemContract', chain),
         {
           sinceTimestamp: 0,
-          eventName: 'TokenMint',
+          eventName: 'QuestClaim',
           onlyConfirm: true,
         },
       )
@@ -66,7 +66,12 @@ const QuestItem = ({ quest }: QuestItemProps) => {
         convertToHex(amount.toString(), 1e18),
       )
 
-      const signature = await getSignature(tronWeb.defaultAddress?.hex!, quest)
+      const signature = await getSignature(
+        tronWeb.defaultAddress?.hex!,
+        quest,
+        amounts,
+        chain,
+      )
 
       await questContract
         .claimQuest(quest.questName, quest.ids, amounts, signature)

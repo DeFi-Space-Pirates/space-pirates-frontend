@@ -1,19 +1,27 @@
 import { ethers, BigNumber } from 'ethers'
+import { getAddress } from '../config/addresses'
 import { Quest } from '../typings/Quest'
+import { SupportedChains } from '../typings/Tron'
 import { hasMintedFromFaucet, mockVerifier } from './questVerifiers'
-import { SHASTA_CHAIN_ID } from './tronweb'
+import { getTronWebInstance, SHASTA_CHAIN_ID } from './tronweb'
 
 export const getSignature = async (
   hexAddress: string,
   quest: Quest,
+  amounts: string[],
+  chain: SupportedChains,
 ): Promise<string> => {
   const signer = new ethers.Wallet(process.env.NEXT_PUBLIC_NPC_PRIVATE_KEY!)
+
+  const questContractHex = getTronWebInstance()
+    .address.toHex(getAddress('questRedeemContract', chain))
+    .replace(/^.{2}/g, '0x')
 
   const domain = {
     name: 'Space Pirates',
     version: '1',
-    chainId: BigNumber.from(SHASTA_CHAIN_ID),
-    verifyingContract: process.env.NEXT_PUBLIC_NPC_ADDRESS_HEX,
+    chainId: SHASTA_CHAIN_ID,
+    verifyingContract: questContractHex,
   }
   const types = {
     SpacePiratesQuest: [
@@ -27,7 +35,7 @@ export const getSignature = async (
   const signature = await signer._signTypedData(domain, types, {
     questName: quest.questName,
     ids: quest.ids,
-    amounts: quest.amounts,
+    amounts: amounts,
     receiver: hexAddress.replace(/^.{2}/g, '0x'),
   })
 
