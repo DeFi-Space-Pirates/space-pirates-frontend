@@ -5,7 +5,7 @@ const Alert = () => {
   const { showAlert, alertMessage, alertVariant } = useAlert()
 
   return showAlert ? (
-    <div className="fixed z-10 right-0 pt-16 left-0 sm:left-auto px-4 sm:pr-10">
+    <div className="fixed z-10 right-0 mt-16 left-0 sm:left-auto mx-4 sm:mr-10">
       <div
         className={`alert shadow-lg ${
           alertVariant === 'success'

@@ -203,6 +203,11 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
   )
 
   const connectTronLink = useCallback(async () => {
+    // locked wallet
+    if (window.tronWeb.ready === false && window.tronLink.ready === false) {
+      toggleAlert('Unlock your wallet to connect with Space Pirates', 'warning')
+    }
+
     // automatic connection without prompt if already approved
     if (window.tronWeb && window.tronLink.ready) {
       window.tronWeb.isConnected = true
