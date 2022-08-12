@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { useAlert } from './AlertContext'
 
 import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
@@ -38,6 +44,9 @@ type TronWebContextValue = {
   balances1155: Balance1155[]
   balances20: Balance20[]
   balancesLP: BalanceLP[]
+  fetchSPTokensBalance: () => Promise<void>
+  fetchERC20Balances: () => Promise<void>
+  fetchLPTokensBalances: () => Promise<void>
   getBalanceById: (id: number | undefined) => string
   getBalanceByAddress: (address: string | undefined) => string
   getContractInstance: (
@@ -60,6 +69,116 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
 
   const { toggleAlert } = useAlert()
 
+  const fetchSPTokensBalance = useCallback(async () => {
+    try {
+      const spacePiratesTokens = await tronWeb.contract(
+        SpacePiratesTokens.abi,
+        addresses.shasta.tokensContract,
+      )
+
+      const batchBalances = await spacePiratesTokens
+        .balanceOfBatch(
+          Array(tokensList.ids.length).fill(address),
+          tokensList.ids,
+        )
+        .call()
+
+      const userBalances = tokensList.ids.map((id, index) => ({
+        id: id,
+        amount: convertToNumber(batchBalances[index]._hex, id),
+      }))
+
+      setBalances1155(userBalances)
+    } catch (err) {
+      toggleAlert('Error while fetching tokens balances. Try again.', 'error')
+    }
+  }, [address, toggleAlert, tronWeb])
+
+  const fetchERC20Balances = useCallback(async () => {
+    let updatedBalances20: Balance20[] = []
+    try {
+      for (const token of wrappedTokensList.unWrapped) {
+        if (token.symbol === 'TRX') {
+          const sunBalance = await tronWeb.trx.getBalance(address)
+
+          updatedBalances20.push({
+            address: token.address,
+            amount: parseFloat(tronWeb.fromSun(sunBalance)).toFixed(2),
+            symbol: token.symbol,
+          })
+        } else {
+          const contractInstance = await tronWeb.contract().at(token.address)
+
+          const balance = await contractInstance.balanceOf(address).call()
+
+          updatedBalances20.push({
+            address: token.address,
+            amount: tronWeb
+              .BigNumber(balance._hex)
+              .div(1e18)
+              .toNumber()
+              .toFixed(2),
+            symbol: token.symbol,
+          })
+        }
+      }
+
+      setBalances20(updatedBalances20)
+    } catch (err) {
+      toggleAlert('Error while fetching tokens balances. Try again.', 'error')
+    }
+  }, [address, toggleAlert, tronWeb])
+
+  const fetchLPTokensBalances = useCallback(async () => {
+    let updatedBalancesLP: BalanceLP[] = []
+    try {
+      const spacePiratesFactory = await tronWeb.contract(
+        SpacePiratesFactory.abi,
+        addresses.shasta.factoryContract,
+      )
+
+      const poolsAmount = await spacePiratesFactory.allPairsLength().call()
+
+      const convertedAmount = tronWeb.BigNumber(poolsAmount._hex).toNumber()
+
+      for (let i = 0; i < convertedAmount; i++) {
+        const pairAddress = await spacePiratesFactory.allPairs(i).call()
+
+        const pairContract = await tronWeb.contract(
+          PairContract.abi,
+          pairAddress,
+        )
+
+        const balance = await pairContract.balanceOf(address).call()
+
+        const tokenIds = await pairContract.getTokenIds().call()
+
+        const tokenA = getTokenById(
+          tronWeb.BigNumber(tokenIds._token0._hex).toNumber(),
+        )
+
+        const tokenB = getTokenById(
+          tronWeb.BigNumber(tokenIds._token1._hex).toNumber(),
+        )
+
+        updatedBalancesLP.push({
+          address: pairAddress,
+          balance: tronWeb
+            .BigNumber(balance._hex)
+            .div(1e18)
+            .toNumber()
+            .toFixed(2),
+          name: `${tokenA?.symbol}/${tokenB?.symbol}`,
+          symbol: '',
+        })
+      }
+
+      setBalancesLP(updatedBalancesLP)
+    } catch (err) {
+      toggleAlert('Error while fetching tokens balances. Try again.', 'error')
+    }
+  }, [address, toggleAlert, tronWeb])
+
   const loadTronWeb = useCallback(
     async (tronWeb: any, address: string) => {
       if (
@@ -68,7 +187,6 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
       ) {
         setTronWeb(tronWeb)
         setAddress(address)
-
         setChain(
           // tronWeb.fullNode.host === 'https://api.trongrid.io'
           //   ? 'mainnet'
@@ -76,112 +194,6 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
           'shasta',
           // ,
         )
-
-        const spacePiratesTokens = await tronWeb.contract(
-          SpacePiratesTokens.abi,
-          addresses.shasta.tokensContract,
-        )
-
-        try {
-          const batchBalances = await spacePiratesTokens
-            .balanceOfBatch(
-              Array(tokensList.ids.length).fill(address),
-              tokensList.ids,
-            )
-            .call()
-
-          const userBalances = tokensList.ids.map((id, index) => ({
-            id: id,
-            amount: convertToNumber(batchBalances[index]._hex, id),
-          }))
-
-          setBalances1155(userBalances)
-        } catch (err) {
-          setBalances1155([])
-        }
-
-        let updatedBalances20: Balance20[] = []
-        try {
-          for (const token of wrappedTokensList.unWrapped) {
-            if (token.symbol === 'TRX') {
-              const sunBalance = await tronWeb.trx.getBalance(address)
-
-              updatedBalances20.push({
-                address: token.address,
-                amount: parseFloat(tronWeb.fromSun(sunBalance)).toFixed(2),
-                symbol: token.symbol,
-              })
-            } else {
-              const contractInstance = await tronWeb
-                .contract()
-                .at(token.address)
-
-              const balance = await contractInstance.balanceOf(address).call()
-
-              updatedBalances20.push({
-                address: token.address,
-                amount: tronWeb
-                  .BigNumber(balance._hex)
-                  .div(1e18)
-                  .toNumber()
-                  .toFixed(2),
-                symbol: token.symbol,
-              })
-            }
-          }
-
-          setBalances20(updatedBalances20)
-        } catch (err) {
-          setBalances20([])
-        }
-
-        let updatedBalancesLP: BalanceLP[] = []
-        try {
-          const spacePiratesFactory = await tronWeb.contract(
-            SpacePiratesFactory.abi,
-            addresses.shasta.factoryContract,
-          )
-
-          const poolsAmount = await spacePiratesFactory.allPairsLength().call()
-
-          const convertedAmount = tronWeb.BigNumber(poolsAmount._hex).toNumber()
-
-          for (let i = 0; i < convertedAmount; i++) {
-            const pairAddress = await spacePiratesFactory.allPairs(i).call()
-
-            const pairContract = await tronWeb.contract(
-              PairContract.abi,
-              pairAddress,
-            )
-
-            const balance = await pairContract.balanceOf(address).call()
-
-            const tokenIds = await pairContract.getTokenIds().call()
-
-            const tokenA = getTokenById(
-              tronWeb.BigNumber(tokenIds._token0._hex).toNumber(),
-            )
-
-            const tokenB = getTokenById(
-              tronWeb.BigNumber(tokenIds._token1._hex).toNumber(),
-            )
-
-            updatedBalancesLP.push({
-              address: pairAddress,
-              balance: tronWeb
-                .BigNumber(balance._hex)
-                .div(1e18)
-                .toNumber()
-                .toFixed(2),
-              name: `${tokenA?.symbol}/${tokenB?.symbol}`,
-              symbol: '',
-            })
-          }
-
-          setBalancesLP(updatedBalancesLP)
-        } catch (err) {
-          setBalancesLP([])
-        }
 
         toggleAlert(
           `Connected to ${
@@ -292,6 +304,21 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     [chain, tronWeb],
   )
 
+  // when the tronWeb instance is set, fetch the updated balances
+  // trongrid allows for 15QPS. If an error 503 is returned try to add delay between the requests
+  useEffect(() => {
+    const fetchBalances = async () => {
+      // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
+      await fetchSPTokensBalance()
+      // await delay(500)
+      await fetchERC20Balances()
+      // await delay(500)
+      await fetchLPTokensBalances()
+    }
+
+    if (tronWeb !== null) fetchBalances()
+  }, [tronWeb, fetchSPTokensBalance, fetchERC20Balances, fetchLPTokensBalances])
+
   const value = {
     tronWeb,
     connectTronLink,
@@ -300,6 +327,9 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     balances1155,
     balances20,
     balancesLP,
+    fetchSPTokensBalance,
+    fetchERC20Balances,
+    fetchLPTokensBalances,
     getBalanceById,
     getBalanceByAddress,
     getContractInstance,
