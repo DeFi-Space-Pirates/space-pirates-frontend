@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import tokensList from '../../config/constants/tokensList.json'
 import wrappedTokensList from '../../config/constants/wrappedTokensList.json'
+import dexPairsList from '../../config/constants/dexPairsList.json'
 import { useTronWeb } from '../../contexts/TronWebContext'
 
 type WalletItemProps = {
@@ -10,12 +11,12 @@ type WalletItemProps = {
 }
 
 const WalletItem = ({ title, predicate, lp }: WalletItemProps) => {
-  const { getBalanceById, getBalanceByAddress, balancesLP } = useTronWeb()
+  const { getTokenBalance } = useTronWeb()
 
   let tokens = predicate
     ? tokensList.tokens.filter((token) => predicate(token.id))
     : lp
-    ? balancesLP!
+    ? dexPairsList.tokens
     : wrappedTokensList.unWrapped
 
   return (
@@ -31,22 +32,16 @@ const WalletItem = ({ title, predicate, lp }: WalletItemProps) => {
             <div className="flex items-center">
               <Image
                 src={'logoURI' in token ? token.logoURI : '/favicon.ico'}
-                alt={token.name}
+                alt={token.symbol}
                 height={20}
                 width={20}
                 layout="fixed"
               />
               <p className="ml-2 font-semibold md:text-lg">
-                {token.name} {token.symbol.length > 0 && `(${token.symbol})`}
+                {token.symbol ? token.symbol : token.name}
               </p>
             </div>
-            <div>
-              {'balance' in token
-                ? token.balance
-                : 'id' in token
-                ? getBalanceById(token.id)
-                : getBalanceByAddress(token.address)}
-            </div>
+            <div>{getTokenBalance(token)}</div>
           </div>
         ))}
       </div>

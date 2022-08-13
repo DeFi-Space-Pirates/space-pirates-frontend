@@ -20,5 +20,5 @@ export type UserInfo = {
 export type StakeModalData = {
   text: string
   token: Token1155
-  onSubmit: (amount: string) => void
+  onSubmit: (amount: string) => Promise<void>
 }

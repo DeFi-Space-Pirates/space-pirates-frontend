@@ -1,8 +1,5 @@
-import Image from 'next/image'
 import { useState } from 'react'
-import { getTokenById } from '../../lib/tokens'
 import { StakeModalData } from '../../typings/Staking'
-import { Token1155 } from '../../typings/Token'
 import LoadingButton from '../layout/LoadingButton'
 import TokenInput from '../Trade/TokenInput'
 
@@ -10,14 +7,12 @@ type StakeModalProps = {
   showModal: boolean
   handleShowModal: () => void
   modalData: StakeModalData
-  loading: boolean
 }
 
 const StakeModal = ({
   showModal,
   handleShowModal,
   modalData: { text, token, onSubmit },
-  loading,
 }: StakeModalProps) => {
   const [amount, setAmount] = useState('')
 
@@ -54,7 +49,6 @@ const StakeModal = ({
               token={token}
             />
             <LoadingButton
-              loading={loading}
               onClick={() => onSubmit(amount)}
               text={`${text} ${amount} ${token?.symbol}`}
             />

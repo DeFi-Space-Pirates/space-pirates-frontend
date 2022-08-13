@@ -6,7 +6,7 @@ import Layout from '../../components/layout/Layout'
 import NavTab from '../../components/layout/NavTab'
 import StakingItem from '../../components/Earn/StakingItem'
 
-import { convertToNumber, getTronWebInstance } from '../../lib/tronweb'
+import { getTronWebInstance } from '../../lib/tronweb'
 import SpacePiratesStaking from '../../config/artifacts/SpacePiratesStaking.json'
 import { addresses } from '../../config/addresses'
 import { StakingPool } from '../../typings/Staking'
@@ -94,15 +94,6 @@ const Staking = ({ stakingPools }: StakingProps) => {
             stakingPool={stakingPool}
           />
         ))}
-      </div>
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2 pt-10">LP-Stake</h2>
-        <p className="text-xl italic">
-          Stake LP tokens to earn while providing liquidity
-        </p>
-      </div>
-      <div className="flex md:flex-col md:gap-y-7 md:items-center justify-around">
-        {/* <StakingItem title="DBL-ASTR LP" /> */}
       </div>
     </div>
   )

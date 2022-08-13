@@ -9,7 +9,6 @@ import { getTokenById } from '../../lib/tokens'
 import { convertToHex, convertToNumber } from '../../lib/tronweb'
 import StakeModal from './StakeModal'
 import { Token1155 } from '../../typings/Token'
-import { getAddress } from '../../config/addresses'
 
 type StakingItemProps = {
   stakingPool: StakingPool
@@ -18,7 +17,6 @@ type StakingItemProps = {
 const StakingItem = ({
   stakingPool: { stakingTokenId, rewardTokenId, totalSupply },
 }: StakingItemProps) => {
-  const [loading, setLoading] = useState(false)
   const [pendingRewards, setPendingRewards] = useState('')
   const [userInfo, setUserInfo] = useState<UserInfo>({
     balances: '0',
@@ -34,7 +32,8 @@ const StakingItem = ({
   const rewardToken = getTokenById(rewardTokenId)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, getContractInstance, address, chain } = useTronWeb()
+  const { tronWeb, getContractInstance, address, chain, isApprovedSP } =
+    useTronWeb()
 
   const handleShowModal = (mode?: 'stake' | 'unstake', token?: Token1155) => {
     setShowModal((prev) => !prev)
@@ -88,22 +87,8 @@ const StakingItem = ({
   ])
 
   const onStakeTokens = async (amount: string) => {
-    setLoading(true)
-
     try {
-      const spacePiratesTokens = await getContractInstance(
-        'tokensContract',
-        'tokensContract',
-      )
-
-      const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, getAddress('stakingContract', chain))
-        .call()
-
-      !isApproved &&
-        (await spacePiratesTokens
-          .setApprovalForAll(getAddress('stakingContract', chain), true)
-          .send())
+      await isApprovedSP('stakingContract')
 
       const spacePiratesStaking = await getContractInstance(
         'stakingContract',
@@ -115,14 +100,10 @@ const StakingItem = ({
         .send({ shouldPollResponse: true })
     } catch (err) {
       toggleAlert('Error during the staking. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
   const onUnStakeTokens = async (amount: string) => {
-    setLoading(true)
-
     try {
       const spacePiratesStaking = await getContractInstance(
         'stakingContract',
@@ -134,14 +115,10 @@ const StakingItem = ({
         .send({ shouldPollResponse: true })
     } catch (err) {
       toggleAlert('Error during the staking. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
   const onHarvestTokens = async () => {
-    setLoading(true)
-
     try {
       const spacePiratesStaking = await getContractInstance(
         'stakingContract',
@@ -153,8 +130,6 @@ const StakingItem = ({
         .send({ shouldPollResponse: true })
     } catch (err) {
       toggleAlert('Error during the staking. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -168,7 +143,6 @@ const StakingItem = ({
             ? modalData
             : { text: 'Stake', onSubmit: onStakeTokens, token: stakingToken! }
         }
-        loading={loading}
       />
       <div className="md:w-11/12 bg-base-200 p-4 grid grid-cols-12 gap-6 md:gap-y-2 md:gap-x-6 rounded-md drop-shadow-md">
         <div className="md:col-span-3 col-span-12 flex items-center">
@@ -204,23 +178,21 @@ const StakingItem = ({
         <div className="md:col-span-2 col-span-12">
           {userInfo.balances !== '0.00' ? (
             <LoadingButton
-              loading={loading}
               text={
                 pendingRewards !== '0.00'
                   ? `HARVEST ${pendingRewards} ${rewardToken?.symbol}`
                   : 'UNSTAKE'
               }
-              onClick={() =>
-                pendingRewards !== '0.00'
-                  ? onHarvestTokens()
-                  : handleShowModal('unstake', stakingToken)
-              }
+              {...(pendingRewards !== '0.00'
+                ? { onClick: onHarvestTokens }
+                : {
+                    onSyncClick: () => handleShowModal('unstake', stakingToken),
+                  })}
             />
           ) : (
             <LoadingButton
-              loading={loading}
               text="STAKE"
-              onClick={() => handleShowModal('stake', stakingToken)}
+              onSyncClick={() => handleShowModal('stake', stakingToken)}
             />
           )}
         </div>

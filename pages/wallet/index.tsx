@@ -1,8 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useTronWeb } from '../../contexts/TronWebContext'
-import tokensList from '../../config/constants/tokensList.json'
-import Image from 'next/image'
 import {
   isBattlefield,
   isDecoration,

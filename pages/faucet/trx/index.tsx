@@ -1,7 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
 import LoadingButton from '../../../components/layout/LoadingButton'
 import CardContainer from '../../../components/Trade/CardContainer'
 import { getAddress } from '../../../config/addresses'
@@ -12,16 +11,11 @@ import { useTronWeb } from '../../../contexts/TronWebContext'
 import { convertToHex, getTronWebInstance } from '../../../lib/tronweb'
 import { AddressesList } from '../../../typings/Tron'
 
-type TRXFaucetProps = {}
-
-const TRXFaucet: NextPage = (props: TRXFaucetProps) => {
-  const [loading, setLoading] = useState(false)
-
+const TRXFaucet: NextPage = () => {
   const { toggleAlert } = useAlert()
-  const { address, tronWeb } = useTronWeb()
+  const { address, tronWeb, fetchERC20Balances } = useTronWeb()
 
   const onGetTokens = async (symbol: string) => {
-    setLoading(true)
     try {
       if (symbol === 'TRX') {
         await getTronWebInstance().trx.sendTransaction(
@@ -40,10 +34,10 @@ const TRXFaucet: NextPage = (props: TRXFaucetProps) => {
 
         localStorage.setItem(`${symbol}_MINTED`, '1')
       }
+
+      await fetchERC20Balances()
     } catch (err) {
       toggleAlert('Error while getting tokens', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -58,7 +52,7 @@ const TRXFaucet: NextPage = (props: TRXFaucetProps) => {
           Start here! Get your tokens and start playing in testnet!
         </p>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-wrap">
         {tokensList.unWrapped.map((token) => (
           <CardContainer
             key={token.address}
@@ -67,7 +61,6 @@ const TRXFaucet: NextPage = (props: TRXFaucetProps) => {
           >
             <LoadingButton
               customClasses="md:btn-md btn-xs"
-              loading={loading}
               disabled={
                 !(typeof window === 'undefined') &&
                 localStorage.getItem(`${token.symbol}_MINTED`) === '1'

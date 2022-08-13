@@ -23,15 +23,21 @@ type PoolsItemProps = {
 const PoolsItem = ({
   pool: { tokenA, tokenB, reserveA, reserveB },
 }: PoolsItemProps) => {
-  const [loading, setLoading] = useState(false)
   const [amountA, setAmountA] = useState('')
   const [amountB, setAmountB] = useState('')
 
   const [showModal, setShowModal] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, getContractInstance, address, chain, balancesLP } =
-    useTronWeb()
+  const {
+    tronWeb,
+    getContractInstance,
+    address,
+    chain,
+    balancesLP,
+    fetchLPTokensBalances,
+    isApprovedSP,
+  } = useTronWeb()
 
   const handleShowModal = () => {
     setShowModal((prev) => !prev)
@@ -46,22 +52,8 @@ const PoolsItem = ({
   }
 
   const onAddLiquidity = async () => {
-    setLoading(true)
-
     try {
-      const spacePiratesTokens = await getContractInstance(
-        'tokensContract',
-        'tokensContract',
-      )
-
-      const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, getAddress('routerContract', chain))
-        .call()
-
-      !isApproved &&
-        (await spacePiratesTokens
-          .setApprovalForAll(getAddress('routerContract', chain), true)
-          .send())
+      await isApprovedSP('routerContract')
 
       const spacePiratesRouter = await getContractInstance(
         'routerContract',
@@ -79,22 +71,21 @@ const PoolsItem = ({
           address,
           getUnixTimestamp(300),
         )
-        .send({ shouldPollResponse: true })
+        .send()
+
+      await fetchLPTokensBalances()
     } catch (err) {
       toggleAlert('Error while adding liquidity. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
   const onRemoveLiquidity = async (amount: string) => {
-    setLoading(true)
-
     try {
       const pairContract = await tronWeb.contract(
         PairContract.abi,
-        balancesLP.find((lp) => lp.name === `${tokenA.symbol}/${tokenB.symbol}`)
-          ?.address,
+        balancesLP.find(
+          (lp) => lp.symbol === `${tokenA.symbol}/${tokenB.symbol}`,
+        )?.address,
       )
 
       await pairContract
@@ -119,11 +110,11 @@ const PoolsItem = ({
           address,
           getUnixTimestamp(300),
         )
-        .send({ shouldPollResponse: true })
+        .send()
+
+      await fetchLPTokensBalances()
     } catch (err) {
       toggleAlert('Error while adding liquidity. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -132,7 +123,6 @@ const PoolsItem = ({
       <StakeModal
         handleShowModal={handleShowModal}
         showModal={showModal}
-        loading={loading}
         modalData={{
           text: `Remove liquidity for `,
           onSubmit: onRemoveLiquidity,
@@ -195,20 +185,15 @@ const PoolsItem = ({
           </div>
           <div className="flex">
             <div className="w-full">
-              <LoadingButton
-                loading={loading}
-                text="Add liquidity"
-                onClick={() => onAddLiquidity()}
-              />
+              <LoadingButton text="Add liquidity" onClick={onAddLiquidity} />
             </div>
             {balancesLP.find(
-              (lp) => lp.name === `${tokenA.symbol}/${tokenB.symbol}`,
-            )?.balance !== '0.00' && (
+              (lp) => lp.symbol === `${tokenA.symbol}/${tokenB.symbol}`,
+            )?.amount !== '0.00' && (
               <div className="w-full ml-3">
                 <LoadingButton
-                  loading={loading}
                   text="Remove liquidity"
-                  onClick={() => handleShowModal()}
+                  onSyncClick={() => handleShowModal()}
                 />
               </div>
             )}

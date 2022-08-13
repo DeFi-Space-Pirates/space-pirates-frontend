@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import { NextPageWithLayout } from '../_app'
 
 import CardContainer from '../../components/Trade/CardContainer'
@@ -18,34 +17,25 @@ import tokenList from '../../config/constants/tokensList.json'
 import AsteroidsSplit from '../../config/artifacts/AsteroidsSplitContract.json'
 
 import { getAddress } from '../../config/addresses'
-import { convertToHex, getTronWebInstance } from '../../lib/tronweb'
+import { convertToHex } from '../../lib/tronweb'
 
 const Split: NextPageWithLayout = () => {
   const [splitAmount, setSplitAmount] = useState('')
   const [mergeAmount, setMergeAmount] = useState('')
-  const [splitLoading, setSplitLoading] = useState(false)
-  const [mergeLoading, setMergeLoading] = useState(false)
 
   const { toggleAlert } = useAlert()
-  const { tronWeb, chain, address, getContractInstance } = useTronWeb()
+  const {
+    tronWeb,
+    chain,
+    address,
+    getContractInstance,
+    fetchSPTokensBalances,
+    isApprovedSP,
+  } = useTronWeb()
 
   const onSplitTokens = async () => {
-    setSplitLoading(true)
-
     try {
-      const spacePiratesTokens = await getContractInstance(
-        'tokensContract',
-        'tokensContract',
-      )
-
-      const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, getAddress('splitContract', chain))
-        .call()
-
-      !isApproved &&
-        (await spacePiratesTokens
-          .setApprovalForAll(getAddress('splitContract', chain), true)
-          .send())
+      await isApprovedSP('splitContract')
 
       const asteroidsSplit = await tronWeb.contract(
         AsteroidsSplit.abi,
@@ -54,22 +44,15 @@ const Split: NextPageWithLayout = () => {
 
       await asteroidsSplit
         .splitAsteroids(convertToHex(splitAmount, 1e18))
-        .send({ shouldPoolResponse: true })
+        .send()
 
-      toggleAlert(
-        `Successfully minted ${splitAmount} veASTR and stkASTR`,
-        'success',
-      )
+      await fetchSPTokensBalances()
     } catch (err) {
       toggleAlert('Error during the split. Try again', 'error')
-    } finally {
-      setSplitLoading(false)
     }
   }
 
   const onMergeTokens = async () => {
-    setMergeLoading(true)
-
     try {
       const asteroidsSplit = await getContractInstance(
         'splitContract',
@@ -78,18 +61,36 @@ const Split: NextPageWithLayout = () => {
 
       await asteroidsSplit
         .mergeAsteroids(convertToHex(mergeAmount, 1e18))
-        .send({ shouldPoolResponse: true })
+        .send()
 
-      toggleAlert(`Successfully redeemed ${mergeAmount} ASTR`, 'success')
+      await fetchSPTokensBalances()
     } catch (err) {
       toggleAlert('Error during the split. Try again', 'error')
-    } finally {
-      setMergeLoading(false)
     }
   }
 
+  const splitInfo = (
+    <InfoBanner>
+      <span className="text-left font-semibold text-sm">
+        For each ASTR you will get 1 ve-ASTR and 1 stk-ASTR.
+      </span>
+      <span className="block text-sm font-light">
+        Read more about ve-ASTR and str-ASTR on the{' '}
+        <span className="link">
+          <a
+            target="_blank"
+            href="https://docs.space-pirates-testnet.com/"
+            rel="noopener noreferrer"
+          >
+            Wiki
+          </a>
+        </span>
+      </span>
+    </InfoBanner>
+  )
+
   return (
-    <div className="flex justify-center items-center gap-20 py-20">
+    <div className="flex lg:flex-row flex-col justify-center items-center md:gap-20 md:py-20">
       <Head>
         <title>Space Pirates Split</title>
       </Head>
@@ -207,17 +208,7 @@ const Split: NextPageWithLayout = () => {
             />
           </div>
         </div>
-        <InfoBanner>
-          <span className="text-left font-semibold text-sm">
-            For each ASTR you will get 1 ve-ASTR and 1 stk-ASTR.
-          </span>
-          <span className="block text-sm font-light">
-            Read more about ve-ASTR and str-ASTR on the{' '}
-            <span className="link">
-              <Link href="wiki">Wiki</Link>
-            </span>
-          </span>
-        </InfoBanner>
+        {splitInfo}
         <TokenInput
           amount={splitAmount}
           handleAmountChange={setSplitAmount}
@@ -229,11 +220,7 @@ const Split: NextPageWithLayout = () => {
         <TokenInput amount={splitAmount} token={tokenList.tokens[2]} />
         <TokenInput amount={splitAmount} token={tokenList.tokens[3]} />
         <div className="mt-8">
-          <LoadingButton
-            text="SPLIT"
-            loading={splitLoading}
-            onClick={() => onSplitTokens()}
-          />
+          <LoadingButton text="SPLIT" onClick={onSplitTokens} />
         </div>
       </CardContainer>
 
@@ -352,17 +339,7 @@ const Split: NextPageWithLayout = () => {
             />
           </div>
         </div>
-        <InfoBanner>
-          <span className="text-left font-semibold text-sm">
-            For each ASTR you will get 1 ve-ASTR and 1 stk-ASTR.
-          </span>
-          <span className="block text-sm font-light">
-            Read more about ve-ASTR and str-ASTR on the{' '}
-            <span className="link">
-              <Link href="wiki">Wiki</Link>
-            </span>
-          </span>
-        </InfoBanner>
+        {splitInfo}
         <TokenInput
           amount={mergeAmount}
           handleAmountChange={setMergeAmount}
@@ -378,11 +355,7 @@ const Split: NextPageWithLayout = () => {
         </div>
         <TokenInput amount={mergeAmount} token={tokenList.tokens[1]} />
         <div className="mt-8">
-          <LoadingButton
-            text="MERGE"
-            loading={mergeLoading}
-            onClick={() => onMergeTokens()}
-          />
+          <LoadingButton text="MERGE" onClick={onMergeTokens} />
         </div>
       </CardContainer>
     </div>

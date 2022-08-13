@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import Image from 'next/image'
 import { NextPageWithLayout } from '../_app'
 
@@ -29,16 +28,21 @@ const Convert: NextPageWithLayout = () => {
   const [showWrapModal, setShowWrapModal] = useState(false)
   const [showUnWrapModal, setShowUnWrapModal] = useState(false)
 
-  const [wrapLoading, setWrapLoading] = useState(false)
-  const [unWrapLoading, setUnWrapLoading] = useState(false)
-
   const { toggleAlert } = useAlert()
-  const { tronWeb, getContractInstance, address, chain } = useTronWeb()
+  const {
+    tronWeb,
+    getContractInstance,
+    address,
+    chain,
+    fetchERC20Balances,
+    fetchSPTokensBalances,
+    isApprovedSP,
+  } = useTronWeb()
 
-  const handleShowWrapModal = (isTokenA?: boolean) => {
+  const handleShowWrapModal = () => {
     setShowWrapModal((prev) => !prev)
   }
-  const handleShowUnWrapModal = (isTokenA?: boolean) => {
+  const handleShowUnWrapModal = () => {
     setShowUnWrapModal((prev) => !prev)
   }
 
@@ -59,8 +63,6 @@ const Convert: NextPageWithLayout = () => {
   }
 
   const onConvertWrapTokens = async () => {
-    setWrapLoading(true)
-
     try {
       const spacePiratesWrapper = await getContractInstance(
         'wrapperContract',
@@ -70,42 +72,23 @@ const Convert: NextPageWithLayout = () => {
       if (wrapToken.symbol === 'TRX') {
         await spacePiratesWrapper.ethDeposit().send({
           callValue: tronWeb.toSun(wrapAmount),
-          shouldPollResponse: true,
         })
       } else {
         await spacePiratesWrapper
           .erc20Deposit(wrapToken.address, convertToHex(wrapAmount, 1e18))
-          .send({ shouldPollResponse: true })
+          .send()
       }
 
-      toggleAlert(
-        `Successfully minted ${wrapAmount} ${wrapToken.symbol}`,
-        'success',
-      )
+      await fetchSPTokensBalances()
+      await fetchERC20Balances()
     } catch (err) {
       toggleAlert('Error during the conversion. Try again', 'error')
-    } finally {
-      setWrapLoading(false)
     }
   }
 
   const onConvertUnWrapTokens = async () => {
-    setUnWrapLoading(true)
-
     try {
-      const spacePiratesTokens = await getContractInstance(
-        'tokensContract',
-        'tokensContract',
-      )
-
-      const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, getAddress('wrapperContract', chain))
-        .call()
-
-      !isApproved &&
-        (await spacePiratesTokens
-          .setApprovalForAll(getAddress('wrapperContract', chain), true)
-          .send())
+      await isApprovedSP('wrapperContract')
 
       const spacePiratesWrapper = await getContractInstance(
         'wrapperContract',
@@ -119,32 +102,45 @@ const Convert: NextPageWithLayout = () => {
       if (token!.symbol === 'TRX') {
         await spacePiratesWrapper
           .ethWithdraw(convertToHex(unWrapAmount, 1e6))
-          .send({
-            shouldPollResponse: true,
-          })
+          .send()
       } else {
         await spacePiratesWrapper
           .erc20Withdraw(token!.address, convertToHex(unWrapAmount, 1e18))
-          .send({ shouldPollResponse: true })
+          .send()
       }
 
-      toggleAlert(
-        `Successfully redeemed ${unWrapAmount} ${token!.symbol}`,
-        'success',
-      )
+      await fetchSPTokensBalances()
+      await fetchERC20Balances()
     } catch (err) {
       toggleAlert('Error during the conversion. Try again', 'error')
-    } finally {
-      setUnWrapLoading(false)
     }
   }
 
+  let convertInfo = (
+    <InfoBanner>
+      <span className="text-left font-semibold text-sm">
+        The conversion ratio is 1:1
+      </span>
+      <span className="block text-sm font-light">
+        Read more about wrapped tokens on the{' '}
+        <span className="link">
+          <a
+            target="_blank"
+            href="https://docs.space-pirates-testnet.com/"
+            rel="noopener noreferrer"
+          >
+            Wiki
+          </a>
+        </span>
+      </span>
+    </InfoBanner>
+  )
+
   return (
-    <div className="flex justify-center items-center gap-20 py-20">
+    <div className="flex lg:flex-row flex-col justify-center items-center md:gap-20 md:py-20">
       <Head>
         <title>Space Pirates Convert</title>
       </Head>
-
       <TokensModal
         showModal={showWrapModal}
         handleShowModal={handleShowWrapModal}
@@ -157,7 +153,6 @@ const Convert: NextPageWithLayout = () => {
         handleTokenChange={handleUnWrapTokenChange}
         tokensList={wrappedTokensList.wrapped}
       />
-
       <CardContainer
         title="Wrap"
         subtitle="Convert TRC20 tokens into their wrapped version"
@@ -219,19 +214,9 @@ const Convert: NextPageWithLayout = () => {
             <Image src={wrapToken.logoURI} alt="token" height={64} width={64} />
           </div>
         </div>
-        <InfoBanner>
-          <span className="text-left font-semibold text-sm">
-            The conversion ratio is 1:1
-          </span>
-          <span className="block text-sm font-light">
-            Read more about wrapped tokens on the{' '}
-            <span className="link">
-              <Link href="wiki">Wiki</Link>
-            </span>
-          </span>
-        </InfoBanner>
+        {convertInfo}
         <TokenInput
-          handleShowModal={() => handleShowWrapModal(true)}
+          handleShowModal={() => handleShowWrapModal()}
           amount={wrapAmount}
           handleAmountChange={handleWrapAmountChange}
           token={wrapToken}
@@ -244,14 +229,9 @@ const Convert: NextPageWithLayout = () => {
           token={{ ...wrapToken, symbol: `SP-${wrapToken.symbol}` }}
         />
         <div className="mt-8">
-          <LoadingButton
-            text={`Wrap`}
-            loading={wrapLoading}
-            onClick={() => onConvertWrapTokens()}
-          />
+          <LoadingButton text="Wrap" onClick={onConvertWrapTokens} />
         </div>
       </CardContainer>
-
       <CardContainer
         title="Un-Wrap"
         subtitle="Convert wrapped tokens into their TRC20 version"
@@ -323,19 +303,9 @@ const Convert: NextPageWithLayout = () => {
             />
           </div>
         </div>
-        <InfoBanner>
-          <span className="text-left font-semibold text-sm">
-            The conversion ratio is 1:1
-          </span>
-          <span className="block text-sm font-light">
-            Read more about wrapped tokens on the{' '}
-            <span className="link">
-              <Link href="wiki">Wiki</Link>
-            </span>
-          </span>
-        </InfoBanner>
+        {convertInfo}
         <TokenInput
-          handleShowModal={() => handleShowUnWrapModal(true)}
+          handleShowModal={() => handleShowUnWrapModal()}
           amount={unWrapAmount}
           handleAmountChange={handleUnWrapAmountChange}
           token={unWrapToken}
@@ -351,11 +321,7 @@ const Convert: NextPageWithLayout = () => {
           }}
         />
         <div className="mt-8">
-          <LoadingButton
-            text={`UN-WRAP`}
-            loading={unWrapLoading}
-            onClick={() => onConvertUnWrapTokens()}
-          />
+          <LoadingButton text="UN-WRAP" onClick={onConvertUnWrapTokens} />
         </div>
       </CardContainer>
     </div>

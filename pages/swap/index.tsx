@@ -20,7 +20,6 @@ import {
   getUnixTimestamp,
   NULL_ADDRESS,
 } from '../../lib/tronweb'
-import WIPBanner from '../../components/layout/WIPBanner'
 import { getAddress } from '../../config/addresses'
 
 const Swap: NextPageWithLayout = () => {
@@ -36,9 +35,14 @@ const Swap: NextPageWithLayout = () => {
   const [isTokenA, setIsTokenA] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  const [loading, setLoading] = useState(false)
-
-  const { tronWeb, address, getContractInstance, chain } = useTronWeb()
+  const {
+    tronWeb,
+    address,
+    getContractInstance,
+    chain,
+    fetchSPTokensBalances,
+    isApprovedSP,
+  } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   const handleShowModal = (isTokenA?: boolean) => {
@@ -89,7 +93,7 @@ const Swap: NextPageWithLayout = () => {
       }
 
       return true
-    } catch (error) {
+    } catch (err) {
       toggleAlert('Invalid pair. Try a different combination.', 'error')
       return false
     }
@@ -159,29 +163,15 @@ const Swap: NextPageWithLayout = () => {
   }
 
   const onSwapTokens = async () => {
-    setLoading(true)
-
     try {
-      const spacePiratesTokens = await getContractInstance(
-        'tokensContract',
-        'tokensContract',
-      )
-
-      const isApproved = await spacePiratesTokens
-        .isApprovedForAll(address, getAddress('routerContract', chain))
-        .call()
-
-      !isApproved &&
-        (await spacePiratesTokens
-          .setApprovalForAll(getAddress('routerContract', chain), true)
-          .send())
+      await isApprovedSP('routerContract')
 
       const spacePiratesRouter = await getContractInstance(
         'routerContract',
         'routerContract',
       )
 
-      const res = await spacePiratesRouter
+      await spacePiratesRouter
         .swapExactTokensForTokens(
           convertToHex(amountA, 1e18),
           1,
@@ -189,11 +179,11 @@ const Swap: NextPageWithLayout = () => {
           address,
           getUnixTimestamp(300), //300 is 5 minutes
         )
-        .send({ shouldPollResponse: true })
+        .send()
+
+      await fetchSPTokensBalances()
     } catch (err) {
       toggleAlert('Error during the swap. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -235,12 +225,7 @@ const Swap: NextPageWithLayout = () => {
           loading={loadingB}
         />
         <div className="mt-8 text-center">
-          <LoadingButton
-            text="SWAP"
-            loading={loading}
-            onClick={() => onSwapTokens()}
-          />
-          <small>Default slippage: 2%</small>
+          <LoadingButton text="SWAP" onClick={onSwapTokens} />
         </div>
       </CardContainer>
     </div>

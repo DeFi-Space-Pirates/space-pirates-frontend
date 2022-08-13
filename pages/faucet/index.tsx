@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
+import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import FaucetCard from '../../components/Faucet/FaucetCard'
 import { convertToNumber, getTronWebInstance } from '../../lib/tronweb'
@@ -7,7 +7,6 @@ import tokensList from '../../config/constants/tokensList.json'
 import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
 import { addresses } from '../../config/addresses'
 import { Token1155 } from '../../typings/Token'
-import { isToken } from '../../lib/tokens'
 
 type SupportedToken = Token1155 & { maxAmount: string }
 
@@ -66,10 +65,8 @@ const Faucet = ({
           {supportedTokens.map((token) => (
             <FaucetCard
               key={token.id}
-              id={token.id}
-              name={token.name}
+              token={token}
               maxAmount={token.maxAmount}
-              logoURI={token.logoURI}
             />
           ))}
         </div>

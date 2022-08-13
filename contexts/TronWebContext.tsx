@@ -11,12 +11,14 @@ import SpacePiratesTokens from '../config/artifacts/SpacePiratesTokens.json'
 import SpacePiratesFactory from '../config/artifacts/SpacePiratesFactory.json'
 import tokensList from '../config/constants/tokensList.json'
 import wrappedTokensList from '../config/constants/wrappedTokensList.json'
+import dexPairsList from '../config/constants/dexPairsList.json'
 import { addresses, getAbi, getAddress } from '../config/addresses'
-import { Balance1155, Balance20, BalanceLP } from '../typings/Balance'
+import { Balance1155, Balance20 } from '../typings/Balance'
 import { convertToNumber } from '../lib/tronweb'
 import { ABIsList, AddressesList, SupportedChains } from '../typings/Tron'
 import PairContract from '../config/artifacts/SpacePiratesPair.json'
 import { getTokenById } from '../lib/tokens'
+import { Token } from '../typings/Token'
 
 declare global {
   interface Window {
@@ -43,16 +45,16 @@ type TronWebContextValue = {
   chain: SupportedChains
   balances1155: Balance1155[]
   balances20: Balance20[]
-  balancesLP: BalanceLP[]
-  fetchSPTokensBalance: () => Promise<void>
+  balancesLP: Balance20[]
+  fetchSPTokensBalances: () => Promise<void>
   fetchERC20Balances: () => Promise<void>
   fetchLPTokensBalances: () => Promise<void>
-  getBalanceById: (id: number | undefined) => string
-  getBalanceByAddress: (address: string | undefined) => string
+  getTokenBalance: (token: Token) => string
   getContractInstance: (
     abiContract: ABIsList,
     contract: AddressesList,
   ) => Promise<any>
+  isApprovedSP: (contract: AddressesList) => Promise<void>
 }
 
 type TronWebProviderProps = { children: React.ReactNode }
@@ -65,11 +67,11 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
   const [address, setAddress] = useState('')
   const [balances1155, setBalances1155] = useState<Balance1155[]>([])
   const [balances20, setBalances20] = useState<Balance20[]>([])
-  const [balancesLP, setBalancesLP] = useState<BalanceLP[]>([])
+  const [balancesLP, setBalancesLP] = useState<Balance20[]>([])
 
   const { toggleAlert } = useAlert()
 
-  const fetchSPTokensBalance = useCallback(async () => {
+  const fetchSPTokensBalances = useCallback(async () => {
     try {
       const spacePiratesTokens = await tronWeb.contract(
         SpacePiratesTokens.abi,
@@ -130,23 +132,12 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
   }, [address, toggleAlert, tronWeb])
 
   const fetchLPTokensBalances = useCallback(async () => {
-    let updatedBalancesLP: BalanceLP[] = []
+    let updatedBalancesLP: Balance20[] = []
     try {
-      const spacePiratesFactory = await tronWeb.contract(
-        SpacePiratesFactory.abi,
-        addresses.shasta.factoryContract,
-      )
-
-      const poolsAmount = await spacePiratesFactory.allPairsLength().call()
-
-      const convertedAmount = tronWeb.BigNumber(poolsAmount._hex).toNumber()
-
-      for (let i = 0; i < convertedAmount; i++) {
-        const pairAddress = await spacePiratesFactory.allPairs(i).call()
-
+      for (const token of dexPairsList.tokens) {
         const pairContract = await tronWeb.contract(
           PairContract.abi,
-          pairAddress,
+          token.address,
         )
 
         const balance = await pairContract.balanceOf(address).call()
@@ -162,14 +153,13 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
         )
 
         updatedBalancesLP.push({
-          address: pairAddress,
-          balance: tronWeb
+          address: token.address,
+          amount: tronWeb
             .BigNumber(balance._hex)
             .div(1e18)
             .toNumber()
             .toFixed(2),
-          name: `${tokenA?.symbol}/${tokenB?.symbol}`,
-          symbol: '',
+          symbol: `${tokenA?.symbol}/${tokenB?.symbol}`,
         })
       }
 
@@ -278,16 +268,15 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     }
   }, [toggleAlert, loadTronWeb])
 
-  const getBalanceById = (id: number | undefined) => {
-    const balance = balances1155?.find((balance) => balance.id === id)
+  const getTokenBalance = (token: Token): string => {
+    const balance =
+      'id' in token
+        ? balances1155?.find((item) => item.id === token.id)?.amount
+        : balances20
+            .concat(balancesLP)
+            ?.find((item) => item.address === token.address)?.amount
 
-    return balance ? balance.amount.toString() : '0.00'
-  }
-
-  const getBalanceByAddress = (address: string | undefined) => {
-    const balance = balances20?.find((balance) => balance.address === address)
-
-    return balance ? balance.amount.toString() : '0.00'
+    return balance ? balance.toString() : 'N/A'
   }
 
   const getContractInstance = useCallback(
@@ -304,20 +293,40 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     [chain, tronWeb],
   )
 
+  const isApprovedSP = async (contract: AddressesList) => {
+    const spacePiratesTokens = await getContractInstance(
+      'tokensContract',
+      'tokensContract',
+    )
+
+    const isApproved = await spacePiratesTokens
+      .isApprovedForAll(address, getAddress(contract, chain))
+      .call()
+
+    !isApproved &&
+      (await spacePiratesTokens
+        .setApprovalForAll(getAddress(contract, chain), true)
+        .send())
+  }
+
   // when the tronWeb instance is set, fetch the updated balances
   // trongrid allows for 15QPS. If an error 503 is returned try to add delay between the requests
   useEffect(() => {
     const fetchBalances = async () => {
       // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-      await fetchSPTokensBalance()
-      // await delay(500)
+      await fetchSPTokensBalances()
       await fetchERC20Balances()
       // await delay(500)
       await fetchLPTokensBalances()
     }
 
     if (tronWeb !== null) fetchBalances()
-  }, [tronWeb, fetchSPTokensBalance, fetchERC20Balances, fetchLPTokensBalances])
+  }, [
+    tronWeb,
+    fetchSPTokensBalances,
+    fetchERC20Balances,
+    fetchLPTokensBalances,
+  ])
 
   const value = {
     tronWeb,
@@ -327,12 +336,12 @@ const TronWebProvider = ({ children }: TronWebProviderProps) => {
     balances1155,
     balances20,
     balancesLP,
-    fetchSPTokensBalance,
+    fetchSPTokensBalances,
     fetchERC20Balances,
     fetchLPTokensBalances,
-    getBalanceById,
-    getBalanceByAddress,
+    getTokenBalance,
     getContractInstance,
+    isApprovedSP,
   }
 
   return (

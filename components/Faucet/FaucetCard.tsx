@@ -3,27 +3,28 @@ import Image from 'next/image'
 import { useAlert } from '../../contexts/AlertContext'
 import LoadingButton from '../layout/LoadingButton'
 
-import SpacePiratesFaucet from '../../config/artifacts/SpacePiratesFaucet.json'
 import { useTronWeb } from '../../contexts/TronWebContext'
 import { isToken } from '../../lib/tokens'
-import { convertToHex } from '../../lib/tronweb'
+import { convertToHex, convertToNumber } from '../../lib/tronweb'
+import { Token1155 } from '../../typings/Token'
 
 type FaucetCardProps = {
-  id: number
-  name: string
+  token: Token1155
   maxAmount: string
-  logoURI: string
 }
 
-const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
+const FaucetCard = ({ token, maxAmount }: FaucetCardProps) => {
   const [amount, setAmount] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  const { getContractInstance, getBalanceById } = useTronWeb()
+  const {
+    getContractInstance,
+    getTokenBalance,
+    tronWeb,
+    fetchSPTokensBalances,
+  } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   const onMintToken = async (id: number, amount: string) => {
-    setLoading(true)
     try {
       const spacePiratesFaucet = await getContractInstance(
         'faucetContract',
@@ -31,23 +32,22 @@ const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
       )
 
       const mintAmount = isToken(id) ? convertToHex(amount, 1e18) : amount
+      await spacePiratesFaucet.mintToken(id, mintAmount).send()
 
-      await spacePiratesFaucet
-        .mintToken(id, mintAmount)
-        .send({ shouldPollResponse: true })
-
-      toggleAlert(`Successfully minted ${amount} ${name}`, 'success')
+      await fetchSPTokensBalances()
     } catch (err) {
       toggleAlert('Error during the mint. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
-  const onGetMaxAmount = async (id: number) => {
-    const maxMintable = parseFloat(maxAmount) - parseFloat(getBalanceById(id))
+  const onGetMaxAmount = async () => {
+    const maxMintable = tronWeb
+      .BigNumber(convertToHex(maxAmount, token.decimals === 18 ? 1e18 : 1))
+      .minus(
+        convertToHex(getTokenBalance(token), token.decimals === 18 ? 1e18 : 1),
+      )
 
-    setAmount(maxMintable > 0 ? maxMintable.toString() : '0')
+    setAmount(maxMintable > 0 ? convertToNumber(maxMintable, token.id) : '0')
   }
 
   return (
@@ -55,16 +55,16 @@ const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
       <div className="card-body items-center p-2">
         <div className="card-title justify-center">
           <Image
-            src={logoURI}
+            src={token.logoURI}
             className="rounded-xl"
-            alt={name}
+            alt={token.symbol}
             width={25}
             height={25}
           />
-          <p className="text-2xl font-bold">{name}</p>
+          <p className="text-2xl font-bold">{token.name}</p>
         </div>
         <div className="form-control mb-8">
-          <span className="label label-text">Enter {name} amount</span>
+          <span className="label label-text">Enter {token.symbol} amount</span>
           <label className="input-group drop-shadow-md">
             <input
               type="number"
@@ -75,7 +75,7 @@ const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
             />
             <span
               className="btn btn-ghost bg-base-100 border-0"
-              onClick={() => onGetMaxAmount(id)}
+              onClick={() => onGetMaxAmount()}
             >
               MAX
             </span>
@@ -86,8 +86,7 @@ const FaucetCard = ({ id, name, maxAmount, logoURI }: FaucetCardProps) => {
         </div>
         <LoadingButton
           text="MINT"
-          loading={loading}
-          onClick={() => onMintToken(id, amount)}
+          onClick={() => onMintToken(token.id, amount)}
           disabled={amount === '0'}
         />
       </div>

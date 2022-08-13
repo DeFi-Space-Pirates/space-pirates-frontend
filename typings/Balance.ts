@@ -8,10 +8,3 @@ export type Balance20 = {
   address: string
   symbol: string
 }
-
-export type BalanceLP = {
-  address: string
-  balance: string
-  name: string
-  symbol: string
-}

@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+
 import ChevronDown from '../icons/ChevronDown'
 import { Token } from '../../typings/Token'
 import { useTronWeb } from '../../contexts/TronWebContext'
-
 import checkRegex from '../../lib/checkRegex'
 
 type TokenInputProps = {
@@ -20,15 +21,14 @@ const TokenInput = ({
   token,
   loading,
 }: TokenInputProps) => {
-  const { getBalanceById, getBalanceByAddress, balancesLP } = useTronWeb()
+  const [balance, setBalance] = useState('0.0')
+  const { balances1155, balances20, balancesLP, getTokenBalance } = useTronWeb()
 
-  const handleGetBalance = (): string => {
-    return 'id' in token
-      ? token.id === -1
-        ? balancesLP.find((lp) => lp.name === token.name)?.balance!
-        : getBalanceById(token.id)
-      : getBalanceByAddress(token.address)
-  }
+  useEffect(() => {
+    const updatedBalance = getTokenBalance(token)
+
+    setBalance(updatedBalance)
+  }, [getTokenBalance, balances1155, balances20, balancesLP, token])
 
   return (
     <div>
@@ -72,14 +72,14 @@ const TokenInput = ({
         {handleAmountChange && (
           <span
             className="btn btn-md btn-ghost bg-base-100 border-0 rounded-r-md rounded-l-none"
-            onClick={() => handleAmountChange(handleGetBalance())}
+            onClick={() => handleAmountChange(balance)}
           >
             MAX
           </span>
         )}
       </div>
       {handleAmountChange && (
-        <label className="label">Balance: {handleGetBalance()}</label>
+        <label className="label">Balance: {balance}</label>
       )}
     </div>
   )

@@ -1,41 +1,55 @@
 {
-  "name": "SpacePirates Dex Pairs list",
-  "timestamp": "2022-07-12T11:45:09Z",
+  "name": "SpacePirates Dex tokens list",
+  "timestamp": "2022-08-12T11:45:09Z",
   "tokens": [
     {
-      "id": 1,
-      "name": "Doubloons",
-      "symbol": "DBL",
+      "name": "DBL/ASTR",
+      "symbol": "DBL/ASTR",
+      "address": "41531cbe701150c3c204847b6889576bc0c2caed14",
       "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+      "logoURI": "/favicon.ico"
     },
     {
-      "id": 2,
-      "name": "Asteroids",
-      "symbol": "ASTR",
+      "name": "DBL/SP-TRX",
+      "symbol": "DBL/SP-TRX",
+      "address": "41dfdb35db0bdeb0d6c5d69f4bdacf1158ea33bc6c",
       "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+      "logoURI": "/favicon.ico"
     },
     {
-      "id": 100,
-      "name": "Space Tron",
-      "symbol": "SP-TRX",
-      "decimals": 6,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"
+      "name": "DBL/SP-USDT",
+      "symbol": "DBL/SP-USDT",
+      "address": "4150fd4707ea753d18d6489fc053d1b646257b62dc",
+      "decimals": 18,
+      "logoURI": "/favicon.ico"
     },
     {
-      "id": 101,
-      "name": "Space USDT",
-      "symbol": "SP-USDT",
+      "name": "DBL/SP-USDD",
+      "symbol": "DBL/SP-USDD",
+      "address": "4165ff0a3aace77c62db5eadebea2e7f555a6d40b3",
       "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+      "logoURI": "/favicon.ico"
     },
     {
-      "id": 102,
-      "name": "Space USDD",
-      "symbol": "SP-USDD",
+      "name": "ASTR/SP-TRX",
+      "symbol": "ASTR/SP-TRX",
+      "address": "41d8791802b880ebdc23cf3a50bc54b1afb3d14df0",
       "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/19891.png"
+      "logoURI": "/favicon.ico"
+    },
+    {
+      "name": "ASTR/SP-USDT",
+      "symbol": "ASTR/SP-USDT",
+      "address": "41cce8acf31e7304211387e38064848be7d4cc55b9",
+      "decimals": 18,
+      "logoURI": "/favicon.ico"
+    },
+    {
+      "name": "ASTR/SP-USDD",
+      "symbol": "ASTR/SP-USDD",
+      "address": "41a75e3c900839068ff975507ff98db0668e3f3d57",
+      "decimals": 18,
+      "logoURI": "/favicon.ico"
     }
   ]
 }
