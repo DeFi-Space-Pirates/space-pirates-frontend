@@ -14,11 +14,16 @@ type QuestItemProps = {
 }
 
 const QuestItem = ({ quest }: QuestItemProps) => {
-  const [loading, setLoading] = useState(false)
   const [claimable, setClaimable] = useState(false)
   const [claimed, setClaimed] = useState(false)
 
-  const { tronWeb, address, chain, getContractInstance } = useTronWeb()
+  const {
+    tronWeb,
+    address,
+    chain,
+    getContractInstance,
+    fetchSPTokensBalances,
+  } = useTronWeb()
   const { toggleAlert } = useAlert()
 
   useEffect(() => {
@@ -54,8 +59,6 @@ const QuestItem = ({ quest }: QuestItemProps) => {
   }, [tronWeb, address, chain, quest])
 
   const onClaimQuest = async () => {
-    setLoading(true)
-
     try {
       const questContract = await getContractInstance(
         'questRedeemContract',
@@ -76,10 +79,10 @@ const QuestItem = ({ quest }: QuestItemProps) => {
       await questContract
         .claimQuest(quest.questName, quest.ids, amounts, signature)
         .send()
+
+      await fetchSPTokensBalances()
     } catch (err) {
       toggleAlert('Error while claiming quest. Try again', 'error')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -95,10 +98,9 @@ const QuestItem = ({ quest }: QuestItemProps) => {
       <div className="">
         <LoadingButton
           customClasses="md:btn-md btn-xs"
-          loading={loading}
           text={claimed ? 'Claimed' : ''}
           disabled={claimed || !claimable}
-          onClick={() => onClaimQuest()}
+          onClick={onClaimQuest}
         >
           <span className="md:mr-2">
             Claim {quest.amounts[0]} {getTokenById(quest.ids[0])?.symbol}
