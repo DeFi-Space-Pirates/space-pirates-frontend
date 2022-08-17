@@ -21,7 +21,7 @@ type PoolsItemProps = {
 }
 
 const PoolsItem = ({
-  pool: { tokenA, tokenB, reserveA, reserveB },
+  pool: { lpToken, tokenA, tokenB, reserveA, reserveB },
 }: PoolsItemProps) => {
   const [amountA, setAmountA] = useState('')
   const [amountB, setAmountB] = useState('')
@@ -34,7 +34,7 @@ const PoolsItem = ({
     getContractInstance,
     address,
     chain,
-    balancesLP,
+    getTokenBalance,
     fetchLPTokensBalances,
     isApprovedSP,
   } = useTronWeb()
@@ -83,9 +83,7 @@ const PoolsItem = ({
     try {
       const pairContract = await tronWeb.contract(
         PairContract.abi,
-        balancesLP.find(
-          (lp) => lp.symbol === `${tokenA.symbol}/${tokenB.symbol}`,
-        )?.address,
+        lpToken.address,
       )
 
       await pairContract
@@ -126,13 +124,7 @@ const PoolsItem = ({
         modalData={{
           text: `Remove liquidity for `,
           onSubmit: onRemoveLiquidity,
-          token: {
-            decimals: 18,
-            id: -1,
-            logoURI: '/favicon.ico',
-            name: `${tokenA.symbol}/${tokenB.symbol}`,
-            symbol: `${tokenA.symbol}/${tokenB.symbol}`,
-          },
+          token: lpToken,
         }}
       />
       <div className="xl:col-span-4 md:col-span-6 col-span-12 card card-compact drop-shadow-lg bg-base-200 collapse collapse-arrow">
@@ -154,19 +146,17 @@ const PoolsItem = ({
                 width={25}
               />
             </div>
-            <p className="ml-14 font-semibold text-lg">
-              {tokenA.symbol}/{tokenB.symbol}
+            <p className="ml-14 font-bold text-xl">
+              {lpToken.name}
+              <span className="font-medium"> - APR: 7%</span>
             </p>
           </div>
-          <div>
-            <p className="text-lg font-semibold">APR: 7%</p>
-          </div>
           <div className="flex">
-            <p className="text-lg font-semibold">
+            <p className="text-base">
               Liquidity {tokenA.symbol}:{' '}
               {convertToNumber(reserveA.toString(), 1)}
             </p>
-            <p className="text-lg font-semibold">
+            <p className="text-base">
               Liquidity {tokenB.symbol}:{' '}
               {convertToNumber(reserveB.toString(), 1)}
             </p>
@@ -187,9 +177,7 @@ const PoolsItem = ({
             <div className="w-full">
               <LoadingButton text="Add liquidity" onClick={onAddLiquidity} />
             </div>
-            {balancesLP.find(
-              (lp) => lp.symbol === `${tokenA.symbol}/${tokenB.symbol}`,
-            )?.amount !== '0.00' && (
+            {getTokenBalance(lpToken) !== '0.00' && (
               <div className="w-full ml-3">
                 <LoadingButton
                   text="Remove liquidity"

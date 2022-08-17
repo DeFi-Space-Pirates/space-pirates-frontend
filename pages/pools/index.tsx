@@ -13,7 +13,7 @@ import { Pool } from '../../typings/Pools'
 import { getTokenById } from '../../lib/tokens'
 
 export const getServerSideProps: GetServerSideProps<{
-  pools: Pool[] //TODO define the Pair type
+  pools: Pool[]
 }> = async () => {
   const pools: Pool[] = []
   const tronWeb = getTronWebInstance()
@@ -30,6 +30,7 @@ export const getServerSideProps: GetServerSideProps<{
     //TODO fetch APR info
 
     pools.push({
+      lpToken: pair,
       tokenA: getTokenById(
         tronWeb.BigNumber(tokenIds._token0._hex).toNumber(),
       )!,

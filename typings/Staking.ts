@@ -1,4 +1,4 @@
-import { Token1155 } from './Token'
+import { Token } from './Token'
 
 export type StakingPool = {
   exists: boolean
@@ -19,6 +19,6 @@ export type UserInfo = {
 
 export type StakeModalData = {
   text: string
-  token: Token1155
+  token: Token
   onSubmit: (amount: string) => Promise<void>
 }
