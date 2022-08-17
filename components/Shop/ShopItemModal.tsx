@@ -114,7 +114,7 @@ const ShopItemModal = ({ showModal, handleShowModal }: ShopItemModalProps) => {
                 </div>
               </div>
               <div className="sm:w-52 w-35 self-end">
-                <LoadingButton loading={loading} onClick={() => {}}>
+                <LoadingButton onClick={async () => {}}>
                   <span className="mr-2">Mint for 10 ASTR</span>
                   <Image
                     src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
