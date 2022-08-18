@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import { NextPageWithLayout } from '../_app'
 
@@ -9,11 +9,10 @@ import StakingItem from '../../components/Earn/StakingItem'
 import { getTronWebInstance } from '../../lib/tronweb'
 import SpacePiratesStaking from '../../config/artifacts/SpacePiratesStaking.json'
 import { addresses } from '../../config/addresses'
-import { StakingPool } from '../../typings/Staking'
 import WIPBanner from '../../components/layout/WIPBanner'
 
-export const getServerSideProps: GetServerSideProps<{
-  stakingPools: StakingPool[]
+export const getStaticProps: GetStaticProps<{
+  poolIds: number[]
 }> = async () => {
   const tronWeb = getTronWebInstance()
   const spacePiratesStaking = await tronWeb.contract(
@@ -30,51 +29,15 @@ export const getServerSideProps: GetServerSideProps<{
     poolIds.push(tronWeb.BigNumber(id._hex).toNumber())
   }
 
-  let stakingPools: StakingPool[] = []
-
-  for (const id of poolIds) {
-    let stakingPool = await spacePiratesStaking.stakingPools(id).call()
-
-    stakingPool.rewardTokenId = tronWeb
-      .BigNumber(stakingPool.rewardTokenId._hex)
-      .toNumber()
-    stakingPool.rewardRate = tronWeb
-      .BigNumber(stakingPool.rewardRate._hex)
-      .toNumber()
-    stakingPool.depositFee = tronWeb
-      .BigNumber(stakingPool.depositFee._hex)
-      .toNumber()
-    stakingPool.lastUpdateTime = tronWeb
-      .BigNumber(stakingPool.lastUpdateTime._hex)
-      .toNumber()
-    stakingPool.totalSupply = tronWeb
-      .BigNumber(stakingPool.totalSupply._hex)
-      .toNumber()
-    stakingPool.accRewardPerShare = tronWeb
-      .BigNumber(stakingPool.accRewardPerShare._hex)
-      .toNumber()
-
-    stakingPools.push({
-      stakingTokenId: id,
-      exists: stakingPool.exists,
-      accRewardPerShare: stakingPool.accRewardPerShare,
-      depositFee: stakingPool.depositFee,
-      lastUpdateTime: stakingPool.lastUpdateTime,
-      rewardRate: stakingPool.rewardRate,
-      rewardTokenId: stakingPool.rewardTokenId,
-      totalSupply: stakingPool.totalSupply,
-    })
-  }
-
   return {
-    props: { stakingPools },
+    props: { poolIds },
   }
 }
 
 type StakingProps = NextPageWithLayout &
-  InferGetServerSidePropsType<typeof getServerSideProps>
+  InferGetStaticPropsType<typeof getStaticProps>
 
-const Staking = ({ stakingPools }: StakingProps) => {
+const Staking = ({ poolIds }: StakingProps) => {
   return (
     <div className="min-h-full p-5">
       <Head>
@@ -88,11 +51,8 @@ const Staking = ({ stakingPools }: StakingProps) => {
         </p>
       </div>
       <div className="flex flex-col items-center gap-y-8">
-        {stakingPools.map((stakingPool) => (
-          <StakingItem
-            key={stakingPool.stakingTokenId}
-            stakingPool={stakingPool}
-          />
+        {poolIds.map((id) => (
+          <StakingItem key={id} poolId={id} />
         ))}
       </div>
     </div>
